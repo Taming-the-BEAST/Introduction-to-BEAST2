@@ -70,4 +70,4 @@ Quisque non mollis massa, nec eleifend dolor. Proin porta elit metus, a lobortis
 
 ----
 
-This tutorial was written by Author Name for [Taming the BEAST Workshop])(https://taming-the-beast.github.io) and is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). 
+This tutorial was written by Author Name for [Taming the BEAST Workshop](https://taming-the-beast.github.io) and is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). 
