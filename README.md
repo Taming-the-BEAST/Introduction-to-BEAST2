@@ -56,3 +56,18 @@ Quisque non mollis massa, nec eleifend dolor. Proin porta elit metus, a lobortis
 1. In iaculis turpis in massa facilisis, quis ultricies nibh ultricies.
 1. Nam vitae turpis eu lacus imperdiet mollis id at augue.
 1. Sed sed turpis ac dolor mollis accumsan.
+
+
+
+----
+
+# Useful Links
+
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html)
+- BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
+- BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.bio.ed.ac.uk)
+- Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
+
+----
+
+This tutorial was written by Author Name for [Taming the BEAST Workshop])(https://taming-the-beast.github.io) and is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). 
