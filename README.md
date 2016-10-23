@@ -12,7 +12,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porta augue id vu
 
 ### BEAST2 - Bayesian Evolutionary Analysis Sampling Trees 2
 
-BEAST2 is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial uses the BEAST2 version 2.4.2.
+BEAST2 is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees {% cite Bouckaert2014 --file Tutorial-Template/master_refs.bib %}. This tutorial uses the BEAST2 version 2.4.2.
 
 ----
 
@@ -58,16 +58,43 @@ Quisque non mollis massa, nec eleifend dolor. Proin porta elit metus, a lobortis
 1. Sed sed turpis ac dolor mollis accumsan.
 
 
+# Figures
+
+# Instructions and code
+
+Use block-quotes for step-by-step instructions (this will produce a framed box on the website):
+
+> Type the following lines into your terminal:
+>
+> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+> - Integer pharetra arcu ut nisl mollis ultricies.
+> -In iaculis turpis in massa facilisis, quis ultricies nibh ultricies.
+> - Nam vitae turpis eu lacus imperdiet mollis id at augue.
+> - Sed sed turpis ac dolor mollis accumsan.
+>
+> Nothing interesting will happen
+
+
+
+# Hyperlinks
+
 
 ----
 
 # Useful Links
 
-- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html)
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite Bouckaert2014 --file Tutorial-Template/master_refs.bib %}
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.bio.ed.ac.uk)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
 
 ----
 
-This tutorial was written by Author Name for [Taming the BEAST Workshop](https://taming-the-beast.github.io) and is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). 
+This tutorial was written by Author Name for [Taming the BEAST](https://taming-the-beast.github.io) and is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). 
+
+----
+
+# Relevant References
+
+{% bibliography --cited --file Tutorial-Template/master_refs %}
+
