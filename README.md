@@ -69,7 +69,7 @@ Quisque non mollis massa, nec eleifend dolor. Proin porta elit metus, a lobortis
 
 <figure>
 	<a id="fig:example"></a>
-	<img src="figures/Logo_bw.png" alt="">
+	<img style="width:50px;" src="figures/Logo_bw.png" alt="">
 	<figcaption>Figure 1: Figure caption example.</figcaption>
 </figure>
 
