@@ -60,16 +60,10 @@ Quisque non mollis massa, nec eleifend dolor. Proin porta elit metus, a lobortis
 
 # Figures
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.5]{figures/Logo_bw.png}
-	\caption{\small Figure caption example}
-	\label{fig:example}
-\end{figure}
 
 <figure>
 	<a id="fig:example"></a>
-	<img style="width:50px;" src="figures/Logo_bw.png" alt="">
+	<img style="width:200px;" src="figures/Logo_bw.png" alt="">
 	<figcaption>Figure 1: Figure caption example.</figcaption>
 </figure>
 
