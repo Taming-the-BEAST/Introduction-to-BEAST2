@@ -60,6 +60,24 @@ Quisque non mollis massa, nec eleifend dolor. Proin porta elit metus, a lobortis
 
 # Figures
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{figures/Logo_bw.png}
+	\caption{\small Figure caption example}
+	\label{fig:example}
+\end{figure}
+
+<figure>
+	<a id="fig:example"></a>
+	<img src="figures/Logo_bw.png" alt="">
+	<figcaption>Figure 1: Figure caption example.</figcaption>
+</figure>
+
+Praesent sodales est in tempor commodo. Suspendisse nulla metus, gravida eget malesuada vel, viverra eu felis. In vitae leo facilisis, ornare nunc nec, tempor tortor. Duis pretium mi eros, at consequat neque tincidunt eget. Mauris vestibulum venenatis arcu, eget lacinia arcu faucibus ut. Phasellus aliquam dui ipsum, a eleifend lacus fermentum at. Suspendisse congue orci quis ante consequat ornare. Integer a massa blandit, vestibulum eros ut, pulvinar augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+
+Quisque a urna a massa congue rhoncus. Donec bibendum tempus velit. Nam varius augue sit amet lacinia hendrerit. Proin tincidunt massa ut mi vestibulum placerat. Phasellus eget dui molestie, aliquet libero efficitur, vehicula ex. Pellentesque ultricies ante leo, eu lobortis odio convallis id. Donec vitae risus dui. Nulla orci velit, ultricies sed finibus quis, blandit quis arcu. Morbi non neque non odio rutrum condimentum. Vivamus libero metus, vehicula vitae elit ac, tincidunt pretium dui. Proin condimentum fringilla diam, blandit blandit nisl dapibus vel. Proin ante felis, accumsan eget ligula et, lobortis dictum nunc. Mauris a ante dignissim ipsum tincidunt tristique.
+
+
 # Instructions and code
 
 Use block-quotes for step-by-step instructions (this will produce a framed box on the website):
@@ -78,12 +96,13 @@ Use block-quotes for step-by-step instructions (this will produce a framed box o
 
 # Hyperlinks
 
+refer to figures, like this: [figure 1](#fig:example). Add links to external URLs like [this](http://www.google.com). Links can be added to sections within the document, but it is a little buggy.
 
 ----
 
 # Useful Links
 
-- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite Bouckaert2014 --file Tutorial-Template/master_refs.bib %}
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file Tutorial-Template/master_refs.bib %}
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.bio.ed.ac.uk)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
