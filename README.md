@@ -92,6 +92,7 @@ Use block-quotes for step-by-step instructions (this will produce a framed box o
 > Nothing interesting will happen
 
 Use the code environment to add code blocks:
+
 ```java
 public class HelloWorld {
 
