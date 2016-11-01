@@ -1,3 +1,8 @@
+---
+author: Author I. Name
+---
+
+
 # Background
 
 This is a style guide to help formatting Markdown tutorials. Please add some background about the tutorial in this section, clearly explaining the question/problem and the type of analysis that the methods in the tutorial should be used for. In the next section please add a short description of all the programs or packages used in the tutorial. 
@@ -85,6 +90,35 @@ Use block-quotes for step-by-step instructions (this will produce a framed box o
 > - Sed sed turpis ac dolor mollis accumsan.
 >
 > Nothing interesting will happen
+
+Use the code environment to add code blocks:
+```java
+public class HelloWorld {
+
+    public static void main(String[] args) {
+        // Prints "Hello, World" to the terminal window.
+        System.out.println("Hello, World");
+    }
+
+}
+```
+
+```xml
+\begin{lstlisting}[language=XML]
+	<BirthDeathSkylineModel spec="BirthDeathSkylineModel" id="birthDeath" tree="@tree" contemp="true">
+	      <parameter name="origin" id="origin" value ="100" lower="0."/>    
+	      <parameter name="R0" id="R0" value="2" lower="0." dimension ="10"/>
+	      <parameter name="becomeUninfectiousRate" id="becomeUninfectiousRate" value="1" lower="0." dimension ="10"/>
+	      <parameter name="samplingProportion" id="samplingProportion" value="0."/>
+	      <parameter name="rho" id="rho" value="1e-6" lower="0." upper="1."/>
+	</BirthDeathSkylineModel>
+```
+
+```R
+	> myString <- "Hello, World!"
+	> print (myString)
+	[1] "Hello, World!"
+```
 
 
 

@@ -168,7 +168,35 @@ Use framed boxes for step-by-step instructions:
 
 \end{framed}
 
+Use lstlisting boxes for inserting code in different languages:
 
+\begin{lstlisting}[language=java]
+public class HelloWorld {
+
+    public static void main(String[] args) {
+        // Prints "Hello, World" to the terminal window.
+        System.out.println("Hello, World");
+    }
+
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=XML]
+	<BirthDeathSkylineModel spec="BirthDeathSkylineModel" id="birthDeath" tree="@tree" contemp="true">
+	      <parameter name="origin" id="origin" value ="100" lower="0."/>    
+	      <parameter name="R0" id="R0" value="2" lower="0." dimension ="10"/>
+	      <parameter name="becomeUninfectiousRate" id="becomeUninfectiousRate" value="1" lower="0." dimension ="10"/>
+	      <parameter name="samplingProportion" id="samplingProportion" value="0."/>
+	      <parameter name="rho" id="rho" value="1e-6" lower="0." upper="1."/>
+	</BirthDeathSkylineModel>
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+	> myString <- "Hello, World!"
+	> print (myString)
+	[1] "Hello, World!"
+\end{lstlisting}
 
 \bigskip
 \section{Hyperlinks}
