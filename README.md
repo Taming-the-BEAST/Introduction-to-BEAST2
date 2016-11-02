@@ -1,5 +1,6 @@
 ---
 author: Jūlija Pečerska,Veronika Bošková
+level: Beginner
 ---
 
 
