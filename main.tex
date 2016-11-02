@@ -1,36 +1,20 @@
 \documentclass[11pt]{article}
 \input{preamble}
 
-\usepackage{tikz}
-\usepackage{float}
+% Add your bibtex library here
+\addbibresource{master_refs.bib}
 
-\setlength{\topmargin}{-0.4in}
-\setlength{\headheight}{14.5pt}
-\pagestyle{fancy}
 
-\usepackage[breaklinks]{hyperref}
-\usepackage[all]{hypcap}
-\hypersetup{colorlinks=true,linkcolor=linkscol,citecolor=citescol,urlcolor=urlscol}
-
-\definecolor{lg}{gray}{0.75}
-\def\gcirc{{%
-    \setbox0\hbox{$\fullmoon$}%
-    \rlap{\hbox to \wd0{\hss{$\textcolor{lg}{\newmoon}$}\hss}}\box0
-}}
-
-%%%%%%%%%%%%%% Fixme setup
-\definecolor{red}{HTML}{C92D39}
-
-% syntax: \fixme{What needs to be fixed}
-\newcommand{\fixme}[1]{\textcolor{red}{\texttt{{\bf FIX ME:} #1}}}
-% Hide all fixmes by switching the line above to this:
-%\newcommand{\fixme}[1]{}
-
+%%%%%%%%%%%%%%%%%%%%
+% Do NOT edit this %
+%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \renewcommand{\headrulewidth}{0.5pt}
 \headsep = 20pt
 \lhead{ }
 \rhead{\textsc {BEAST v2 Tutorial}}
+\thispagestyle{plain}
+
 
 \thispagestyle{plain}
 
@@ -116,7 +100,7 @@ Import the alignment into BEAUti by either dragging and dropping the *.nex file 
 
 Once you have done that, the data should appear in the BEAUti window which should look as shown in Figure~\ref{fig:data}.
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/data.png}
 \caption{\small Data imported into BEAUti}
@@ -145,7 +129,7 @@ Click on the first drop-down menu in the \texttt{Clock Model} column and rename 
 Likewise rename the shared tree to \texttt{tree}.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/link.png}
 \caption{\small Linked models}
@@ -192,7 +176,7 @@ Now return to the \texttt{Partitions} panel and unlink the site models such that
 Go to the \texttt{Partitions} tab again, select all partitions and click the \texttt{Unlink Site Models} button.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/substitution.png}
 \caption{\small Substitution model setup}
@@ -231,7 +215,7 @@ We will leave the rest of the priors on their default values, which should look 
 
 Please note that in general using default priors is highly frowned upon as priors are meant to convey your prior knowledge of the parameters. It is important to know what exactly do the priors tell MCMC and whether this fits your particular situation. In our case the default priors are suitable for this particular analysis, however for further, more complex analyses, we will require a clear idea of what do the priors mean. Getting this understanding is hard so we will leave it to the later Taming the Beast classes and tutorials in order to keep the introduction as simple as possible.
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/priors.png}
 \caption{\small Prior setup}
@@ -260,7 +244,7 @@ Locate \texttt{Pan} taxon in the left hand side list and click the \texttt{>>} b
 Click the \texttt{OK} button to add the newly defined taxa set to the prior list.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/taxa.png}
 \caption{\small Calibration node taxa set definition}
@@ -287,7 +271,7 @@ Set the \texttt{Sigma} of the distribution to 0.5.
 
 The final setup of the calibration node should look as shown in Figure~\ref{fig:calibration}.
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/calibration.png}
 \caption{\small Calibration node prior setup}
@@ -338,7 +322,7 @@ Leave the \texttt{Log Every} parameter at the default value of 1'000.
 
 The final setup should look as in Figure~\ref{fig:logs}.
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/logs.png}
 \caption{\small Logging options}
@@ -377,14 +361,14 @@ Run BEAST2 by clicking the \texttt{Run} button.
 
 The window will remain open when BEAST2 will finished. When you try to close it, you may see BEAST2 asking the question: "Do you wish to save?". Note that your log and trees files are always saved, no matter what answer you choose for this question. Thus, the question is only restricted to saving or not of the BEAST2 \texttt{screenlog} output. In order to save this output, click \texttt{Yes} and select the location on your computer, and the filename under which you wish to save this output. However, for now, it is safe to click \texttt{No} and not save the \texttt{screenlog} output.
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/beast.png}
 \caption{\small BEAST2 setup for the analysis}
 \label{fig:beast}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/beast_out.png}
 \caption{\small BEAST2 output for the analysis}
@@ -421,14 +405,14 @@ Select all four mutation rates by clicking the first mutation rate (\texttt{muta
 Select the \texttt{Marginal Prob Distribution} tab on the right to view the four distributions together.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/tracer_bad.png}
 \caption{\small Tracer showing a summary of the BEAST2 run of primate data with MCMC chain length of 1'000'000.}
 \label{fig:tracer_bad}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/tracer_comparison.png}
 \caption{\small Tracer showing the four marginal probability distributions of the mutation rates in each partition of the alignment.}
@@ -445,14 +429,14 @@ If a lot of statistics have red or yellow coloured ESS value, we did not explore
 
 Remember that MCMC is a stochastic algorithm, so if you set a different seed the actual numbers will not be exactly the same as those depicted in the figure.% However, if you run the analysis twice with the same seed, but with a longer chain the second time, the second trace will include the first one, as the start of the random number sequence will be the same. To verify that, select both trace files in Tracer, pick any statistic and select the \texttt{Trace} tab on the right. Figure~\ref{fig:tracer_two} shows what it should look like when we tell Tracer to colour traces by trace file (pick \texttt{Trace file} in the \texttt{Colour by} drop down menu at the very bottom of the window).
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/tracer_better.png}
 \caption{\small Tracer showing a summary of the BEAST2 run with MCMC chain length of 2'500'000.}
 \label{fig:tracer_better}
 \end{figure}
 
-%\begin{figure}[H]
+%\begin{figure}[!h]
 %\centering
 %\includegraphics[width=5in]{figures/tracer_two.png}
 %\caption{\small Tracer showing traces of two separate analyses ran with the same seed. The black line corresponds to the shorter run, with the beginning being coloured gray to indicate burn-in. The violet line corresponds to the longer run. With close inspection one can see that the black line, going on until 1'000'000 samples, is hidden behind the violet line, showing that if one runs the exact same analysis in BEAST2 with the same seed, the traces will be identical.}
@@ -503,7 +487,7 @@ Set the \texttt{Output File} to \texttt{Primates.MCC.tree}.
 Run the MCC tree generation by clocking the \texttt{Run} button.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/treeannot.png}
 \caption{\small TreeAnnotator setup}
@@ -534,7 +518,7 @@ Check the \texttt{Node Labels} checkbox.
 Expand the \texttt{Node Labels} options and select the \texttt{posterior} in the \texttt{Display} dropdown.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/figtree.png}
 \caption{\small FigTree visualisation of the estimated tree.}
@@ -567,28 +551,29 @@ Now, select the \texttt{Help > View clades} in DensiTree menu. You should see a 
 Select \texttt{Help > View clades} and view the different clades and their probabilities.
 \end{framed}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/densitree.png}
 \caption{\small DensiTree visualisation of the tree sample.}
 \label{fig:densitree}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=5in]{figures/densitree_clades.png}
 \caption{\small DensiTree clade probability.}
 \label{fig:densitree_clades}
 \end{figure}
 
+\clearpage
 \bigskip
 \section{Useful Links}
 
 \begin{itemize}
-\item \href{http://www.beast2.org/book.html}{\textit{Bayesian Evolutionary Analysis with BEAST 2}} \\ \vspace{-7mm}
-\item BEAST 2 website and documentation: \href{http://www.beast2.org/}{http://www.beast2.org/} \\ \vspace{-7mm}
-\item BEAST 1 website and documentation: \href{http://beast.bio.ed.ac.uk}{http://beast.bio.ed.ac.uk} \\ \vspace{-7mm}
-\item Join the BEAST user discussion: \href{http://groups.google.com/group/beast-users}{http://groups.google.com/group/beast-users} \\ \vspace{-7mm}
+\item \href{http://www.beast2.org/book.html}{\textit{Bayesian Evolutionary Analysis with BEAST 2}}
+\item BEAST 2 website and documentation: \href{http://www.beast2.org/}{http://www.beast2.org/} 
+\item BEAST 1 website and documentation: \href{http://beast.bio.ed.ac.uk}{http://beast.bio.ed.ac}
+\item Join the BEAST user discussion: \href{http://groups.google.com/group/beast-users}{http://groups.google.com/group/beast-users} 
 \end{itemize}
 
 \href{http://creativecommons.org/licenses/by/4.0/}{\includegraphics[scale=0.8]{figures/ccby.pdf}} This tutorial was written by \href{https://www.bsse.ethz.ch/cevo/the-group/people/person-detail.html?persid=192596}{J\={u}lija Pe\v{c}erska} and \href{https://www.bsse.ethz.ch/cevo/the-group/people/person-detail.html?persid=184671}{Veronika Bo\v{s}kov\'{a}} for the \href{https://www.bsse.ethz.ch/cevo/taming-the-beast.html}{Taming the BEAST Workshop} on applied phylogenetics and molecular evolution and is licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License}. The content is based on the \href{https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true}{Divergence Dating Tutorial with BEAST 2.0} by Drummond, Rambaut, and Bouckaert.
