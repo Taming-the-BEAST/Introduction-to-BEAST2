@@ -1,6 +1,8 @@
 ---
-author: Jūlija Pečerska,Veronika Bošková
+author: Jūlija Pečerska,Veronika Bošková
 level: Beginner
+title: Introduction to BEAST2
+subtitle: This is a simple introductory tutorial to help you get started with using BEAST2 and its accomplices.
 ---
 
 
@@ -418,7 +420,7 @@ Then set the `Input Tree File` to the file `.trees` file BEAST2 created as the r
 
 <figure>
 	<a id="fig:treeannot"></a>
-	<img src="figures/treeannot.png">
+	<img style="width:50%;" src="figures/treeannot.png">
 	<figcaption>Figure 13: TreeAnnotator setup</figcaption>
 </figure>
 
@@ -492,10 +494,9 @@ Now, select the `Help > View clades` in DensiTree menu. You should see a window 
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.bio.ed.ac.uk)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
 
-----
+---- 
 
-This tutorial was written by Jūlija Pečerska and Veronika Bošková for the [Taming the BEAST Workshop])(https://www.bsse.ethz.ch/cevo/taming-the-beast.html) on applied phylogenetics and molecular evolution and is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). The content is based on the [Divergence Dating Tutorial with BEAST 2.0](https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true) by Drummond, Rambaut, and Bouckaert.
-
+The content of this tutorial is based on the [Divergence Dating Tutorial with BEAST 2.0](https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true) by Drummond, Rambaut, and Bouckaert.
 
 
 
