@@ -179,7 +179,7 @@ We will set the prior for `birthRateY.t:tree` to a `Gamma` distribution with an 
 
 > For `birthRateY.t:tree` select `Gamma` from the dropdown menu
 > 
-> Expand the options for `birthRateY.t:tree` using the arrow button on the right.
+> Expand the options for `birthRateY.t:tree` using the arrow button on the left.
 >
 > Set the `Alpha` (shape) parameter to 0.001 and the `Beta` (scale) parameter to 1000.
 
