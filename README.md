@@ -43,7 +43,7 @@ TreeAnnotator is provided as a part of the BEAST2 package so you do not need to 
 
 Bayesian analysis using BEAST2 provides an estimate of the uncertainty in tree space. This distribution is represented by a set of trees, which can be rather large and difficult to interpret. DensiTree is a program for qualitative analysis of sets of trees. DensiTree allows to quickly get an impression of properties of the tree set such as well-supported clades, distribution of tree heights and areas of topological uncertainty.
 
-DensiTree is provided as a part of the BEAST2 tool package so you do not need to install it separately.
+DensiTree is provided as a part of the BEAST2 package so you do not need to install it separately.
 
 
 ### Tracer
