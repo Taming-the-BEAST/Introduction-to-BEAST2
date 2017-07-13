@@ -505,7 +505,7 @@ The content of this tutorial is based on the [Divergence Dating Tutorial with BE
 
 # Relevant References
 
-{% bibliography --cited --file Substitution-model-averaging/refs %}
+{% bibliography --cited --file Introduction-to-BEAST2/master-refs %}
 
 
 
