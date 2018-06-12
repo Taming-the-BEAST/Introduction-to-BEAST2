@@ -13,7 +13,7 @@ subtitle: This is a simple introductory tutorial to help you get started with us
 
 Before diving into performing complex analyses with the BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
 
-Therefore, in this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software most commonly used to interpret the results of the analyses. Bear in mind that this tutorial is designed just to help you get started using BEAST2. We will not discuss all the choices and concepts in detail, as they will be sequentially discussed in further classes and tutorials.
+In this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software tools most commonly used to interpret the results of the analyses. Bear in mind that this tutorial is designed just to help you get started using BEAST2. This tutorial does not discuss all the choices and concepts in detail, as they are discussed in further  tutorials.
 
 
 ----
@@ -64,25 +64,65 @@ This tutorial will guide you through the analysis of an alignment of sequences s
 1. The gene phylogeny;
 2. The rate of evolution on each lineage based on divergence times of their host species.
 
-More generally, this tutorial aims to introduce new users to a basic workflow and point out the steps towards performing a full analysis of sequencing data within Bayesian framework.
+More generally, this tutorial aims to introduce new users to a basic workflow and point out the steps towards performing a full analysis of sequencing data within a Bayesian framework.
 
 
-## Creating analysis configuration
+## The Data
 
-To run analyses with BEAST, one needs to prepare a configuration file in XML format that contains all the input information and setup of initial values and priors. Even though it is possible to create such files by hand from scratch, it can be complicated and not exactly straightforward. BEAUti is designed to aid you in producing a valid setup file for BEAST. If necessary that file can later be edited by hand, but it is recommended to use BEAUti for generating the files at least for the initial round of analysis.
-
-
-> Begin by starting up BEAUti.
+Before we can start, we need to download the input data for the tutorial. For this tutorial we use a single NEXUS file, `primate-mtDNA.nex`, which contains sequences and meta-information on the twelve primate mitochondrial genomes which we will be analysing.
 
 
-### Loading the data
+> **Downloading from https://taming-the-beast.org**
+> 
+> A link to the alignment file, `primate-mtDNA.nex`, is on the left-hand panel, under the heading **Data**.
+> **Right-click** on the link and select "Save Link As..." (Firefox and Chrome) or **"Download Linked File As..."** (Safari) and save the file to a convenient location on your local drive. Note that some browswers will automatically change the extension of the file from `.nex` to `.nex.txt`. If this is the case simply rename the file again. 
+>
+> Alternatively, if you left-click on the link most modern browswers will display the alignment file. You can then press **File > Save As** to store a local copy of the file. Note that some browsers will inject an HTML header into the file, which will make it unusable in BEAST2 (making this the less preferable option for downloading data files).
+>
+> In the same way you can also download **pre-cooked** `.xml` files for the analyses in this tutorial, as well as the output `.log` and `.trees` files. We recommend only downloading these files to check your results or if you become seriously stuck.
+>
 
-In the folder with the extracted tutorial materials you should see the `Data` folder containing a single NEXUS file. This file contains sequences and meta-information on the twelve primate mitochondrial genomes which we will be analysing.
 
-To give BEAST2 access to the data, one has to add the alignment to the configuration file. To do this, open BEAUti and either drag and drop the Nexus file into the open BEAUti window (it should be on `Partitions` tab), or use `File > Import Alignment` and then locate and click the alignment file.
+> **Downloading from Github**
+>
+> The tutorial is also stored on Github, at [https://github.com/taming-the-beast/Introduction-to-BEAST2](https://github.com/taming-the-beast/Introduction-to-BEAST2). As with the data files, there is also a link to the Github repository on the left-hand panel on the website. 
+>
+> If you navigate to the Github repository you can either download the raw data files directly from Github or clone/download the repository to your local drive.
+>
+> Note that this tutorial is distributed under a CCBY 4.0 license, which gives anyone the right to freely use (and modify) it, as long as appropriate credit is given and the updated material is licensed in the same fashion.
+>
 
 
-> Import the alignment into BEAUti by either dragging and dropping the `*.nex` file into the BEAUti window open on the Partitions tab, or use `File > Import Alignment` and then locate and click the alignment file.
+## The Model
+
+**XXX** Add information on the model here. Molecular clock dating etc. **XXX**
+
+
+## Creating the Analysis File with BEAUti
+
+To run analyses with BEAST, one needs to prepare a configuration file in XML format that contains all the input information and setup of initial values and priors. 
+
+**XXX**
+Data
+Model specification
+Initial values and parameter constraints
+MCMC specifications
+**XXX**
+
+Even though it is possible to create such files by hand from scratch, it can be complicated and is not exactly straightforward. BEAUti is a user-friendly program designed to aid you in producing a valid setup file for BEAST. If necessary that file can later be edited by hand, but it is recommended to use BEAUti for generating the files at least for the initial round of analysis.
+
+
+> Begin by starting **BEAUti2**.
+
+
+### Importing the Alignment
+
+To give BEAST2 access to the data, one has to add the alignment to the configuration file. 
+
+> Open BEAUti and either drag and drop the file `primate-mtDNA.nex` into the open BEAUti window (it should be on the **Partitions** tab). 
+>
+> Alternatively, use **File > Import Alignment** or click on the **+** in the bottom left-hand corner of the window, then locate and click on the alignment file.
+>
 
 
 Once you have done that, the data should appear in the BEAUti window which should look as shown in [Figure 1](#fig:data).
@@ -90,7 +130,7 @@ Once you have done that, the data should appear in the BEAUti window which shoul
 <figure>
 	<a id="fig:data"></a>
 	<img src="figures/data.png" alt="">
-	<figcaption>Figure 1: Data imported into BEAUti.</figcaption>
+	<figcaption>Figure 1: Data imported into BEAUti2.</figcaption>
 </figure>
 
 
