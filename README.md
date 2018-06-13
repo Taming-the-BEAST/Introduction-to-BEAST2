@@ -14,7 +14,7 @@ subtitle: This is a simple introductory tutorial to help you get started with us
 
 Before diving into performing complex analyses with the BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
 
-In this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software tools most commonly used to interpret the results of the analyses. Bear in mind that this tutorial is designed just to help you get started using BEAST2. This tutorial does not discuss all the choices and concepts in detail, as they are discussed in further  tutorials.
+In this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software tools most commonly used to interpret the results of  analyses. Bear in mind that this tutorial is designed only to help you get started using BEAST2. This tutorial does not discuss all the choices and concepts in detail, as they are discussed in further  tutorials. Interspersed throughout the tutorial are topics for discussion. These discussion topics are optional, however if you work through them you will have a much better understanding of the concepts discussed in this tutorial. Feel free to skip the discussion topics and come back to them later, while running the analysis file, or after finishing the whole tutorial.
 
 
 ----
@@ -59,17 +59,13 @@ DensiTree is provided as a part of the BEAST2 package so you do not need to inst
 
 # Practical: Running a simple analysis with BEAST2
 
-This tutorial will guide you through the analysis of an alignment of sequences sampled from twelve primate species. The aim of this tutorial is to co-estimate the following:
-
-1. The gene phylogeny;
-2. The rate of evolution on each lineage based on divergence times of their host species.
-
-More generally, this tutorial aims to introduce new users to a basic workflow and point out the steps towards performing a full analysis of sequencing data within a Bayesian framework.
+This tutorial will guide you through the analysis of an alignment of sequences sampled from twelve primate species. The aim of this tutorial is to co-estimate the gene phylogeny and the rate of evolution. 
+More generally, this tutorial aims to introduce new users to a basic workflow and point out the steps towards performing a full analysis of sequencing data within a Bayesian framework using BEAST2.
 
 
 ## The Data
 
-Before we can start, we need to download the input data for the tutorial. For this tutorial we use a single NEXUS file, `primate-mtDNA.nex`, which contains a sequence alignment and metadata of the twelve primate mitochondrial genomes which we will be analysing. Among other information the metadata contains information to partition the alignment into 4 regions:
+Before we can start, we need to download the input data for the tutorial. For this tutorial we use a single NEXUS file, `primate-mtDNA.nex`, which contains a sequence alignment and metadata of the twelve primate mitochondrial genomes we will be analysing. Among other information, the metadata contains information to partition the alignment into 4 regions:
 
 - Non-coding region
 - 1st codon positions
@@ -81,7 +77,7 @@ The alignment file can be downloaded from the Taming the BEAST website at [https
 > **Downloading from taming-the-beast.org**
 > 
 > A link to the alignment file, `primate-mtDNA.nex`, is on the left-hand panel, under the heading **Data**.
-> **Right-click** on the link and select **"Save Link As..."** (Firefox and Chrome) or **"Download Linked File As..."** (Safari) and save the file to a convenient location on your local drive. Note that some browsers will automatically change the extension of the file from `.nex` to `.nex.txt`. If this is the case simply rename the file again. 
+> **Right-click** on the link and select **"Save Link As..."** (Firefox and Chrome) or **"Download Linked File As..."** (Safari) and save the file to a convenient location on your local drive. Note that some browsers will automatically change the extension of the file from `.nex` to `.nex.txt`. If this is the case, simply rename the file again. 
 >
 > Alternatively, if you **left-click** on the link most browsers will display the alignment file. You can then press **File > Save As** to store a local copy of the file. Note that some browsers will inject an HTML header into the file, which will make it unusable in BEAST2 (making this the less preferable option for downloading data files).
 >
@@ -109,7 +105,7 @@ To run analyses with BEAST, one needs to prepare a configuration file in XML for
 - Settings of the MCMC algorithm
 - Output options
 
-Even though it is possible to create such files by hand from scratch, it can be complicated and is not exactly straightforward. BEAUti is a user-friendly program designed to aid you in producing a valid setup file for BEAST. If necessary that file can later be edited by hand, but it is recommended to use BEAUti for generating the files at least for the initial round of analysis.
+Even though it is possible to create such files by hand from scratch, it can be complicated and is not exactly straightforward. BEAUti is a user-friendly program designed to aid you in producing a valid configuration file for BEAST. If necessary, that file can later be edited by hand, but it is recommended to use BEAUti for generating the files (at least for the initial round of analysis).
 
 
 > Begin by starting **BEAUti2**.
@@ -117,7 +113,7 @@ Even though it is possible to create such files by hand from scratch, it can be 
 
 ### Importing the alignment
 
-To give BEAST2 access to the data, the alignment ha to be added to the configuration file. 
+To give BEAST2 access to the data, the alignment has to be added to the configuration file. 
 
 > Drag and drop the file `primate-mtDNA.nex` into the open BEAUti window (it should be on the **Partitions** tab). 
 >
@@ -140,9 +136,9 @@ Once you have done that, the data should appear in the BEAUti window which shoul
 
 A common way to account for site-to-site rate heterogeneity (variation in substitution rates between different sites) is to use a Gamma site model. In this model, one assumes that rate variation follows a Gamma distribution. To make the analysis tractable the Gamma distribution is discretised to a small number of bins (4-6 usually). The mean of each bin then acts as a multiplier for the overall substitution rate. The transition probabilities are then calculated for each scaled substitution rate. To calculate the likelihood for a site, **P(data | tree, substitution model)** is calculated under each Gamma rate category and the results are summed up to average over all possible rates. This is a handy approach if one suspects that some sites are mutating faster than others but the precise position of these sites in the alignment is unknown or random.
 
-Another way to account for site-to-site rate heterogeneity is to split the alignment into explicit partitions, and specify an independent substitution model for each partition. This is especially relevant, when one knows exactly which positions in the alignment have different substitution rates from the rest of the sites. In our example, we split the alignment into coding and non-coding regions, and further split the coding region into 1st, 2nd and 3rd codon positions. This information is encoded as metadata into the `.nex` file, which BEAUti automatically processes to produce the four partitions shown in the **Partitions** tab as shown in [Figure 1](#fig:data).
+Another way to account for site-to-site rate heterogeneity is to split the alignment into explicit partitions, and specify an independent substitution model for each partition. This is especially relevant, when one knows exactly which positions in the alignment have different substitution rates from the rest of the sites. In our example, we split the alignment into coding and non-coding regions, and further split the coding region into 1st, 2nd and 3rd codon positions. This information is encoded as metadata into the `.nex` file, which BEAUti automatically processes to produce the four partitions in the **Partitions** tab as shown in [Figure 1](#fig:data).
 
-> **Double-click** on the different partitions (under the **File** column) to view the alignments.
+> **Double-click** on the different partitions (under the **File** column) to view the individual alignments.
 >
 
 <figure>
@@ -158,9 +154,11 @@ Another way to account for site-to-site rate heterogeneity is to split the align
 </figure>
 <br>
 
-By looking at the alignments for the 2nd and 3rd codon positions [Figure 2](#fig:2ndpos) and [Figure 3](#fig:3rdpos) we can immediately see a clear difference between the two codon positions. For the 2nd codon position many of the ancestral relationships are clear from shared substitutions between groups, for instance between the great apes (_Homo sapiens_, _Pan_, _Gorilla_ and _Pongo_ - humans, chimpanzees, gorillas and orangutans) and between the old-world monkeys (_Macaca fuscata_, _M. mulatta_, _M. fascicularis_ and _M. sylvanus_ - the macaques). The lesser apes (represented by _Hylobates_ - gibbons) share most substitutions with the great apes, but occasionally share a substitution with the macaques. For the 3rd codon position there are many more substitutions and the groupings are not as clear. 
+By looking at the alignments for the 2nd and 3rd codon positions ([Figure 2](#fig:2ndpos) and [Figure 3](#fig:3rdpos)) we can immediately see a clear difference between the two codon positions. For the 2nd codon position many of the ancestral relationships are clear from shared substitutions between groups, for instance between the great apes (_Homo sapiens_, _Pan_, _Gorilla_ and _Pongo_ - humans, chimpanzees, gorillas and orangutans) and between the old-world monkeys (_Macaca fuscata_, _M. mulatta_, _M. fascicularis_ and _M. sylvanus_ - the macaques). The lesser apes (represented by _Hylobates_ - gibbons) share most substitutions with the great apes, but occasionally share a substitution with the macaques. For the 3rd codon position there are many more substitutions and the groupings are not as clear. 
 
-> **Topic for discussion:** Do you think there is a good case for using independent substitution models on the different partitions in the `.nex` file? Do you think this is sufficient for taking all site-to-site rate variation into account? How would you account for rate variation between sites in each partition? 
+> **Topic for discussion:** Do you think there is a good case for using independent substitution models on the different partitions in the `.nex` file? Do you think this is sufficient for taking all site-to-site rate variation into account? 
+>
+> How would you account for rate variation between sites in each partition? 
 >
 
 
@@ -170,7 +168,7 @@ To make sure that the partitions share the same evolutionary history we need to 
 
 > Select all four data partitions the **Partitions** panel (use **shift+click**) and click the **Link Trees** and **Link Clock Models** buttons.
 
-You will see that the **Clock Model** and the **Tree** columns in the table both changed to say `noncoding`. Now we will rename both models such that the following options and generated log files more easy to read. The resulting setup should look as shown in [Figure 4](#fig:link).
+You will see that the **Clock Model** and the **Tree** columns in the table both changed to say `noncoding`. Now we will rename both models such that the following options and generated log files are easier to read. The resulting setup should look as shown in [Figure 4](#fig:link).
 
 > Click on the first drop-down menu in the **Clock Model** column and rename the shared clock model to `clock`.
 >
@@ -180,14 +178,14 @@ You will see that the **Clock Model** and the **Tree** columns in the table both
 <figure>
 	<a id="fig:link"></a>
 	<img src="figures/link.png">
-	<figcaption>Figure 4: Linked models.</figcaption>
+	<figcaption>Figure 4: Linked clock and tree models.</figcaption>
 </figure>
 <br>
 
 
 ### Setting the substitution model
 
-In this analysis all of our sequences come from extant species and were thus all sampled in the present (assumed to be {% eqinline t = 0 %}). Therefore we do not need to set up sampling dates and we skip the **Tip Dates** panel. Next we need to set up the substitution model in the **Site Model** tab.
+In this analysis all of our sequences come from extant species and were thus all sampled in the present day (assumed to be {% eqinline t = 0 %}). Therefore we do not need to set up sampling dates and we skip the **Tip Dates** panel. Next, we need to set up the substitution model in the **Site Model** tab.
 
 > Select the **Site Model** tab.
 
@@ -209,11 +207,13 @@ The panel on the left shows each partition. Remember that we did not link the su
 <figure>	
 	<a id="fig:subst"></a>
 	<img src="figures/substitution.png">
-	<figcaption>Figure 5: Substitution model setup.</figcaption>
+	<figcaption>Figure 5: Site model setup.</figcaption>
 </figure>
 <br>
 
-The panel should look like [Figure 5](#fig:subst). We are using an HKY substitution model with empirical frequencies. This will fix the frequencies to the proportions observed in the partition. This approach means that we can get a good fit to the data without explicitly estimating these parameters. To model site-to-site rate variation within the partition we use a discrete Gamma site model with 4 categories. Now we _could_ repeat the above steps for each of the remaining partitions or we can take a shortcut.
+The panel should look like [Figure 5](#fig:subst). 
+
+We are using an HKY substitution model with empirical frequencies. This will fix the frequencies to the proportions observed in the partition. This approach means that we can get a good fit to the data without explicitly estimating these parameters. To model site-to-site rate variation within each partition we use a discrete Gamma site model with 4 categories. Now we _could_ repeat the above steps for each of the remaining partitions or we can take a shortcut.
 
 > Select the remaining three partitions (use **shift+click**). The window will now look like [Figure 6](#fig:clone). 
 >
@@ -261,13 +261,13 @@ The **birthRate** parameter measures the rate of speciation in the calibrated Yu
 > - Set the **Alpha** (shape) parameter to **0.001** and the **Beta** (scale) parameter to **1000**.
 >
 
-Note that BEAUti displays a plot of the prior distribution on the right, as well as a few of its quantiles. This is for easy reference and can help us decide if a prior is appropriate. The unspecific Gamma prior we are using is defined on {% eqinline (0,\infty) %} and has a very broad range of values included between its 2.5% and 97.5% quantiles. 
+Note that BEAUti displays a plot of the prior distribution on the right, as well as a few of its quantiles. This is for easy reference and can help us to decide if a prior is appropriate. The unspecific Gamma prior we are using is defined on {% eqinline (0,\infty) %} and has a very broad range of values included between its 2.5% and 97.5% quantiles. 
 
 If we wanted to add a hyperprior on one of the parameters of the Gamma prior we would check the **estimate** box on the right of the parameter. We could also change the initial values or limits of the model parameters by clicking on the boxes next to the drop-down menus. Do **not** do this here, as we are **not** adding any hyperpriors or changing limits in this analysis! 
 
 **We will leave the rest of the priors on their default values!** The BEAUti panel should look as shown in [Figure 7](#fig:priors).
 
-Please note that in general using default priors is highly frowned upon as priors are meant to convey your prior knowledge of the parameters. It is important to know what information the priors add to the MCMC analysis and whether this fits your particular situation. In our case the default priors are suitable for this particular analysis, however for further, more complex analyses, we will require a clear idea of what the priors mean. Getting this understanding is difficult and comes with experience. The topic of choosing priors is discussed in more detail in later tutorials.
+Please note that in general using default priors is frowned upon as priors are meant to convey your prior knowledge of the parameters. It is important to know what information the priors add to the MCMC analysis and whether this fits your particular situation. In our case the default priors are suitable for this particular analysis, however for further, more complex analyses, we will require a clear idea of what the priors mean. Getting this understanding is difficult and comes with experience. The topic of choosing priors is discussed in more detail in later tutorials.
 
 
 <figure>
@@ -281,9 +281,9 @@ Please note that in general using default priors is highly frowned upon as prior
 
 ### Adding a calibration node
 
-Since all of the samples come from a single time point, there is no information on the actual height of the phylogenetic tree in time units. The tree height (tMRCA) and substitution rate parameters will not be distinguishable and BEAST2 will only be able to estimate their product. To give BEAST2 the possibility to separate these two parameters we need to input additional information that will help calibrate the tree in time.
+Since all of the samples come from a single time point, there is no information on the actual height of the phylogenetic tree in time units. The tree height (tMRCA) and substitution rate parameters will not be distinguishable and BEAST2 will only be able to estimate their product. To give BEAST2 the possibility of separating these two parameters we need to input additional information that will help calibrate the tree in time.
 
-In a Bayesian analysis additional information from external sources should be encoded in the form of a prior distribution. Thus, we will have to add a new prior to the model that is not yet defined. 
+In a Bayesian analysis, additional information from external sources should be encoded in the form of a prior distribution. Thus, we will have to add a new prior to the model. 
 
 
 > To add an extra prior to the model, press the **+ Add Prior** button below list of priors and select **MRCA Prior** from the drop-down menu.
@@ -303,7 +303,7 @@ The taxon set should now look like [Figure 8](#fig:taxa).
 <figure>
 	<a id="fig:taxa"></a>
 	<img style="width:80%;" src="figures/taxa.png">
-	<figcaption>Figure 8: Calibration node taxa set definition.</figcaption>
+	<figcaption>Figure 8: Calibration node taxon set.</figcaption>
 </figure>
 <br>
 
@@ -344,7 +344,7 @@ The **Chain Length** parameter specifies the number of steps the MCMC chain will
 
 Below these general settings you will find the logging settings. Each particular option can be viewed in detail by clicking the arrow to the left of it. You can control the names of the log files and how often values will be stored in each of the files.
 
-Start by expanding the **tracelog** options. This is the log file you will use later to analyse and summarise the results of the run. The **Log Every** parameter for the log file should be set relative to the total length of the chain. Sampling too often will result in very large files with little extra benefit in terms of the accuracy of the analysis. Sampling too rarely will mean that the log file will not record sufficient information about the distributions of the parameters. We normally want to aim to store no more than 10'000 samples so this should be set to no less than chain length/10'000. For this analysis we will make BEAST2 write to log file every 200 samples.
+Start by expanding the **tracelog** options. This is the log file you will use later to analyse and summarise the results of the run. The **Log Every** parameter for the log file should be set relative to the total length of the chain. Sampling too often will result in very large files with little extra benefit in terms of the accuracy of the analysis. Sampling too sparsely will mean that the log file will not record sufficient information about the distributions of the parameters. We normally want to aim to store no more than 10'000 samples so this should be set to no less than chain length/10'000. For this analysis we will make BEAST2 write to the log file every 200 samples.
 
 > Expand the **tracelog** options.
 > 
@@ -412,7 +412,7 @@ BEAST2 will run until the specified number of steps in the chain is reached. Whi
 <figure>
 	<a id="fig:beast_out"></a>
 	<img style="width:80%;" src="figures/beast_out.png">
-	<figcaption>Figure 12: BEAST2 output for the analysis.</figcaption>
+	<figcaption>Figure 12: BEAST2 screen output for the analysis.</figcaption>
 </figure>
 <br>
 
@@ -650,7 +650,7 @@ You can also view all of the different clades and their posterior probabilities 
 
 > **Topics for discussion:** The Yule model for speciation has one parameter (**birthRateY.t:tree**), representing the speciation rate. This model assumes that there is no extinction and thus that all taxa are sampled.
 >
-> - What are the units for **birthRateY.t:tree**? From your analysis, can you figure out, on average, how many years have to elapse before a new species is formed? (Have a look at the tracelog).
+> - What are the units for **birthRateY.t:tree**? From your analysis, can you figure out the average time it takes for a speciation event to occur? (Have a look at the tracelog).
 > - Is the Yule model an appropriate model to use here?
 > - In the dataset there is a much larger sampling proportion for the great apes (4/8 extant species) than for lemurs, tarsiers and new-world monkeys (one species each). Do you think unequal sampling proportions are an issue?
 > 
@@ -665,7 +665,7 @@ The content of this tutorial is based on the [Divergence Dating Tutorial with BE
 
 - [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html)
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
-- BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.bio.ed.ac.uk)
+- BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.community)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
 
 ---- 
