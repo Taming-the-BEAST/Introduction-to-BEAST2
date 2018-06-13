@@ -69,27 +69,33 @@ More generally, this tutorial aims to introduce new users to a basic workflow an
 
 ## The Data
 
-Before we can start, we need to download the input data for the tutorial. For this tutorial we use a single NEXUS file, `primate-mtDNA.nex`, which contains sequences and meta-information on the twelve primate mitochondrial genomes which we will be analysing.
+Before we can start, we need to download the input data for the tutorial. For this tutorial we use a single NEXUS file, `primate-mtDNA.nex`, which contains a sequence alignment and metadata of the twelve primate mitochondrial genomes which we will be analysing. Among other information the metadata contains information to partition the alignment into 4 regions:
 
+- Non-coding region
+- 1st codon positions
+- 2nd codon positions
+- 3rd codon positions
 
-> **Downloading from https://taming-the-beast.org**
+The alignment file can be downloaded from the Taming the BEAST website at [https://taming-the-beast.org/tutorials/Introduction-to-BEAST2/](https://taming-the-beast.org/tutorials/Introduction-to-BEAST2/).
+
+> **Downloading from taming-the-beast.org**
 > 
 > A link to the alignment file, `primate-mtDNA.nex`, is on the left-hand panel, under the heading **Data**.
-> **Right-click** on the link and select "Save Link As..." (Firefox and Chrome) or **"Download Linked File As..."** (Safari) and save the file to a convenient location on your local drive. Note that some browswers will automatically change the extension of the file from `.nex` to `.nex.txt`. If this is the case simply rename the file again. 
+> **Right-click** on the link and select **"Save Link As..."** (Firefox and Chrome) or **"Download Linked File As..."** (Safari) and save the file to a convenient location on your local drive. Note that some browsers will automatically change the extension of the file from `.nex` to `.nex.txt`. If this is the case simply rename the file again. 
 >
-> Alternatively, if you left-click on the link most modern browswers will display the alignment file. You can then press **File > Save As** to store a local copy of the file. Note that some browsers will inject an HTML header into the file, which will make it unusable in BEAST2 (making this the less preferable option for downloading data files).
+> Alternatively, if you **left-click** on the link most browsers will display the alignment file. You can then press **File > Save As** to store a local copy of the file. Note that some browsers will inject an HTML header into the file, which will make it unusable in BEAST2 (making this the less preferable option for downloading data files).
 >
-> In the same way you can also download **pre-cooked** `.xml` files for the analyses in this tutorial, as well as the output `.log` and `.trees` files. We recommend only downloading these files to check your results or if you become seriously stuck.
+> In the same way you can also download example `.xml` files for the analyses in this tutorial, as well as _pre-cooked_ output `.log` and `.trees` files. We recommend only downloading these files to check your results or if you become seriously stuck.
 >
 
+
+The tutorial is also stored on Github, at [https://github.com/taming-the-beast/Introduction-to-BEAST2](https://github.com/taming-the-beast/Introduction-to-BEAST2). As with the data files, there is also a link to the Github repository on the left-hand panel on the website. 
 
 > **Downloading from Github**
 >
-> The tutorial is also stored on Github, at [https://github.com/taming-the-beast/Introduction-to-BEAST2](https://github.com/taming-the-beast/Introduction-to-BEAST2). As with the data files, there is also a link to the Github repository on the left-hand panel on the website. 
+> If you navigate to the Github repository you can either download the raw data files directly from **Github** or clone/download the repository to your local drive.
 >
-> If you navigate to the Github repository you can either download the raw data files directly from Github or clone/download the repository to your local drive.
->
-> Note that this tutorial is distributed under a CCBY 4.0 license, which gives anyone the right to freely use (and modify) it, as long as appropriate credit is given and the updated material is licensed in the same fashion.
+> Note that this tutorial is distributed under a **CC BY 4.0** license, which gives anyone the right to freely use (and modify) it, as long as appropriate credit is given and the updated material is licensed in the same fashion.
 >
 
 
@@ -115,11 +121,11 @@ Even though it is possible to create such files by hand from scratch, it can be 
 > Begin by starting **BEAUti2**.
 
 
-### Importing the Alignment
+### Importing the alignment
 
-To give BEAST2 access to the data, one has to add the alignment to the configuration file. 
+To give BEAST2 access to the data, the alignment ha to be added to the configuration file. 
 
-> Open BEAUti and either drag and drop the file `primate-mtDNA.nex` into the open BEAUti window (it should be on the **Partitions** tab). 
+> Drag and drop the file `primate-mtDNA.nex` into the open BEAUti window (it should be on the **Partitions** tab). 
 >
 > Alternatively, use **File > Import Alignment** or click on the **+** in the bottom left-hand corner of the window, then locate and click on the alignment file.
 >
@@ -134,79 +140,106 @@ Once you have done that, the data should appear in the BEAUti window which shoul
 </figure>
 
 
+
+
 ### Setting up shared models
 
-One way to account for variation in substitution rates between different sites is to include gamma rate categories. In this scenario, one defines a Gamma distribution and discretises it in the desired number of bins (4-6 usually). The mean of each bin is then acting as a multiplier for the overall substitution rate. The transitions probabilities are then calculated for each scaled substitution rate. P(data | tree, substitution model) can then be calculated under each gamma rate category and the results are summed up to average over all possible rates. This is a handy approach if one suspects that some sites can be mutating faster than others but the precise position of the sites in the alignment is unknown or random.
+A common way to account for site-to-site rate heterogeneity (variation in substitution rates between different sites) is to use a Gamma site model. In this model, one assumes that rate variation follows a Gamma distribution. To make the analysis tractable the Gamma distribution is discretised to a small number of bins (4-6 usually). The mean of each bin then acts as a multiplier for the overall substitution rate. The transition probabilities are then calculated for each scaled substitution rate. To calculate the likelihood for a site, **P(data | tree, substitution model)** is calculated under each Gamma rate category and the results are summed up to average over all possible rates. This is a handy approach if one suspects that some sites are mutating faster than others but the precise position of these sites in the alignment is unknown or random.
 
-Another way to account for site rate heterogeneity is to split the alignment into explicit partitions. This is especially relevant, when one knows exactly which positions in the alignment have different substitution rates from the rest of the sites. In our example, we split the alignment into coding and non-coding parts, and split the coding part further into 1st, 2nd and 3rd codon positions. We can now specify a separate substitution model for each partition. 
+Another way to account for site-to-site rate heterogeneity is to split the alignment into explicit partitions, and specify an independent substitution model for each partition. This is especially relevant, when one knows exactly which positions in the alignment have different substitution rates from the rest of the sites. In our example, we split the alignment into coding and non-coding regions, and further split the coding region into 1st, 2nd and 3rd codon positions. This information is encoded as metadata into the `.nex` file, which BEAUti automatically processes to produce the four partitions shown in the **Partitions** tab as shown in [Figure 1](#fig:data).
 
-Since all of the sequences in this data set are from the mitochondrial genome (which is not believed to undergo recombination in birds and mammals) they all share the same ancestry. By default BEAST2 would recover a time-tree for each partition, so we need to make sure that it uses all data to recover a single shared tree. For the sake of simplicity, we will also assume the partitions have the same evolutionary rate for each branch, and hence share the clock model as well.
-
-To make sure that the partitions share the same evolutionary history we need to link the clock model and the tree in BEAUti, which can be done by selecting all four partitions and clicking the `Link Trees` and `Link Clock Models` buttons.
-
-> Select all four data partitions the `Partitions` panel and click the `Link Trees` and `Link Clock Models` buttons.
-
-You will see that the `Clock Model` and the `Tree` columns in the table both changed to say `noncoding`. Now we will rename both models such that the following options and generated log files more easy to read. The resulting setup should look as shown in [Figure 2](#fig:link).
-
-> Click on the first drop-down menu in the `Clock Model` column and rename the shared clock model to `clock`.
+> **Double-click** on the different partitions (under the **File** column) to view the alignments.
 >
-> Likewise rename the shared tree to `tree`.
+
+<figure>
+	<a id="fig:2ndpos"></a>
+	<img src="figures/2ndpos.png" alt="">
+	<figcaption>Figure 2: The partition for the 2nd codon positions in the coding region of the primate mtDNA alignment.</figcaption>
+</figure>
+
+<figure>
+	<a id="fig:3rdpos"></a>
+	<img src="figures/3rdpos.png" alt="">
+	<figcaption>Figure 3: The partition for the 3rd codon positions in the coding region of the primate mtDNA alignment.</figcaption>
+</figure>
+<br>
+
+By looking at the alignments for the 2nd and 3rd codon positions [Figure 2](#fig:2ndpos) and [Figure 3](#fig:3rdpos) we can immediately see a clear difference between the two codon positions. For the 2nd codon position many of the ancestral relationships are clear from shared substitutions between groups, for instance between the great apes (_Homo sapiens_, _Pan_, _Gorilla_ and _Pongo_ - humans, chimpanzees, gorillas and orangutans) and between the old-world monkeys (_Macaca fuscata_, _M. mulatta_, _M. fascicularis_ and _M. sylvanus_ - the macaques). The lesser apes (represented by _Hylobates_ - gibbons) share most substitutions with the great apes, but occasionally share a substitution with the macaques. For the 3rd codon position there are many more substitutions and the groupings are not as clear. 
+
+> **Topic for discussion:** Do you think there is a good case for using independent substitution models on the different partitions in the `.nex` file? Do you think this is sufficient for taking all site-to-site rate variation into account? How would you account for rate variation between sites in each partition? 
+>
+
+
+Since all of the sequences in this dataset are from the mitochondrial genome (which is not believed to undergo recombination in birds and mammals) they all share the same ancestry. By default BEAST2 would recover a separate, independent time-tree for each partition, so we need to make sure that it uses all data to recover only a single shared tree. For the sake of simplicity, we will also assume that the partitions have the same evolutionary branch-rate distribution, and hence share the clock model as well.
+
+To make sure that the partitions share the same evolutionary history we need to link the **clock model** and the **tree** in BEAUti.
+
+> Select all four data partitions the **Partitions** panel (use **shift+click**) and click the **Link Trees** and **Link Clock Models** buttons.
+
+You will see that the **Clock Model** and the **Tree** columns in the table both changed to say `noncoding`. Now we will rename both models such that the following options and generated log files more easy to read. The resulting setup should look as shown in [Figure 4](#fig:link).
+
+> Click on the first drop-down menu in the **Clock Model** column and rename the shared clock model to `clock`.
+>
+> Likewise, rename the shared tree to `tree`.
 
 
 <figure>
 	<a id="fig:link"></a>
 	<img src="figures/link.png">
-	<figcaption>Figure 2: Linked models.</figcaption>
+	<figcaption>Figure 4: Linked models.</figcaption>
 </figure>
 
 
 
 ### Setting the substitution model
 
-Next we need to set up the substitution model in the `Site Model` tab.
+In this analysis all of our sequences come from extant species and were thus all sampled in the present (assumed to be {% eqinline t = 0 %}). Therefore we do not need to set up sampling dates and we skip the **Tip Dates** panel. Next we need to set up the substitution model in the **Site Model** tab.
 
-> Select the `Site Model` tab.
+> Select the **Site Model** tab.
 
-The options available in this panel depend on whether the alignment data is in nucleotides, aminoacids, binary data or general data. The settings available after loading the alignment will contain the default values which we normally want to modify.
+The options available in this panel depend on whether the alignment data are in nucleotides, amino-acids, binary data or general data. The settings available after loading the alignment will contain the default values which we normally want to modify.
 
-The panel on the left shows each part of the alignment. Remember that we did not link the substitution models in the previous step for the different partition, so each partition is allowed to evolve under different substitution model, i.e. we assume that different positions in the alignment accumulate substitutions differently. We will need to set the site substitution model separately for each part of the alignment as these models are unlinked. However, we think that all partitions evolve according to the same model (although with different parameters) so we can temporarily link the site models in the `Partitions` panel so that we can change the model of all partitions simultaneously. 
+The panel on the left shows each partition. Remember that we did not link the substitution models in the previous step for the different partitions, so each partition evolves under a different substitution model, i.e. we assume that different positions in the alignment accumulate substitutions differently. We will need to set the site substitution model separately for each part of the alignment as these models are unlinked. However, we think that all partitions evolve according to the same model (although with different parameters).
 
-Navigate to the `Partitions` tab again, select all the partitions and temporarily link the site models. Then go back to the `Site Model` tab. The panel on the left is now gone as we are setting one model for all of the partitions.
-
-> Go to the `Partitions` tab, select all partitions and click the `Link Site Models` button.
+> Make sure that `noncoding` is selected. 
 >
-> Return to the `Site Model` tab.
-
-First, check the `estimate` checkbox at the `Substitution Rate`, as we want to estimate relative substitution rates for each partition. Next, set the `Gamma Category Count`  to 4 and check the `estimate` box for the `Shape` parameter. This will allow rate variation between sites in each partition to be modelled. Then select `HKY` in the `Subst Model` drop-down and select `Empirical` from the `Frequencies` drop-down. This will fix the frequencies to the proportions observed in the data (for each partition individually, once we unlink the site models again). This approach means that we can get a good fit to the data without explicitly estimating these parameters. The setup should look now as shown in [Figure 3](#fig:subst).
-
-> Check the `estimate` checkbox at the `Substitution Rate`.
->
-> Set the `Gamma Category Count` to 4.
-> 
-> Check the `estimate` box for the `Shape` parameter.
->
-> Select `HKY` in the `Subst Model` drop-down.
-> 
-> Select `Empirical` from the `Frequencies` drop-down.
-
-
-Now return to the `Partitions` panel and unlink the site models such that each partition has its own named site model with independent substitution model parameters and relative rate. You can make sure this is the case by returning to the `Site Model` tab and clicking through the different partitions. 
-
-> Go to the `Partitions` tab again, select all partitions and click the `Unlink Site Models` button.
-
+> - Check the **estimate** checkbox for **Substitution Rate**.
+> - Set the **Gamma Category Count** to 4.
+> - Check the **estimate** box for the **Shape** parameter (it should already be checked).
+> - Select **HKY** in the **Subst Model** drop-down menu.
+> - Select **Empirical** from the **Frequencies** drop-down menu.
 
 <figure>	
 	<a id="fig:subst"></a>
 	<img src="figures/substitution.png">
-	<figcaption>Figure 3: Substitution model setup.</figcaption>
+	<figcaption>Figure 5: Substitution model setup.</figcaption>
 </figure>
+
+The panel should look like [Figure 5](#fig:subst). We are using an HKY substitution model with empirical frequencies. This will fix the frequencies to the proportions observed in the partition. This approach means that we can get a good fit to the data without explicitly estimating these parameters. To model site-to-site rate variation within the partition we use a discrete Gamma site model with 4 categories. Now we _could_ repeat the above steps for each of the remaining partitions or we can take a shortcut.
+
+> Select the remaining three partitions (use **shift+click**). The window will now look like [Figure 6](#fig:clone). 
+> Clone the site model for the other three partitions from `noncoding`.
+>
+
+<figure>	
+	<a id="fig:clone"></a>
+	<img src="figures/clone.png">
+	<figcaption>Figure 6: Shortcut to clone site models between partitions.</figcaption>
+</figure>
+
+If you did everything correctly the yellow circle with a cross to the right of **Fix mean substitution rate** would have disappeared. 
+
+
+
+
 
 
 ### Setting the clock model
 
-Next, select the `Clock Models` tab at the top of the main window. This is where we set up the molecular clock model. For this exercise we are going to leave the selection at the default value of a strict molecular clock, because this data is very clock-like and does not need rate variation among branches to be included in the model.
+Next, select the **Clock Models** tab at the top of the main window. This is where we set up the molecular clock model. For this exercise we are going to leave the selection at the default value of a strict molecular clock, because this data is very clock-like and does not need rate variation among branches to be included in the model.
 
-> Go to the `Clock Models` tab and view the setup.
+> Click on the **Clock Models** tab and view the setup.
+
 
 
 ### Setting priors
