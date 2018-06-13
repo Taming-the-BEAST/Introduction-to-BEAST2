@@ -1,10 +1,10 @@
 ---
-author: Jūlija Pečerska,Veronika Bošková
+author: Jūlija Pečerska,Veronika Bošková,Louis du Plessis
 level: Beginner
 title: Introduction to BEAST2
-beastversion: 2.4.2
-tracerversion: 1.6.0
-figtreeversion: 1.4.2
+beastversion: 2.5.0
+tracerversion: 1.7.0
+figtreeversion: 1.4.3
 subtitle: This is a simple introductory tutorial to help you get started with using BEAST2 and its accomplices.
 ---
 
@@ -39,6 +39,14 @@ TreeAnnotator is used to summarise the posterior sample of trees to produce a ma
 
 TreeAnnotator is provided as a part of the BEAST2 package so you do not need to install it separately.
 
+### Tracer
+
+Tracer ([http://beast.community/tracer](http://beast.community/tracer)) is used to summarise the posterior estimates of the various parameters sampled by the Markov Chain. This program can be used for visual inspection and to assess convergence. It helps to quickly view median estimates and 95% highest posterior density intervals of the parameters, and calculates the effective sample sizes (ESS) of parameters. It can also be used to investigate potential parameter correlations. We will be using Tracer v{{ page.tracerversion }}.
+
+
+### FigTree
+
+FigTree ([http://beast.community/figtree](http://beast.community/figtree)) is a program for viewing trees and producing publication-quality figures. It can interpret the node-annotations created on the summary trees by TreeAnnotator, allowing the user to display node-based statistics (e.g. posterior probabilities). We will be using FigTree v{{ page.figtreeversion }}.
 
 ### DensiTree
 
@@ -46,15 +54,6 @@ Bayesian analysis using BEAST2 provides an estimate of the uncertainty in tree s
 
 DensiTree is provided as a part of the BEAST2 package so you do not need to install it separately.
 
-
-### Tracer
-
-Tracer ([http://tree.bio.ed.ac.uk/software/tracer](http://tree.bio.ed.ac.uk/software/tracer)) is used to summarise the posterior estimates of the various parameters sampled by the Markov Chain. This program can be used for visual inspection and to assess convergence. It helps to quickly view median estimates and 95% highest posterior density intervals of the parameters, and calculates the effective sample sizes (ESS) of parameters. It can also be used to investigate potential parameter correlations. We will be using Tracer v{{ page.tracerversion }}.
-
-
-### FigTree
-
-FigTree ([http://tree.bio.ed.ac.uk/software/figtree](http://tree.bio.ed.ac.uk/software/figtree)) is a program for viewing trees and producing publication-quality figures. It can interpret the node-annotations created on the summary trees by TreeAnnotator, allowing the user to display node-based statistics (e.g. posterior probabilities). We will be using FigTree v{{ page.figtreeversion }}.
 
 ----
 
@@ -77,7 +76,7 @@ Before we can start, we need to download the input data for the tutorial. For th
 - 2nd codon positions
 - 3rd codon positions
 
-The alignment file can be downloaded from the Taming the BEAST website at [https://taming-the-beast.org/tutorials/Introduction-to-BEAST2/](https://taming-the-beast.org/tutorials/Introduction-to-BEAST2/).
+The alignment file can be downloaded from the Taming the BEAST website at [https://taming-the-beast.org/tutorials/Introduction-to-BEAST2/](https://taming-the-beast.org/tutorials/Introduction-to-BEAST2/) or from Github.
 
 > **Downloading from taming-the-beast.org**
 > 
@@ -89,8 +88,7 @@ The alignment file can be downloaded from the Taming the BEAST website at [https
 > In the same way you can also download example `.xml` files for the analyses in this tutorial, as well as _pre-cooked_ output `.log` and `.trees` files. We recommend only downloading these files to check your results or if you become seriously stuck.
 >
 
-
-The tutorial is also stored on Github, at [https://github.com/taming-the-beast/Introduction-to-BEAST2](https://github.com/taming-the-beast/Introduction-to-BEAST2). As with the data files, there is also a link to the Github repository on the left-hand panel on the website. 
+<br>
 
 > **Downloading from Github**
 >
@@ -100,21 +98,16 @@ The tutorial is also stored on Github, at [https://github.com/taming-the-beast/I
 >
 
 
-## The Model
-
-**XXX** Add information on the model here. Molecular clock dating etc. **XXX**
-
 
 ## Creating the Analysis File with BEAUti
 
-To run analyses with BEAST, one needs to prepare a configuration file in XML format that contains all the input information and setup of initial values and priors. 
+To run analyses with BEAST, one needs to prepare a configuration file in XML format that contains everything BEAST2 needs to run an analysis. A BEAST2 XML file contains: 
 
-**XXX**
-Data
-Model specification
-Initial values and parameter constraints
-MCMC specifications
-**XXX**
+- The data (typically a sequence alignment)
+- The model specification
+- Initial values and parameter constraints
+- Settings of the MCMC algorithm
+- Output options
 
 Even though it is possible to create such files by hand from scratch, it can be complicated and is not exactly straightforward. BEAUti is a user-friendly program designed to aid you in producing a valid setup file for BEAST. If necessary that file can later be edited by hand, but it is recommended to use BEAUti for generating the files at least for the initial round of analysis.
 
@@ -388,8 +381,6 @@ We are now ready to create the BEAST2 XML file. This is the final configuration 
 
 <br>
 
-> **Topic for discussion:** Model components
-
 
 ----
 
@@ -428,7 +419,13 @@ BEAST2 will run until the specified number of steps in the chain is reached. Whi
 The window will remain open when BEAST2 will finished. When you try to close it, you may see BEAST2 asking the question: "Do you wish to save?". Note that your log and trees files are always saved, no matter what answer you choose for this question. Thus, the question is only restricted to saving or not of the BEAST2 screenlog output.
 
 
-> **Topic for discussion:** Running from command line
+
+> **Topic for discussion:** While the analysis is running see if you can identify which parts of the setup in BEAUti are concerned with the data, the model and the MCMC algorithm. 
+>
+> Open the XML file in your favourite text editor. Can you recognize any of the values you set in BEAUti? Can you identify the data, model specification and MCMC settings in the XML file? 
+>
+> Can you find the likelihood, priors and hyperpriors in the XML file?
+>
 
 
 ----
@@ -482,7 +479,9 @@ You will be able to see all four distributions in one plot, similar to what is s
 </figure>
 <br>
 
-> **Topic for discussion:** Mutation rates
+> **Topic for discussion:** What can you deduce from the marginal densities of the 4 mutation rates? Does this make biological sense?
+>
+> Why do you think the mutation rate of non-coding DNA is similar to the rates of 1st and 2nd codon positions?
 
 
 
@@ -510,21 +509,39 @@ This will take a bit more time. [Figure 15](#fig:tracer_better) shows the estima
 <br>
 
 
+Tracer also allows us to look for correlations between parameters under the **Joint Marginal** tab, as shown in [Figure 16](#fig:tracer_joint). When two parameters are highly correlated this can lead to poor convergence of the MCMC chain (more on this in later tutorials). 
+
 <figure>
 	<a id="fig:tracer_joint"></a>
 	<img src="figures/tracer_joint.png">
-	<figcaption>Figure 16: .</figcaption>
+	<figcaption>Figure 16: Correlation between the tree height and clock rate estimates.</figcaption>
 </figure>
 <br>
+
+We can also look at correlations between more than two parameters.
+
+> Select all 4 mutation rates again
+> 
+> - Navigate to the **Joint Marginal** tab
+> - Check **Show points**
+
+The panel should like [Figure 17](#fig:tracer_covariance). The ellipses represent the covariance between pairs of parameters and make it easy to identify which pairs are correlated or anti-correlated. Is there a strong correlation or anti-correlation between some of our mutation rate parameters?
 
 <figure>
 	<a id="fig:tracer_covariance"></a>
 	<img src="figures/tracer_covariance.png">
-	<figcaption>Figure 17: .</figcaption>
+	<figcaption>Figure 17: Correlations between the mutation rate parameters.</figcaption>
 </figure>
 <br>
 
-> **Topic for discussion:** Trace tab.
+> **Topic for discussion:** We have not explored the **Trace** tab in Tracer at all!
+>
+> The **Trace** tab is primarily a diagnostic tool for checking convergence to the posterior, assessing the length of the burn-in and whether or not the chain is mixing well. There is a good argument to be made for this being the _most important_ tab in the Tracer program and that it is the first tab users should look at. 
+> 
+> Have a look at the individual parameter traces in the **Trace** tab, in both the short and long log files. Can you figure out why ESS values for some parameters are higher than others? 
+> 
+> Do you think a burn-in of 10% is sufficient for this analysis?
+>
 
 
 
@@ -593,7 +610,11 @@ Finally, we can visualize the tree with one of the available pieces of software,
 Your tree should now look something like [Figure 19](#fig:figtree). We first ordered the tree nodes. Because there are many ways to draw the same tree ordering nodes makes it easier for us to compare different trees to each other. The scale bars we added represent the 95% HPD interval for the age of each node in the tree, as estimated by the BEAST2 analysis. The node labels we added gives the posterior probability for a node in the posterior set of trees (that is, the trees logged in the tree log file, after discarding the burn-in). We can also use FigTree to display other statistics, such as the branch lengths, the 95% HPD interval of a node etc. The exact statistics available will depend on the model used.
 
 
-> **Topic for discussion:** Tree
+> **Topics for discussion:** The posterior probabilities tell us which clades are highly supported and the scale bars tell us how confident we are about their divergence times. 
+>
+> - Are all clades well-supported? How about their ages?
+> - Look at the 95% HPD interval for the age of the apes (_Hylobates, Pongo, Gorilla, Pan_ and _Homo sapiens_). Does the estimated age agree with your prior knowledge?
+> - What about the divergence time between old-world and new-world monkeys? (_Saimiri sciureus_ is the only new-world monkey in this dataset).
 
 
 ### Visualising tree posteriors (optional)
@@ -626,6 +647,13 @@ The tree should look as shown in [Figure 20](#fig:densitree).
 
 You can also view all of the different clades and their posterior probabilities by selecting **Help > View clades**. In this particular run there is little uncertainty in the tree estimate with respect to clade grouping, as almost every clade has 100% support.
 
+
+> **Topics for discussion:** The Yule model for speciation has one parameter (**birthRateY.t:tree**), representing the speciation rate. This model assumes that there is no extinction and thus that all taxa are sampled.
+>
+> - What are the units for **birthRateY.t:tree**? From your analysis, can you figure out, on average, how many years have to elapse before a new species is formed? (Have a look at the tracelog).
+> - Is the Yule model an appropriate model to use here?
+> - In the dataset there is a much larger sampling proportion for the great apes (4/8 extant species) than for lemurs, tarsiers and new-world monkeys (one species each). Do you think unequal sampling proportions are an issue?
+> 
 
 ----
 
