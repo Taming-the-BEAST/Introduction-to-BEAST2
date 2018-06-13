@@ -123,15 +123,36 @@
                     <parameter id="RealParameter.5" estimate="false" name="S">1.25</parameter>
                 </LogNormal>
             </prior>
-            <distribution id="human-chimp.prior" spec="beast.math.distributions.MRCAPrior" monophyletic="true" tree="@Tree.t:tree">
-                <taxonset id="human-chimp" spec="TaxonSet">
+            <distribution id="great_apes.prior" spec="beast.math.distributions.MRCAPrior" tree="@Tree.t:tree">
+                <taxonset id="great_apes" spec="TaxonSet">
+                    <taxon id="Gorilla" spec="Taxon"/>
                     <taxon id="Homo_sapiens" spec="Taxon"/>
                     <taxon id="Pan" spec="Taxon"/>
+                    <taxon id="Pongo" spec="Taxon"/>
+                </taxonset>
+            </distribution>
+            <distribution id="human-chimp.prior" spec="beast.math.distributions.MRCAPrior" monophyletic="true" tree="@Tree.t:tree">
+                <taxonset id="human-chimp" spec="TaxonSet">
+                    <taxon idref="Homo_sapiens"/>
+                    <taxon idref="Pan"/>
                 </taxonset>
                 <Normal id="Normal.0" name="distr">
                     <parameter id="RealParameter.8" estimate="false" name="mean">6.0</parameter>
                     <parameter id="RealParameter.9" estimate="false" name="sigma">0.5</parameter>
                 </Normal>
+            </distribution>
+            <distribution id="old_world.prior" spec="beast.math.distributions.MRCAPrior" tree="@Tree.t:tree">
+                <taxonset id="old_world" spec="TaxonSet">
+                    <taxon idref="Gorilla"/>
+                    <taxon idref="Homo_sapiens"/>
+                    <taxon id="Hylobates" spec="Taxon"/>
+                    <taxon id="M._fascicularis" spec="Taxon"/>
+                    <taxon id="M._mulatta" spec="Taxon"/>
+                    <taxon id="M._sylvanus" spec="Taxon"/>
+                    <taxon id="Macaca_fuscata" spec="Taxon"/>
+                    <taxon idref="Pan"/>
+                    <taxon idref="Pongo"/>
+                </taxonset>
             </distribution>
         </distribution>
         <distribution id="likelihood" spec="util.CompoundDistribution" useThreads="true">
@@ -221,7 +242,7 @@
         <down idref="Tree.t:tree"/>
     </operator>
 
-    <logger id="tracelog" fileName="primate-mtDNA_long.log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
+    <logger id="tracelog" fileName="primate-mtDNA_nodes.log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
         <log idref="posterior"/>
         <log idref="likelihood"/>
         <log idref="prior"/>
@@ -246,6 +267,8 @@
         <log idref="birthRateY.t:tree"/>
         <log idref="human-chimp.prior"/>
         <log idref="clockRate.c:clock"/>
+        <log idref="great_apes.prior"/>
+        <log idref="old_world.prior"/>
     </logger>
 
     <logger id="screenlog" logEvery="1000">
@@ -255,7 +278,7 @@
         <log idref="prior"/>
     </logger>
 
-    <logger id="treelog.t:tree" fileName="primate-mtDNA_long.trees" logEvery="1000" mode="tree">
+    <logger id="treelog.t:tree" fileName="primate-mtDNA_nodes.trees" logEvery="1000" mode="tree">
         <log id="TreeWithMetaDataLogger.t:tree" spec="beast.evolution.tree.TreeWithMetaDataLogger" tree="@Tree.t:tree"/>
     </logger>
 

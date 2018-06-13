@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.evolution.likelihood" version="2.0">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.evolution.likelihood" required="BEAST v2.5.0" version="2.5">
 
 
-    <data
-id="primate-mtDNA">
+    <data id="primate-mtDNA">
                         <sequence id="seq_Lemur_catta" taxon="Lemur_catta" totalcount="4" value="AAGCTTCATAGGAGCAACCATTCTAATAATCGCACATGGCCTTACATCATCCATATTATTCTGTCTAGCCAACTCTAACTACGAACGAATCCATAGCCGTACAATACTACTAGCACGAGGGATCCAAACCATTCTCCCTCTTATAGCCACCTGATGACTACTCGCCAGCCTAACTAACCTAGCCCTACCCACCTCTATCAATTTAATTGGCGAACTATTCGTCACTATAGCATCCTTCTCATGATCAAACATTACAATTATCTTAATAGGCTTAAATATGCTCATCACCGCTCTCTATTCCCTCTATATATTAACTACTACACAACGAGGAAAACTCACATATCATTCGCACAACCTAAACCCATCCTTTACACGAGAAAACACCCTTATATCCATACACATACTCCCCCTTCTCCTATTTACCTTAAACCCCAAAATTATTCTAGGACCCACGTACTGTAAATATAGTTTAAA-AAAACACTAGATTGTGAATCCAGAAATAGAAGCTCAAAC-CTTCTTATTTACCGAGAAAGTAATGTATGAACTGCTAACTCTGCACTCCGTATATAAAAATACGGCTATCTCAACTTTTAAAGGATAGAAGTAATCCATTGGCCTTAGGAGCCAAAAA-ATTGGTGCAACTCCAAATAAAAGTAATAAATCTATTATCCTCTTTCACCCTTGTCACACTGATTATCCTAACTTTACCTATCATTATAAACGTTACAAACATATACAAAAACTACCCCTATGCACCATACGTAAAATCTTCTATTGCATGTGCCTTCATCACTAGCCTCATCCCAACTATATTATTTATCTCCTCAGGACAAGAAACAATCATTTCCAACTGACATTGAATAACAATCCAAACCCTAAAACTATCTATTAGCTT"/>
                         <sequence id="seq_Homo_sapiens" taxon="Homo_sapiens" totalcount="4" value="AAGCTTCACCGGCGCAGTCATTCTCATAATCGCCCACGGGCTTACATCCTCATTACTATTCTGCCTAGCAAACTCAAACTACGAACGCACTCACAGTCGCATCATAATCCTCTCTCAAGGACTTCAAACTCTACTCCCACTAATAGCTTTTTGATGACTTCTAGCAAGCCTCGCTAACCTCGCCTTACCCCCCACTATTAACCTACTGGGAGAACTCTCTGTGCTAGTAACCACGTTCTCCTGATCAAATATCACTCTCCTACTTACAGGACTCAACATACTAGTCACAGCCCTATACTCCCTCTACATATTTACCACAACACAATGGGGCTCACTCACCCACCACATTAACAACATAAAACCCTCATTCACACGAGAAAACACCCTCATGTTCATACACCTATCCCCCATTCTCCTCCTATCCCTCAACCCCGACATCATTACCGGGTTTTCCTCTTGTAAATATAGTTTAACCAAAACATCAGATTGTGAATCTGACAACAGAGGCTTA-CGACCCCTTATTTACCGAGAAAGCT-CACAAGAACTGCTAACTCATGCCCCCATGTCTAACAACATGGCTTTCTCAACTTTTAAAGGATAACAGCTATCCATTGGTCTTAGGCCCCAAAAATTTTGGTGCAACTCCAAATAAAAGTAATAACCATGCACACTACTATAACCACCCTAACCCTGACTTCCCTAATTCCCCCCATCCTTACCACCCTCGTTAACCCTAACAAAAAAAACTCATACCCCCATTATGTAAAATCCATTGTCGCATCCACCTTTATTATCAGTCTCTTCCCCACAACAATATTCATGTGCCTAGACCAAGAAGTTATTATCTCGAACTGACACTGAGCCACAACCCAAACAACCCAGCTCTCCCTAAGCTT"/>
                         <sequence id="seq_Pan" taxon="Pan" totalcount="4" value="AAGCTTCACCGGCGCAATTATCCTCATAATCGCCCACGGACTTACATCCTCATTATTATTCTGCCTAGCAAACTCAAATTATGAACGCACCCACAGTCGCATCATAATTCTCTCCCAAGGACTTCAAACTCTACTCCCACTAATAGCCTTTTGATGACTCCTAGCAAGCCTCGCTAACCTCGCCCTACCCCCTACCATTAATCTCCTAGGGGAACTCTCCGTGCTAGTAACCTCATTCTCCTGATCAAATACCACTCTCCTACTCACAGGATTCAACATACTAATCACAGCCCTGTACTCCCTCTACATGTTTACCACAACACAATGAGGCTCACTCACCCACCACATTAATAACATAAAGCCCTCATTCACACGAGAAAATACTCTCATATTTTTACACCTATCCCCCATCCTCCTTCTATCCCTCAATCCTGATATCATCACTGGATTCACCTCCTGTAAATATAGTTTAACCAAAACATCAGATTGTGAATCTGACAACAGAGGCTCA-CGACCCCTTATTTACCGAGAAAGCT-TATAAGAACTGCTAATTCATATCCCCATGCCTGACAACATGGCTTTCTCAACTTTTAAAGGATAACAGCCATCCGTTGGTCTTAGGCCCCAAAAATTTTGGTGCAACTCCAAATAAAAGTAATAACCATGTATACTACCATAACCACCTTAACCCTAACTCCCTTAATTCTCCCCATCCTCACCACCCTCATTAACCCTAACAAAAAAAACTCATATCCCCATTATGTGAAATCCATTATCGCGTCCACCTTTATCATTAGCCTTTTCCCCACAACAATATTCATATGCCTAGACCAAGAAGCTATTATCTCAAACTGGCACTGAGCAACAACCCAAACAACCCAGCTCTCCCTAAGCTT"/>
@@ -37,7 +36,7 @@ id="primate-mtDNA">
 <map name="OneOnX" >beast.math.distributions.OneOnX</map>
 
 
-<run id="mcmc" spec="MCMC" chainLength="2500000">
+<run id="mcmc" spec="MCMC" chainLength="1000000">
     <state id="state" storeEvery="5000">
         <tree id="Tree.t:tree" name="stateNode">
             <taxonset id="TaxonSet.noncoding" spec="TaxonSet">
@@ -50,14 +49,14 @@ id="primate-mtDNA">
         <parameter id="gammaShape.s:noncoding" name="stateNode">1.0</parameter>
         <parameter id="kappa.s:noncoding" lower="0.0" name="stateNode">2.0</parameter>
         <parameter id="kappa.s:1stpos" lower="0.0" name="stateNode">2.0</parameter>
-        <parameter id="gammaShape.s:1stpos" name="stateNode">1.0</parameter>
         <parameter id="mutationRate.s:1stpos" name="stateNode">1.0</parameter>
+        <parameter id="gammaShape.s:1stpos" name="stateNode">1.0</parameter>
         <parameter id="kappa.s:2ndpos" lower="0.0" name="stateNode">2.0</parameter>
-        <parameter id="gammaShape.s:2ndpos" name="stateNode">1.0</parameter>
         <parameter id="mutationRate.s:2ndpos" name="stateNode">1.0</parameter>
+        <parameter id="gammaShape.s:2ndpos" name="stateNode">1.0</parameter>
         <parameter id="kappa.s:3rdpos" lower="0.0" name="stateNode">2.0</parameter>
-        <parameter id="gammaShape.s:3rdpos" name="stateNode">1.0</parameter>
         <parameter id="mutationRate.s:3rdpos" name="stateNode">1.0</parameter>
+        <parameter id="gammaShape.s:3rdpos" name="stateNode">1.0</parameter>
         <parameter id="birthRateY.t:tree" name="stateNode">1.0</parameter>
         <parameter id="clockRate.c:clock" name="stateNode">1.0</parameter>
     </state>
@@ -73,38 +72,65 @@ id="primate-mtDNA">
             <distribution id="CalibratedYuleModel.t:tree" spec="beast.evolution.speciation.CalibratedYuleModel" birthRate="@birthRateY.t:tree" tree="@Tree.t:tree"/>
             <prior id="CalibratedYuleBirthRatePrior.t:tree" name="distribution" x="@birthRateY.t:tree">
                 <Gamma id="Gamma.0" name="distr">
-                    <parameter id="RealParameter.0" estimate="false" name="alpha">0.001</parameter>
-                    <parameter id="RealParameter.01" estimate="false" name="beta">1000.0</parameter>
+                    <parameter id="RealParameter.6" estimate="false" name="alpha">0.001</parameter>
+                    <parameter id="RealParameter.7" estimate="false" name="beta">1000.0</parameter>
                 </Gamma>
             </prior>
             <prior id="ClockPrior.c:clock" name="distribution" x="@clockRate.c:clock">
                 <Uniform id="Uniform.0" name="distr" upper="Infinity"/>
             </prior>
             <prior id="GammaShapePrior.s:1stpos" name="distribution" x="@gammaShape.s:1stpos">
-                <Exponential id="Exponential.0" name="distr">
-                    <parameter id="RealParameter.02" lower="0.0" name="mean" upper="0.0">1.0</parameter>
+                <Exponential id="Exponential.0.1stpos" name="distr">
+                    <parameter id="RealParameter.0.1stpos" estimate="false" name="mean">1.0</parameter>
                 </Exponential>
             </prior>
-            <prior id="GammaShapePrior.s:2ndpos" distr="@Exponential.0" name="distribution" x="@gammaShape.s:2ndpos"/>
-            <prior id="GammaShapePrior.s:3rdpos" distr="@Exponential.0" name="distribution" x="@gammaShape.s:3rdpos"/>
-            <prior id="GammaShapePrior.s:noncoding" distr="@Exponential.0" name="distribution" x="@gammaShape.s:noncoding"/>
+            <prior id="GammaShapePrior.s:2ndpos" name="distribution" x="@gammaShape.s:2ndpos">
+                <Exponential id="Exponential.0.2ndpos" name="distr">
+                    <parameter id="RealParameter.0.2ndpos" estimate="false" name="mean">1.0</parameter>
+                </Exponential>
+            </prior>
+            <prior id="GammaShapePrior.s:3rdpos" name="distribution" x="@gammaShape.s:3rdpos">
+                <Exponential id="Exponential.0.3rdpos" name="distr">
+                    <parameter id="RealParameter.0.3rdpos" estimate="false" name="mean">1.0</parameter>
+                </Exponential>
+            </prior>
+            <prior id="GammaShapePrior.s:noncoding" name="distribution" x="@gammaShape.s:noncoding">
+                <Exponential id="Exponential.0" name="distr">
+                    <parameter id="RealParameter.0" estimate="false" name="mean">1.0</parameter>
+                </Exponential>
+            </prior>
             <prior id="KappaPrior.s:1stpos" name="distribution" x="@kappa.s:1stpos">
-                <LogNormal id="LogNormalDistributionModel.0" name="distr">
-                    <parameter id="RealParameter.03" estimate="false" name="M">1.0</parameter>
-                    <parameter id="RealParameter.04" estimate="false" name="S">1.25</parameter>
+                <LogNormal id="LogNormalDistributionModel.0.1stpos" name="distr">
+                    <parameter id="RealParameter.4.1stpos" estimate="false" name="M">1.0</parameter>
+                    <parameter id="RealParameter.5.1stpos" estimate="false" name="S">1.25</parameter>
                 </LogNormal>
             </prior>
-            <prior id="KappaPrior.s:2ndpos" distr="@LogNormalDistributionModel.0" name="distribution" x="@kappa.s:2ndpos"/>
-            <prior id="KappaPrior.s:3rdpos" distr="@LogNormalDistributionModel.0" name="distribution" x="@kappa.s:3rdpos"/>
-            <prior id="KappaPrior.s:noncoding" distr="@LogNormalDistributionModel.0" name="distribution" x="@kappa.s:noncoding"/>
+            <prior id="KappaPrior.s:2ndpos" name="distribution" x="@kappa.s:2ndpos">
+                <LogNormal id="LogNormalDistributionModel.0.2ndpos" name="distr">
+                    <parameter id="RealParameter.4.2ndpos" estimate="false" name="M">1.0</parameter>
+                    <parameter id="RealParameter.5.2ndpos" estimate="false" name="S">1.25</parameter>
+                </LogNormal>
+            </prior>
+            <prior id="KappaPrior.s:3rdpos" name="distribution" x="@kappa.s:3rdpos">
+                <LogNormal id="LogNormalDistributionModel.0.3rdpos" name="distr">
+                    <parameter id="RealParameter.4.3rdpos" estimate="false" name="M">1.0</parameter>
+                    <parameter id="RealParameter.5.3rdpos" estimate="false" name="S">1.25</parameter>
+                </LogNormal>
+            </prior>
+            <prior id="KappaPrior.s:noncoding" name="distribution" x="@kappa.s:noncoding">
+                <LogNormal id="LogNormalDistributionModel.0" name="distr">
+                    <parameter id="RealParameter.4" estimate="false" name="M">1.0</parameter>
+                    <parameter id="RealParameter.5" estimate="false" name="S">1.25</parameter>
+                </LogNormal>
+            </prior>
             <distribution id="human-chimp.prior" spec="beast.math.distributions.MRCAPrior" monophyletic="true" tree="@Tree.t:tree">
                 <taxonset id="human-chimp" spec="TaxonSet">
                     <taxon id="Homo_sapiens" spec="Taxon"/>
                     <taxon id="Pan" spec="Taxon"/>
                 </taxonset>
                 <Normal id="Normal.0" name="distr">
-                    <parameter id="RealParameter.05" estimate="false" name="mean">6.0</parameter>
-                    <parameter id="RealParameter.06" estimate="false" name="sigma">0.5</parameter>
+                    <parameter id="RealParameter.8" estimate="false" name="mean">6.0</parameter>
+                    <parameter id="RealParameter.9" estimate="false" name="sigma">0.5</parameter>
                 </Normal>
             </distribution>
         </distribution>
@@ -119,11 +145,7 @@ id="primate-mtDNA">
                 <branchRateModel id="StrictClock.c:clock" spec="beast.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:clock"/>
             </distribution>
             <distribution id="treeLikelihood.1stpos" spec="ThreadedTreeLikelihood" branchRateModel="@StrictClock.c:clock" tree="@Tree.t:tree">
-                <data
-id="1stpos"
-spec="FilteredAlignment"
-data="@primate-mtDNA"
-filter="2-457\3,660-896\3"/>
+                <data id="1stpos" spec="FilteredAlignment" data="@primate-mtDNA" filter="2-457\3,660-896\3"/>
                 <siteModel id="SiteModel.s:1stpos" spec="SiteModel" gammaCategoryCount="4" mutationRate="@mutationRate.s:1stpos" shape="@gammaShape.s:1stpos">
                     <parameter id="proportionInvariant.s:1stpos" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
                     <substModel id="hky.s:1stpos" spec="HKY" kappa="@kappa.s:1stpos">
@@ -132,11 +154,7 @@ filter="2-457\3,660-896\3"/>
                 </siteModel>
             </distribution>
             <distribution id="treeLikelihood.2ndpos" spec="ThreadedTreeLikelihood" branchRateModel="@StrictClock.c:clock" tree="@Tree.t:tree">
-                <data
-id="2ndpos"
-spec="FilteredAlignment"
-data="@primate-mtDNA"
-filter="3-457\3,661-896\3"/>
+                <data id="2ndpos" spec="FilteredAlignment" data="@primate-mtDNA" filter="3-457\3,661-896\3"/>
                 <siteModel id="SiteModel.s:2ndpos" spec="SiteModel" gammaCategoryCount="4" mutationRate="@mutationRate.s:2ndpos" shape="@gammaShape.s:2ndpos">
                     <parameter id="proportionInvariant.s:2ndpos" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
                     <substModel id="hky.s:2ndpos" spec="HKY" kappa="@kappa.s:2ndpos">
@@ -145,11 +163,7 @@ filter="3-457\3,661-896\3"/>
                 </siteModel>
             </distribution>
             <distribution id="treeLikelihood.3rdpos" spec="ThreadedTreeLikelihood" branchRateModel="@StrictClock.c:clock" tree="@Tree.t:tree">
-                <data
-id="3rdpos"
-spec="FilteredAlignment"
-data="@primate-mtDNA"
-filter="4-457\3,662-.\3"/>
+                <data id="3rdpos" spec="FilteredAlignment" data="@primate-mtDNA" filter="4-457\3,662-.\3"/>
                 <siteModel id="SiteModel.s:3rdpos" spec="SiteModel" gammaCategoryCount="4" mutationRate="@mutationRate.s:3rdpos" shape="@gammaShape.s:3rdpos">
                     <parameter id="proportionInvariant.s:3rdpos" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
                     <substModel id="hky.s:3rdpos" spec="HKY" kappa="@kappa.s:3rdpos">
@@ -207,27 +221,27 @@ filter="4-457\3,662-.\3"/>
         <down idref="Tree.t:tree"/>
     </operator>
 
-    <logger id="tracelog" fileName="primate-mtDNA_long.log" logEvery="200" model="@posterior" sanitiseHeaders="true" sort="smart">
+    <logger id="tracelog" fileName="primate-mtDNA.log" logEvery="200" model="@posterior" sanitiseHeaders="true" sort="smart">
         <log idref="posterior"/>
         <log idref="likelihood"/>
         <log idref="prior"/>
-        <log idref="treeLikelihood.1stpos"/>
-        <log idref="treeLikelihood.3rdpos"/>
         <log idref="treeLikelihood.noncoding"/>
         <log id="TreeHeight.t:tree" spec="beast.evolution.tree.TreeHeightLogger" tree="@Tree.t:tree"/>
         <log idref="treeLikelihood.2ndpos"/>
+        <log idref="treeLikelihood.1stpos"/>
+        <log idref="treeLikelihood.3rdpos"/>
         <log idref="mutationRate.s:noncoding"/>
         <log idref="gammaShape.s:noncoding"/>
         <log idref="kappa.s:noncoding"/>
         <log idref="kappa.s:1stpos"/>
-        <log idref="gammaShape.s:1stpos"/>
         <log idref="mutationRate.s:1stpos"/>
+        <log idref="gammaShape.s:1stpos"/>
         <log idref="kappa.s:2ndpos"/>
-        <log idref="gammaShape.s:2ndpos"/>
         <log idref="mutationRate.s:2ndpos"/>
+        <log idref="gammaShape.s:2ndpos"/>
         <log idref="kappa.s:3rdpos"/>
-        <log idref="gammaShape.s:3rdpos"/>
         <log idref="mutationRate.s:3rdpos"/>
+        <log idref="gammaShape.s:3rdpos"/>
         <log idref="CalibratedYuleModel.t:tree"/>
         <log idref="birthRateY.t:tree"/>
         <log idref="human-chimp.prior"/>
@@ -241,7 +255,7 @@ filter="4-457\3,662-.\3"/>
         <log idref="prior"/>
     </logger>
 
-    <logger id="treelog.t:tree" fileName="primate-mtDNA_long.trees" logEvery="1000" mode="tree">
+    <logger id="treelog.t:tree" fileName="primate-mtDNA.trees" logEvery="1000" mode="tree">
         <log id="TreeWithMetaDataLogger.t:tree" spec="beast.evolution.tree.TreeWithMetaDataLogger" tree="@Tree.t:tree"/>
     </logger>
 
