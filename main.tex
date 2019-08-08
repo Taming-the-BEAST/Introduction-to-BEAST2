@@ -45,9 +45,9 @@ using BEAST2 and its accomplices.
 
 \section{Background}\label{background}
 
-Before diving into performing complex analyses with the BEAST2 one needs
-to understand the basic workflow and concepts. While BEAST2 tries to be
-as user-friendly as possible, the amount of possibilities can be
+Before diving into performing complex analyses with BEAST2 one needs to
+understand the basic workflow and concepts. While BEAST2 tries to be as
+user-friendly as possible, the amount of possibilities can be
 overwhelming.
 
 In this simple tutorial you will get acquainted with the basic workflow
@@ -57,7 +57,7 @@ help you get started using BEAST2. This tutorial does not discuss all
 the choices and concepts in detail, as they are discussed in further
 tutorials. Interspersed throughout the tutorial are topics for
 discussion. These discussion topics are optional, however if you work
-through them you will have a much better understanding of the concepts
+through them you will have a better understanding of the concepts
 discussed in this tutorial. Feel free to skip the discussion topics and
 come back to them later, while running the analysis file, or after
 finishing the whole tutorial.
@@ -73,7 +73,7 @@ Exercise}\label{programs-used-in-this-exercise}
 BEAST2 (\url{http://www.beast2.org}) is a free software package for
 Bayesian evolutionary analysis of molecular sequences using MCMC and
 strictly oriented toward inference using rooted, time-measured
-phylogenetic trees. This tutorial is written for BEAST v2.5.0 \citep{BEAST2book2014}.
+phylogenetic trees. This tutorial is written for BEAST v2.5.0 \citep{Bouckaert2014, Bouckaert2019}.
 
 \subsubsection{BEAUti2 - Bayesian Evolutionary Analysis
 Utility}\label{beauti2---bayesian-evolutionary-analysis-utility}
@@ -108,7 +108,7 @@ convergence. It helps to quickly view median estimates and 95\% highest
 posterior density intervals of the parameters, and calculates the
 effective sample sizes (ESS) of parameters. It can also be used to
 investigate potential parameter correlations. We will be using Tracer
-v1.7.0.
+v1.7.0
 
 \subsubsection{FigTree}\label{figtree}
 
@@ -142,6 +142,19 @@ is to co-estimate the gene phylogeny and the rate of evolution. More
 generally, this tutorial aims to introduce new users to a basic workflow
 and point out the steps towards performing a full analysis of sequencing
 data within a Bayesian framework using BEAST2.
+
+After completing this tutorial you should be able to:
+
+\begin{itemize}
+
+\item
+  Set up all the components of a simple BEAST2 analysis in BEAUti2
+\item
+  Use a calibration node to calibrate the molecular clock
+\item
+  Use Tracer, FigTree and DensiTree to check convergence and analyse
+  results
+\end{itemize}
 
 \subsection{The Data}\label{the-data}
 
@@ -228,9 +241,9 @@ BEAST2 XML file contains:
   Output options
 \end{itemize}
 
-Even though it is possible to create such files by hand from scratch, it
-can be complicated and is not exactly straightforward. BEAUti is a
-user-friendly program designed to aid you in producing a valid
+Even though it is possible to create such files from scratch in a text
+editor, it can be complicated and is not exactly straightforward. BEAUti
+is a user-friendly program designed to aid you in producing a valid
 configuration file for BEAST. If necessary, that file can later be
 edited by hand, but it is recommended to use BEAUti for generating the
 files (at least for the initial round of analysis).
@@ -335,12 +348,12 @@ partition?
 
 Since all of the sequences in this dataset are from the mitochondrial
 genome (which is not believed to undergo recombination in birds and
-mammals) they all share the same ancestry. By default BEAST2 would
-recover a separate, independent time-tree for each partition, so we need
-to make sure that it uses all data to recover only a single shared tree.
-For the sake of simplicity, we will also assume that the partitions have
-the same evolutionary branch-rate distribution, and hence share the
-clock model as well.
+mammals) they all share the same ancestry. By default, BEAST2 would
+recover a separate, independent time-calibrated tree for each partition,
+so we need to make sure that it uses all data to recover only a single
+shared tree. For the sake of simplicity, we will also assume that the
+partitions have the same evolutionary branch-rate distribution, and
+hence share the clock model as well.
 
 To make sure that the partitions share the same evolutionary history we
 need to link the \textbf{clock model} and the \textbf{tree} in BEAUti.
@@ -396,7 +409,7 @@ model, i.e.~we assume that different positions in the alignment
 accumulate substitutions differently. We will need to set the site
 substitution model separately for each part of the alignment as these
 models are unlinked. However, we think that all partitions evolve
-according to the same model (although with different parameters).
+according to the same model (although with different parameter values).
 
 \begin{framed}
 Make sure that \lstinline!noncoding! is selected.
@@ -486,10 +499,12 @@ each model parameter. The model selections made in the \textbf{Site
 Model} and \textbf{Clock Model} tabs determine which parameters are
 included in the model. For each of these parameters a prior distribution
 needs to be specified. It is also possible to specify hyperpriors (and
-hyper-hyperpriors etc.) for each of the model parameters.
+hyper-hyperpriors etc.) for each of the model parameters. We also need
+to specify a prior for the \textbf{Tree}. In this example the tree prior
+is a null model for species diversity over time within the primates.
 
 Here we specify that we wish to use the Calibrated Yule model as the
-tree prior. This is a simple model of speciation that is generally more
+tree prior. This is a simple model of speciation that is generally
 appropriate when considering sequences from different species.
 
 \begin{framed}
@@ -556,9 +571,8 @@ Since all of the samples come from a single time point, there is no
 information on the actual height of the phylogenetic tree in time units.
 The tree height (tMRCA) and substitution rate parameters will not be
 distinguishable and BEAST2 will only be able to estimate their product.
-To give BEAST2 the possibility of separating these two parameters we
-need to input additional information that will help calibrate the tree
-in time.
+To allow BEAST2 to separate these two parameters we need to input
+additional information that will help calibrate the tree in time.
 
 In a Bayesian analysis, additional information from external sources
 should be encoded in the form of a prior distribution. Thus, we will
@@ -776,7 +790,7 @@ seed is provided. However, if you want to exactly reproduce the results
 of a run you need to start it with the same random number seed.
 
 \begin{framed}
-Run the BEAST2 program.
+Run the \textbf{BEAST2} program.
 
 \begin{itemize}
 
@@ -802,7 +816,7 @@ Run the BEAST2 program.
 The BEAST2 window should look as shown in Figure \ref{fig:beast}.
 
 \begin{framed}
-Run BEAST2 by clicking the \lstinline!Run! button.
+Run \textbf{BEAST2} by clicking the \lstinline!Run! button.
 \end{framed}
 
 BEAST2 will run until the specified number of steps in the chain is
@@ -818,11 +832,14 @@ look approximately as shown in Figure \ref{fig:beast_out}.
     \label{fig:beast_out}
 \end{figure}
 
-The window will remain open when BEAST2 will finished. When you try to
-close it, you may see BEAST2 asking the question: ``Do you wish to
-save?''. Note that your log and trees files are always saved, no matter
-what answer you choose for this question. Thus, the question is only
-restricted to saving or not of the BEAST2 screenlog output.
+The window will remain open when BEAST2 finished running the analysis.
+When you try to close it, you may see BEAST2 asking the question: ``Do
+you wish to save?''. Note that your log and trees files are always
+saved, no matter what answer you choose for this question. Thus, the
+question is only restricted to saving the BEAST2 screen output (which
+contains some information about the hardware configuration, initial
+values, operator acceptance rates and running time that are not stored
+in the other output files).
 
 \begin{framed}
 \textbf{Topic for discussion:} While the analysis is running see if you
@@ -899,7 +916,7 @@ chain).
 
 Select the \textbf{TreeHeight} statistic in the left hand list to look
 at the tree height estimated jointly for all partitions in the
-alignment. Tracer will plots (marginal posterior) histogram for the
+alignment. Tracer plots the (marginal posterior) histogram for the
 selected statistic and also give you summary statistics such as the mean
 and median. The 95\% HPD stands for \emph{highest posterior density
 interval} and represents the most compact interval on the selected
@@ -935,10 +952,8 @@ what is shown in Figure \ref{fig:tracer_comparison}.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=0.32\textwidth, max height=0.9\textheight]{figures/Tracer_comparison_KDE.png}
-    \includegraphics[max width=0.32\textwidth, max height=0.9\textheight]{figures/Tracer_comparison_violin.png}
-    \includegraphics[max width=0.32\textwidth, max height=0.9\textheight]{figures/Tracer_comparison_box.png}
-    \caption{Tracer showing the four marginal probability distributions of the mutation rates in each partition of the alignment. The figure on the left shows the marginal distributions plotted with a Kernel Density Estimation (KDE) in the middle as violin plots and on the right as box and whisker plots.}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/Tracer_comparison_KDE.png}
+    \caption{Tracer showing the four marginal probability distributions of the mutation rates in each partition of the alignment. The figure at the top shows the marginal distributions plotted with a Kernel Density Estimation (KDE) in the middle as violin plots and at the bottom as box and whisker plots.}
     \label{fig:tracer_comparison}
 \end{figure}
 
@@ -947,7 +962,8 @@ what is shown in Figure \ref{fig:tracer_comparison}.
 densities of the 4 mutation rates? Does this make biological sense?
 
 Why do you think the mutation rate of non-coding DNA is similar to the
-rates of 1st and 2nd codon positions?
+rates of 1st and 2nd codon positions? (display the legend on the plot to
+help with your analysis).
 \end{framed}
 
 \subsubsection{Analysing the posterior estimate
@@ -1298,7 +1314,7 @@ Bouckaert.
 
 \item
   \href{http://www.beast2.org/book.html}{Bayesian Evolutionary Analysis
-  with BEAST 2}
+  with BEAST 2} \citep{BEAST2book2014}
 \item
   BEAST 2 website and documentation: \url{http://www.beast2.org/}
 \item
@@ -1306,7 +1322,7 @@ Bouckaert.
   \href{http://beast.community}{http://beast.bio.ed.ac.uk}
 \item
   Join the BEAST user discussion:
-  \url{http://groups.google.com/group/beast-users}
+  \url{http://groups.google.com/group/beast-users} \clearpage
 \end{itemize}
 
 
@@ -1325,6 +1341,9 @@ Bouckaert.
 %%%%%%%%%%%%%%%%%%%%
 Version dated: \today
 
+
+
+\newpage
 
 %%%%%%%%%%%%%%%%
 %  REFERENCES  %
