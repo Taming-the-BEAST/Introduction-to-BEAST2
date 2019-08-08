@@ -668,7 +668,7 @@ The content of this tutorial is based on the [Divergence Dating Tutorial with BE
 
 # Useful Links
 
-- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) ({% cite BEAST2book2014 --file Introduction-to-BEAST2/master-refs %})
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file Introduction-to-BEAST2/master-refs %}
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.community)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
