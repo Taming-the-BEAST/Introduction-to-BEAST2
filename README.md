@@ -9,12 +9,11 @@ subtitle: This is a simple introductory tutorial to help you get started with us
 ---
 
 
-
 # Background
 
 Before diving into performing complex analyses with BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
 
-In this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software tools most commonly used to interpret the results of  analyses. Bear in mind that this tutorial is designed only to help you get started using BEAST2. This tutorial does not discuss all the choices and concepts in detail, as they are discussed in further  tutorials. Interspersed throughout the tutorial are topics for discussion. These discussion topics are optional, however if you work through them you will have a much better understanding of the concepts discussed in this tutorial. Feel free to skip the discussion topics and come back to them later, while running the analysis file, or after finishing the whole tutorial.
+In this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software tools most commonly used to interpret the results of  analyses. Bear in mind that this tutorial is designed only to help you get started using BEAST2. This tutorial does not discuss all the choices and concepts in detail, as they are discussed in further  tutorials. Interspersed throughout the tutorial are topics for discussion. These discussion topics are optional, however if you work through them you will have a better understanding of the concepts discussed in this tutorial. Feel free to skip the discussion topics and come back to them later, while running the analysis file, or after finishing the whole tutorial.
 
 
 ----
@@ -24,7 +23,7 @@ In this simple tutorial you will get acquainted with the basic workflow of BEAST
 
 ### BEAST2 - Bayesian Evolutionary Analysis Sampling Trees 2
 
-BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite BEAST2book2014 --file Introduction-to-BEAST2/master-refs %}. 
+BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite Bouckaert2014 --file Introduction-to-BEAST2/master-refs %}, {% cite Bouckaert2019 --file Introduction-to-BEAST2/master-refs %}. 
 
 
 ### BEAUti2 - Bayesian Evolutionary Analysis Utility
@@ -61,6 +60,12 @@ DensiTree is provided as a part of the BEAST2 package so you do not need to inst
 
 This tutorial will guide you through the analysis of an alignment of sequences sampled from twelve primate species. The aim of this tutorial is to co-estimate the gene phylogeny and the rate of evolution. 
 More generally, this tutorial aims to introduce new users to a basic workflow and point out the steps towards performing a full analysis of sequencing data within a Bayesian framework using BEAST2.
+
+After completing this tutorial you should be able to:
+
+- Set up all the components of a simple BEAST2 analysis in BEAUti2
+- Use a calibration node to calibrate the molecular clock
+- Use Tracer, FigTree and DensiTree to check convergence and analyse results
 
 
 ## The Data
@@ -162,7 +167,7 @@ By looking at the alignments for the 2nd and 3rd codon positions ([Figure 2](#fi
 >
 
 
-Since all of the sequences in this dataset are from the mitochondrial genome (which is not believed to undergo recombination in birds and mammals) they all share the same ancestry. By default, BEAST2 would recover a separate, independent time-tree for each partition, so we need to make sure that it uses all data to recover only a single shared tree. For the sake of simplicity, we will also assume that the partitions have the same evolutionary branch-rate distribution, and hence share the clock model as well.
+Since all of the sequences in this dataset are from the mitochondrial genome (which is not believed to undergo recombination in birds and mammals) they all share the same ancestry. By default, BEAST2 would recover a separate, independent time-calibrated tree for each partition, so we need to make sure that it uses all data to recover only a single shared tree. For the sake of simplicity, we will also assume that the partitions have the same evolutionary branch-rate distribution, and hence share the clock model as well.
 
 To make sure that the partitions share the same evolutionary history we need to link the **clock model** and the **tree** in BEAUti.
 
@@ -663,7 +668,7 @@ The content of this tutorial is based on the [Divergence Dating Tutorial with BE
 
 # Useful Links
 
-- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html)
+- [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) ({% cite BEAST2book2014 --file Introduction-to-BEAST2/master-refs %})
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.community)
 - Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
