@@ -12,7 +12,7 @@ subtitle: This is a simple introductory tutorial to help you get started with us
 
 # Background
 
-Before diving into performing complex analyses with the BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
+Before diving into performing complex analyses with BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
 
 In this simple tutorial you will get acquainted with the basic workflow of BEAST2 and the software tools most commonly used to interpret the results of  analyses. Bear in mind that this tutorial is designed only to help you get started using BEAST2. This tutorial does not discuss all the choices and concepts in detail, as they are discussed in further  tutorials. Interspersed throughout the tutorial are topics for discussion. These discussion topics are optional, however if you work through them you will have a much better understanding of the concepts discussed in this tutorial. Feel free to skip the discussion topics and come back to them later, while running the analysis file, or after finishing the whole tutorial.
 
@@ -105,7 +105,7 @@ To run analyses with BEAST, one needs to prepare a configuration file in XML for
 - Settings of the MCMC algorithm
 - Output options
 
-Even though it is possible to create such files by hand from scratch, it can be complicated and is not exactly straightforward. BEAUti is a user-friendly program designed to aid you in producing a valid configuration file for BEAST. If necessary, that file can later be edited by hand, but it is recommended to use BEAUti for generating the files (at least for the initial round of analysis).
+Even though it is possible to create such files from scratch in a text editor, it can be complicated and is not exactly straightforward. BEAUti is a user-friendly program designed to aid you in producing a valid configuration file for BEAST. If necessary, that file can later be edited by hand, but it is recommended to use BEAUti for generating the files (at least for the initial round of analysis).
 
 
 > Begin by starting **BEAUti2**.
@@ -162,7 +162,7 @@ By looking at the alignments for the 2nd and 3rd codon positions ([Figure 2](#fi
 >
 
 
-Since all of the sequences in this dataset are from the mitochondrial genome (which is not believed to undergo recombination in birds and mammals) they all share the same ancestry. By default BEAST2 would recover a separate, independent time-tree for each partition, so we need to make sure that it uses all data to recover only a single shared tree. For the sake of simplicity, we will also assume that the partitions have the same evolutionary branch-rate distribution, and hence share the clock model as well.
+Since all of the sequences in this dataset are from the mitochondrial genome (which is not believed to undergo recombination in birds and mammals) they all share the same ancestry. By default, BEAST2 would recover a separate, independent time-tree for each partition, so we need to make sure that it uses all data to recover only a single shared tree. For the sake of simplicity, we will also assume that the partitions have the same evolutionary branch-rate distribution, and hence share the clock model as well.
 
 To make sure that the partitions share the same evolutionary history we need to link the **clock model** and the **tree** in BEAUti.
 
@@ -191,7 +191,7 @@ In this analysis all of our sequences come from extant species and were thus all
 
 The options available in this panel depend on whether the alignment data are in nucleotides, amino-acids, binary data or general data. The settings available after loading the alignment will contain the default values which we normally want to modify.
 
-The panel on the left shows each partition. Remember that we did not link the substitution models in the previous step for the different partitions, so each partition evolves under a different substitution model, i.e. we assume that different positions in the alignment accumulate substitutions differently. We will need to set the site substitution model separately for each part of the alignment as these models are unlinked. However, we think that all partitions evolve according to the same model (although with different parameters).
+The panel on the left shows each partition. Remember that we did not link the substitution models in the previous step for the different partitions, so each partition evolves under a different substitution model, i.e. we assume that different positions in the alignment accumulate substitutions differently. We will need to set the site substitution model separately for each part of the alignment as these models are unlinked. However, we think that all partitions evolve according to the same model (although with different parameter values).
 
 > Make sure that `noncoding` is selected. 
 >
@@ -246,9 +246,9 @@ Next, select the **Clock Model** tab at the top of the main window. This is wher
 
 ### Setting priors
 
-The **Priors** tab allows prior distributions to be specified for each model parameter. The model selections made in the **Site Model** and **Clock Model** tabs determine which parameters are included in the model. For each of these parameters a prior distribution needs to be specified. It is also possible to specify hyperpriors (and hyper-hyperpriors etc.) for each of the model parameters.
+The **Priors** tab allows prior distributions to be specified for each model parameter. The model selections made in the **Site Model** and **Clock Model** tabs determine which parameters are included in the model. For each of these parameters a prior distribution needs to be specified. It is also possible to specify hyperpriors (and hyper-hyperpriors etc.) for each of the model parameters. We also need to specify a prior for the **Tree**. In this example the tree prior is a null model for species diversity over time within the primates.
 
-Here we specify that we wish to use the Calibrated Yule model as the tree prior. This is a simple model of speciation that is generally more appropriate when considering sequences from different species.
+Here we specify that we wish to use the Calibrated Yule model as the tree prior. This is a simple model of speciation that is generally appropriate when considering sequences from different species.
 
 
 > Go to the **Priors** tab and select **Calibrated Yule Model** in the drop-down menu next to **Tree.t:tree**.
@@ -281,7 +281,7 @@ Please note that in general using default priors is frowned upon as priors are m
 
 ### Adding a calibration node
 
-Since all of the samples come from a single time point, there is no information on the actual height of the phylogenetic tree in time units. The tree height (tMRCA) and substitution rate parameters will not be distinguishable and BEAST2 will only be able to estimate their product. To give BEAST2 the possibility of separating these two parameters we need to input additional information that will help calibrate the tree in time.
+Since all of the samples come from a single time point, there is no information on the actual height of the phylogenetic tree in time units. The tree height (tMRCA) and substitution rate parameters will not be distinguishable and BEAST2 will only be able to estimate their product. To allow BEAST2 to separate these two parameters we need to input additional information that will help calibrate the tree in time.
 
 In a Bayesian analysis, additional information from external sources should be encoded in the form of a prior distribution. Thus, we will have to add a new prior to the model. 
 
@@ -388,7 +388,7 @@ We are now ready to create the BEAST2 XML file. This is the final configuration 
 
 Now run BEAST2 and provide your newly created XML file as input. You can also change the **random number seed** for the run. This number is the starting point of a pseudo-random number chain BEAST2 will use to generate the samples. As computers are unable to generate truly random numbers, we have to resort to generating determinate sequences of numbers that only look random, but will be identical when the starting seed is the same. If your MCMC run converges to the true posterior then you will be able to draw the same conclusions regardless of which random seed is provided. However, if you want to exactly reproduce the results of a run you need to start it with the same random number seed.
 
-> Run the BEAST2 program.
+> Run the **BEAST2** program.
 >
 > - Select `Primates.xml` as the **Beast XML File**.
 > - Set the **Random number seed** to **777** (or pick your favourite number).
@@ -404,7 +404,7 @@ Now run BEAST2 and provide your newly created XML file as input. You can also ch
 
 The BEAST2 window should look as shown in [Figure 11](#fig:beast). 
 
-> Run BEAST2 by clicking the `Run` button.
+> Run **BEAST2** by clicking the `Run` button.
 
 BEAST2 will run until the specified number of steps in the chain is reached. While it is running, it will print the screenlog values to a console and store the tracelog and tree log values to files located in the same folder as the configuration XML file. The screen output will look approximately as shown in [Figure 12](#fig:beast_out).
 
@@ -416,7 +416,7 @@ BEAST2 will run until the specified number of steps in the chain is reached. Whi
 </figure>
 <br>
 
-The window will remain open when BEAST2 will finished. When you try to close it, you may see BEAST2 asking the question: "Do you wish to save?". Note that your log and trees files are always saved, no matter what answer you choose for this question. Thus, the question is only restricted to saving or not of the BEAST2 screenlog output.
+The window will remain open when BEAST2 finished running the analysis. When you try to close it, you may see BEAST2 asking the question: "Do you wish to save?". Note that your log and trees files are always saved, no matter what answer you choose for this question. Thus, the question is only restricted to saving the BEAST2 screen output (which contains some information about the hardware configuration, initial values, operator acceptance rates and running time that are not stored in the other output files).
 
 
 
@@ -455,7 +455,7 @@ The log file contains traces for the posterior (this is the natural logarithm of
 
 For each loaded log file we can specify a **Burn-In**, which is shown in the file list table (top left) in Tracer. The burn-in is intended to give the Markov Chain time to reach its equilibrium distribution, particularly if it has started from a bad starting point. A bad starting point may lead to over-sampling regions of the posterior that actually have very low probability under the equilibrium distribution, before the chain settles into the equilibrium distribution. Burn-in allows us to simply discard the first _N_ samples of a chain and not use them to compute the summary statistics. Determining the number of samples to discard is not a trivial problem and depends on the size of the dataset, the complexity of the model and the length of the chain. A good rule of thumb is to always throw out at least the first 10% of the whole chain length as the burn-in (however, in some cases it may be necessary to discard as much as 50% of the MCMC chain).
 
-Select the **TreeHeight** statistic in the left hand list to look at the tree height estimated jointly for all partitions in the alignment. Tracer will plots (marginal posterior) histogram for the selected statistic and also give you summary statistics such as the mean and median. The 95% HPD stands for *highest posterior density interval* and represents the most compact interval on the selected statistic that contains 95% of the posterior density. It can be loosely thought of as a Bayesian analogue to a confidence interval. The **TreeHeight** statistic gives the marginal posterior distribution of the age of the root of the entire tree (that is, the tMRCA).
+Select the **TreeHeight** statistic in the left hand list to look at the tree height estimated jointly for all partitions in the alignment. Tracer plots the (marginal posterior) histogram for the selected statistic and also give you summary statistics such as the mean and median. The 95% HPD stands for *highest posterior density interval* and represents the most compact interval on the selected statistic that contains 95% of the posterior density. It can be loosely thought of as a Bayesian analogue to a confidence interval. The **TreeHeight** statistic gives the marginal posterior distribution of the age of the root of the entire tree (that is, the tMRCA).
 
 > Select **TreeHeight** in the bottom left hand list in Tracer and view the different summary statistics on the right.
 
@@ -481,7 +481,7 @@ You will be able to see all four distributions in one plot, similar to what is s
 
 > **Topic for discussion:** What can you deduce from the marginal densities of the 4 mutation rates? Does this make biological sense?
 >
-> Why do you think the mutation rate of non-coding DNA is similar to the rates of 1st and 2nd codon positions?
+> Why do you think the mutation rate of non-coding DNA is similar to the rates of 1st and 2nd codon positions? (display the legend on the plot to help with your analysis).
 
 
 
