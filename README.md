@@ -2,7 +2,7 @@
 author: Jūlija Pečerska,Veronika Bošková,Louis du Plessis
 level: Beginner
 title: Introduction to BEAST2
-beastversion: 2.5.0
+beastversion: 2.7.0
 tracerversion: 1.7.0
 figtreeversion: 1.4.3
 subtitle: This is a simple introductory tutorial to help you get started with using BEAST2 and its accomplices.
