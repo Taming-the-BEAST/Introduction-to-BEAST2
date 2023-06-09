@@ -10,7 +10,6 @@ subtitle: This is a simple introductory tutorial to help you get started with us
 
 
 
-
 # Background
 
 Before diving into performing complex analyses with BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
@@ -310,7 +309,7 @@ The taxon set should now look like [Figure 8](#fig:taxa).
 
 <figure>
 	<a id="fig:taxa"></a>
-	<img style="width:80%;" src="figures/taxa.png">
+	<img style="width:60%;" src="figures/taxa.png">
 	<figcaption>Figure 8: Calibration node taxon set.</figcaption>
 </figure>
 <br>
