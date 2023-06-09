@@ -25,7 +25,7 @@
 \begin{center}
 
 	% Enter the name of your tutorial here
-	\textbf{\LARGE Tutorial using BEAST v2.7.0}\\\vspace{2mm}
+	\textbf{\LARGE Tutorial using BEAST v2.7.x}\\\vspace{2mm}
 
 	% Enter a short description of your tutorial here
 	\textbf{\textcolor{mycol}{\Large Introduction to BEAST2}}\\
@@ -43,7 +43,8 @@ using BEAST2 and its accomplices.
 % Tutorial body %
 %%%%%%%%%%%%%%%%%
 
-\section{Background}\label{background}
+\hypertarget{background}{%
+\section{Background}\label{background}}
 
 Before diving into performing complex analyses with BEAST2 one needs to
 understand the basic workflow and concepts. While BEAST2 tries to be as
@@ -64,19 +65,22 @@ finishing the whole tutorial.
 
 \clearpage
 
+\hypertarget{programs-used-in-this-exercise}{%
 \section{Programs used in this
-Exercise}\label{programs-used-in-this-exercise}
+Exercise}\label{programs-used-in-this-exercise}}
 
+\hypertarget{beast2---bayesian-evolutionary-analysis-sampling-trees-2}{%
 \subsubsection{BEAST2 - Bayesian Evolutionary Analysis Sampling Trees
-2}\label{beast2---bayesian-evolutionary-analysis-sampling-trees-2}
+2}\label{beast2---bayesian-evolutionary-analysis-sampling-trees-2}}
 
 BEAST2 (\url{http://www.beast2.org}) is a free software package for
 Bayesian evolutionary analysis of molecular sequences using MCMC and
 strictly oriented toward inference using rooted, time-measured
-phylogenetic trees. This tutorial is written for BEAST v2.7.0 \citep{Bouckaert2014, Bouckaert2019}.
+phylogenetic trees. This tutorial is written for BEAST v2.7.x \citep{Bouckaert2014,  Bouckaert2019}.
 
+\hypertarget{beauti2---bayesian-evolutionary-analysis-utility}{%
 \subsubsection{BEAUti2 - Bayesian Evolutionary Analysis
-Utility}\label{beauti2---bayesian-evolutionary-analysis-utility}
+Utility}\label{beauti2---bayesian-evolutionary-analysis-utility}}
 
 BEAUti2 is a graphical user interface tool for generating BEAST2 XML
 configuration files.
@@ -89,7 +93,8 @@ will have the same layout and functionality on both Windows and Linux.
 BEAUti2 is provided as a part of the BEAST2 package so you do not need
 to install it separately.
 
-\subsubsection{TreeAnnotator}\label{treeannotator}
+\hypertarget{treeannotator}{%
+\subsubsection{TreeAnnotator}\label{treeannotator}}
 
 TreeAnnotator is used to summarise the posterior sample of trees to
 produce a maximum clade credibility tree. It can also be used to
@@ -99,7 +104,8 @@ summarise and visualise the posterior estimates of other tree parameters
 TreeAnnotator is provided as a part of the BEAST2 package so you do not
 need to install it separately.
 
-\subsubsection{Tracer}\label{tracer}
+\hypertarget{tracer}{%
+\subsubsection{Tracer}\label{tracer}}
 
 Tracer (\url{http://beast.community/tracer}) is used to summarise the
 posterior estimates of the various parameters sampled by the Markov
@@ -108,17 +114,19 @@ convergence. It helps to quickly view median estimates and 95\% highest
 posterior density intervals of the parameters, and calculates the
 effective sample sizes (ESS) of parameters. It can also be used to
 investigate potential parameter correlations. We will be using Tracer
-v1.7.0
+v1.7.x.
 
-\subsubsection{FigTree}\label{figtree}
+\hypertarget{figtree}{%
+\subsubsection{FigTree}\label{figtree}}
 
 FigTree (\url{http://beast.community/figtree}) is a program for viewing
 trees and producing publication-quality figures. It can interpret the
 node-annotations created on the summary trees by TreeAnnotator, allowing
 the user to display node-based statistics (e.g.~posterior
-probabilities). We will be using FigTree v1.4.3.
+probabilities). We will be using FigTree v1.4.x.
 
-\subsubsection{DensiTree}\label{densitree}
+\hypertarget{densitree}{%
+\subsubsection{DensiTree}\label{densitree}}
 
 Bayesian analysis using BEAST2 provides an estimate of the uncertainty
 in tree space. This distribution is represented by a set of trees, which
@@ -133,8 +141,9 @@ to install it separately.
 
 \clearpage
 
+\hypertarget{practical-running-a-simple-analysis-with-beast2}{%
 \section{Practical: Running a simple analysis with
-BEAST2}\label{practical-running-a-simple-analysis-with-beast2}
+BEAST2}\label{practical-running-a-simple-analysis-with-beast2}}
 
 This tutorial will guide you through the analysis of an alignment of
 sequences sampled from twelve primate species. The aim of this tutorial
@@ -156,14 +165,15 @@ After completing this tutorial you should be able to:
   results
 \end{itemize}
 
-\subsection{The Data}\label{the-data}
+\hypertarget{the-data}{%
+\subsection{The Data}\label{the-data}}
 
 Before we can start, we need to download the input data for the
 tutorial. For this tutorial we use a single NEXUS file,
-\lstinline!primate-mtDNA.nex!, which contains a sequence alignment and
-metadata of the twelve primate mitochondrial genomes we will be
-analysing. Among other information, the metadata contains information to
-partition the alignment into 4 regions:
+\passthrough{\lstinline!primate-mtDNA.nex!}, which contains a sequence
+alignment and metadata of the twelve primate mitochondrial genomes we
+will be analysing. Among other information, the metadata contains
+information to partition the alignment into 4 regions:
 
 \begin{itemize}
 
@@ -184,14 +194,15 @@ or from Github.
 \begin{framed}
 \textbf{Downloading from taming-the-beast.org}
 
-A link to the alignment file, \lstinline!primate-mtDNA.nex!, is on the
-left-hand panel, under the heading \textbf{Data}. \textbf{Right-click}
-on the link and select \textbf{``Save Link As\ldots{}''} (Firefox and
-Chrome) or \textbf{``Download Linked File As\ldots{}''} (Safari) and
-save the file to a convenient location on your local drive. Note that
-some browsers will automatically change the extension of the file from
-\lstinline!.nex! to \lstinline!.nex.txt!. If this is the case, simply
-rename the file again.
+A link to the alignment file,
+\passthrough{\lstinline!primate-mtDNA.nex!}, is on the left-hand panel,
+under the heading \textbf{Data}. \textbf{Right-click} on the link and
+select \textbf{``Save Link As\ldots{}''} (Firefox and Chrome) or
+\textbf{``Download Linked File As\ldots{}''} (Safari) and save the file
+to a convenient location on your local drive. Note that some browsers
+will automatically change the extension of the file from
+\passthrough{\lstinline!.nex!} to \passthrough{\lstinline!.nex.txt!}. If
+this is the case, simply rename the file again.
 
 Alternatively, if you \textbf{left-click} on the link most browsers will
 display the alignment file. You can then press \textbf{File
@@ -200,11 +211,11 @@ some browsers will inject an HTML header into the file, which will make
 it unusable in BEAST2 (making this the less preferable option for
 downloading data files).
 
-In the same way you can also download example \lstinline!.xml! files for
-the analyses in this tutorial, as well as \emph{pre-cooked} output
-\lstinline!.log! and \lstinline!.trees! files. We recommend only
-downloading these files to check your results or if you become seriously
-stuck.
+In the same way you can also download example
+\passthrough{\lstinline!.xml!} files for the analyses in this tutorial,
+as well as \emph{pre-cooked} output \passthrough{\lstinline!.log!} and
+\passthrough{\lstinline!.trees!} files. We recommend only downloading
+these files to check your results or if you become seriously stuck.
 \end{framed}
 
 \begin{framed}
@@ -220,8 +231,9 @@ long as appropriate credit is given and the updated material is licensed
 in the same fashion.
 \end{framed}
 
+\hypertarget{creating-the-analysis-file-with-beauti}{%
 \subsection{Creating the Analysis File with
-BEAUti}\label{creating-the-analysis-file-with-beauti}
+BEAUti}\label{creating-the-analysis-file-with-beauti}}
 
 To run analyses with BEAST, one needs to prepare a configuration file in
 XML format that contains everything BEAST2 needs to run an analysis. A
@@ -252,14 +264,15 @@ files (at least for the initial round of analysis).
 Begin by starting \textbf{BEAUti2}.
 \end{framed}
 
-\subsubsection{Importing the alignment}\label{importing-the-alignment}
+\hypertarget{importing-the-alignment}{%
+\subsubsection{Importing the alignment}\label{importing-the-alignment}}
 
 To give BEAST2 access to the data, the alignment has to be added to the
 configuration file.
 
 \begin{framed}
-Drag and drop the file \lstinline!primate-mtDNA.nex! into the open
-BEAUti window (it should be on the \textbf{Partitions} tab).
+Drag and drop the file \passthrough{\lstinline!primate-mtDNA.nex!} into
+the open BEAUti window (it should be on the \textbf{Partitions} tab).
 
 Alternatively, use \textbf{File \textgreater{} Import Alignment} or
 click on the \textbf{+} in the bottom left-hand corner of the window,
@@ -276,7 +289,9 @@ which should look as shown in Figure \ref{fig:data}.
     \label{fig:data}
 \end{figure}
 
-\subsubsection{Setting up shared models}\label{setting-up-shared-models}
+\hypertarget{setting-up-shared-models}{%
+\subsubsection{Setting up shared
+models}\label{setting-up-shared-models}}
 
 A common way to account for site-to-site rate heterogeneity (variation
 in substitution rates between different sites) is to use a Gamma site
@@ -294,12 +309,12 @@ sites in the alignment is unknown or random.
 
 Another way to account for site-to-site rate heterogeneity is to split
 the alignment into explicit partitions, and specify an independent
-substitution model for each partition. This is especially relevant, when
-one knows exactly which positions in the alignment have different
-substitution rates from the rest of the sites. In our example, we split
-the alignment into coding and non-coding regions, and further split the
-coding region into 1st, 2nd and 3rd codon positions. This information is
-encoded as metadata into the \lstinline!.nex! file, which BEAUti
+substitution model for each partition. This is especially relevant when
+one knows exactly which positions in the alignment are expected to
+evolve at different rates. In our example, we split the alignment into
+coding and non-coding regions, and further split the coding region into
+1st, 2nd and 3rd codon positions. This information is encoded as
+metadata into the \passthrough{\lstinline!.nex!} file, which BEAUti
 automatically processes to produce the four partitions in the
 \textbf{Partitions} tab as shown in Figure \ref{fig:data}.
 
@@ -339,11 +354,11 @@ and the groupings are not as clear.
 \begin{framed}
 \textbf{Topic for discussion:} Do you think there is a good case for
 using independent substitution models on the different partitions in the
-\lstinline!.nex! file? Do you think this is sufficient for taking all
-site-to-site rate variation into account?
+\passthrough{\lstinline!.nex!} file? Do you think this is sufficient for
+taking all site-to-site rate variation into account?
 
-How would you account for rate variation between sites in each
-partition?
+How would you account for rate variation between sites \emph{within}
+each partition?
 \end{framed}
 
 Since all of the sequences in this dataset are from the mitochondrial
@@ -365,16 +380,16 @@ Clock Models} buttons.
 \end{framed}
 
 You will see that the \textbf{Clock Model} and the \textbf{Tree} columns
-in the table both changed to say \lstinline!noncoding!. Now we will
-rename both models such that the following options and generated log
-files are easier to read. The resulting setup should look as shown in
-Figure \ref{fig:link}.
+in the table both changed to say \passthrough{\lstinline!noncoding!}.
+Now we will rename both models such that the following options and
+generated log files are easier to read. The resulting setup should look
+as shown in Figure \ref{fig:link}.
 
 \begin{framed}
 Click on the first drop-down menu in the \textbf{Clock Model} column and
-rename the shared clock model to \lstinline!clock!.
+rename the shared clock model to \passthrough{\lstinline!clock!}.
 
-Likewise, rename the shared tree to \lstinline!tree!.
+Likewise, rename the shared tree to \passthrough{\lstinline!tree!}.
 \end{framed}
 
 \begin{figure}
@@ -384,14 +399,15 @@ Likewise, rename the shared tree to \lstinline!tree!.
     \label{fig:link}
 \end{figure}
 
+\hypertarget{setting-the-substitution-model}{%
 \subsubsection{Setting the substitution
-model}\label{setting-the-substitution-model}
+model}\label{setting-the-substitution-model}}
 
 In this analysis all of our sequences come from extant species and were
 thus all sampled in the present day (assumed to be
-$ t = 0 $). Therefore we do not need to set up sampling
-dates and we skip the \textbf{Tip Dates} panel. Next, we need to set up
-the substitution model in the \textbf{Site Model} tab.
+\passthrough{$ t = 0 $}). Therefore we do not need to set
+sampling dates and we skip the \textbf{Tip Dates} panel. Next, we need
+to set the substitution model in the \textbf{Site Model} tab.
 
 \begin{framed}
 Select the \textbf{Site Model} tab.
@@ -400,19 +416,19 @@ Select the \textbf{Site Model} tab.
 The options available in this panel depend on whether the alignment data
 are in nucleotides, amino-acids, binary data or general data. The
 settings available after loading the alignment will contain the default
-values which we normally want to modify.
+values we normally want to modify.
 
 The panel on the left shows each partition. Remember that we did not
 link the substitution models in the previous step for the different
 partitions, so each partition evolves under a different substitution
 model, i.e.~we assume that different positions in the alignment
-accumulate substitutions differently. We will need to set the site
-substitution model separately for each part of the alignment as these
-models are unlinked. However, we think that all partitions evolve
-according to the same model (although with different parameter values).
+accumulate substitutions differently. We will need to set the site model
+separately for each part of the alignment as these models are unlinked.
+However, we think that all partitions evolve according to the same
+general model (albeit with different parameter values).
 
 \begin{framed}
-Make sure that \lstinline!noncoding! is selected.
+Make sure that \passthrough{\lstinline!noncoding!} is selected.
 
 \begin{itemize}
 
@@ -426,15 +442,16 @@ Make sure that \lstinline!noncoding! is selected.
 \item
   Select \textbf{HKY} in the \textbf{Subst Model} drop-down menu.
 \item
+  Ensure that the \textbf{estimate} box for \textbf{Kappa} is checked
+  (it should already be checked).
+\item
   Select \textbf{Empirical} from the \textbf{Frequencies} drop-down
   menu.
 \end{itemize}
 
-Note that when you checked \textbf{estimate} for the substitution rate a
-yellow circle with a cross appeared to the right of \textbf{Fix mean
-substitution rate}. If you hover your cursor above the circle you will
-see a warning. \textbf{Ignore} the warning and continue with the next
-step.
+Note that when you checked \textbf{estimate} for the substitution rate
+the greyed out \textbf{Fix mean substitution rate} box at the bottom of
+the window was also automatically checked.
 \end{framed}
 
 \begin{figure}
@@ -444,7 +461,7 @@ step.
     \label{fig:subst}
 \end{figure}
 
-The panel should look like Figure \ref{fig:subst}.
+The panel should now look like Figure \ref{fig:subst}.
 
 We are using an HKY substitution model with empirical frequencies. This
 will fix the frequencies to the proportions observed in the partition.
@@ -458,8 +475,9 @@ remaining partitions or we can take a shortcut.
 Select the remaining three partitions (use \textbf{shift+click}). The
 window will now look like Figure \ref{fig:clone}.
 
-Click \textbf{OK} to to clone the site model for the other three
-partitions from \lstinline!noncoding!.
+Select \passthrough{\lstinline!noncoding!} and click \textbf{OK} to to
+clone the site model for the other three partitions from
+\passthrough{\lstinline!noncoding!}.
 \end{framed}
 
 \begin{figure}
@@ -469,17 +487,15 @@ partitions from \lstinline!noncoding!.
     \label{fig:clone}
 \end{figure}
 
-If you did everything correctly the yellow circle with a cross to the
-right of \textbf{Fix mean substitution rate} would have disappeared.
-
 \begin{framed}
-\textbf{Topic for discussion:} Can you figure out the reason for the
-warning when you checked \textbf{estimate} for the substitution rate?
-Don't worry if you can't figure it out, the reason for the warning is
-explained in detail in later tutorials.
+\textbf{Topic for discussion:} Can you figure out the reason why
+\textbf{Fix mean substitution rate} was automatically checked when you
+checked \textbf{estimate} for the substitution rate? Don't worry if you
+can't figure it out, it is explained in detail in later tutorials.
 \end{framed}
 
-\subsubsection{Setting the clock model}\label{setting-the-clock-model}
+\hypertarget{setting-the-clock-model}{%
+\subsubsection{Setting the clock model}\label{setting-the-clock-model}}
 
 Next, select the \textbf{Clock Model} tab at the top of the main window.
 This is where we set up the molecular clock model. For this exercise we
@@ -492,7 +508,11 @@ Click on the \textbf{Clock Models} tab and view the setup \emph{(but
 don't do anything)}.
 \end{framed}
 
-\subsubsection{Setting priors}\label{setting-priors}
+Note that the \textbf{estimate} box next to \textbf{Mean clock rate} is
+not checked.
+
+\hypertarget{setting-priors}{%
+\subsubsection{Setting priors}\label{setting-priors}}
 
 The \textbf{Priors} tab allows prior distributions to be specified for
 each model parameter. The model selections made in the \textbf{Site
@@ -534,8 +554,9 @@ menu
 Note that BEAUti displays a plot of the prior distribution on the right,
 as well as a few of its quantiles. This is for easy reference and can
 help us to decide if a prior is appropriate. The unspecific Gamma prior
-we are using is defined on $ (0,\infty) $ and has a very
-broad range of values included between its 2.5\% and 97.5\% quantiles.
+we are using is defined on \passthrough{$ (0,\infty) $} and
+has a very broad range of values included between its 2.5\% and 97.5\%
+quantiles.
 
 If we wanted to add a hyperprior on one of the parameters of the Gamma
 prior we would check the \textbf{estimate} box on the right of the
@@ -564,15 +585,16 @@ tutorials.
     \label{fig:priors}
 \end{figure}
 
+\hypertarget{adding-a-calibration-node}{%
 \subsubsection{Adding a calibration
-node}\label{adding-a-calibration-node}
+node}\label{adding-a-calibration-node}}
 
 Since all of the samples come from a single time point, there is no
 information on the actual height of the phylogenetic tree in time units.
-The tree height (tMRCA) and substitution rate parameters will not be
-distinguishable and BEAST2 will only be able to estimate their product.
-To allow BEAST2 to separate these two parameters we need to input
-additional information that will help calibrate the tree in time.
+That means the tree height (tMRCA) and substitution rate parameters will
+not be distinguishable and BEAST2 will only be able to estimate their
+product. To allow BEAST2 to separate these two parameters we need to
+input additional information that will help calibrate the tree in time.
 
 In a Bayesian analysis, additional information from external sources
 should be encoded in the form of a prior distribution. Thus, we will
@@ -580,26 +602,31 @@ have to add a new prior to the model.
 
 \begin{framed}
 To add an extra prior to the model, press the \textbf{+ Add Prior}
-button below list of priors and select \textbf{MRCA Prior} from the
+button below the list of priors. If this doesn't automatically open a
+\textbf{Taxon set editor} window, select \textbf{MRCA Prior} from the
 drop-down menu.
 
-You will see a dialogue box that allows you to select a subset of taxa
-from the phylogenetic tree. Once you have created a taxon set you will
-be able to add calibration information for its most recent common
-ancestor (MRCA) later on.
+You will see a dialogue box (\textbf{Taxon set editor}) that allows you
+to select a subset of taxa from the phylogenetic tree. Once you have
+created a taxon set you will be able to add calibration information for
+its most recent common ancestor (MRCA) later on.
 
 \begin{itemize}
 
 \item
-  Set the \textbf{Taxon set label} to \lstinline!human-chimp!.
+  Set the \textbf{Taxon set label} to
+  \passthrough{\lstinline!human-chimp!}.
 \item
-  Locate \lstinline!Homo_sapiens! in the left hand side list and click
-  the \textbf{\textgreater{}\textgreater{}} button to add it to the
-  \lstinline!human-chimp! taxon set.
+  Locate \passthrough{\lstinline!Homo\_sapiens!} in the left hand side
+  list and click the \textbf{\textgreater\textgreater{}} button to add
+  it to the \passthrough{\lstinline!human-chimp!} taxon set. (Note that
+  the arrows may not render in BEAST 2.7.
+  \textbf{\textgreater\textgreater{}} is the top button and
+  \textbf{\textless\textless{}} is at the bottom).
 \item
-  Locate \lstinline!Pan! in the left hand side list and click the
-  \textbf{\textgreater{}\textgreater{}} button to add it to the
-  \lstinline!human-chimp! taxon set.
+  Locate \passthrough{\lstinline!Pan!} in the left hand side list and
+  click the \textbf{\textgreater\textgreater{}} button to add it to the
+  \passthrough{\lstinline!human-chimp!} taxon set.
 \end{itemize}
 \end{framed}
 
@@ -612,7 +639,7 @@ prior list.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.800000\textwidth]{figures/taxa.png}
+    \includegraphics[width=0.600000\textwidth]{figures/taxa.png}
     \caption{Calibration node taxon set.}
     \label{fig:taxa}
 \end{figure}
@@ -624,17 +651,17 @@ tree topology so that the human-chimp grouping is kept monophyletic
 during the course of the MCMC analysis.
 
 \begin{framed}
-Check the \textbf{monophyletic} checkbox next to
+Check the \textbf{monophyletic} checkbox next to the
 \textbf{human-chimp.prior}.
 \end{framed}
 
 We now need to specify a prior distribution on the calibration node
-based on our prior fossil knowledge in order to calibrate our tree. We
-will use a Normal distribution with mean 6 MYA and a standard deviation
-of 0.5 million years. This will give a central 95\% range of about 5-7
-million years, which roughly corresponds to the current consensus
-estimate of the date of the most recent common ancestor of humans and
-chimpanzees.
+based on our prior knowledge from fossils in order to calibrate our
+tree. We will use a Normal distribution with mean 6 MYA and a standard
+deviation of 0.5 million years. This will give a central 95\% range of
+about 5-7 million years, which roughly corresponds to the current
+consensus estimate of the date of the most recent common ancestor of
+humans and chimpanzees.
 
 \begin{framed}
 Select \textbf{Normal} from the drop-down menu to the right of the newly
@@ -651,8 +678,8 @@ added \textbf{human-chimp.prior}.
 \end{itemize}
 \end{framed}
 
-The final setup of the calibration node should look as shown in Figure
-\ref{fig:calibration}.
+The final setup of the calibration node prior should look as shown in
+Figure \ref{fig:calibration}.
 
 \begin{figure}
     \centering
@@ -661,11 +688,23 @@ The final setup of the calibration node should look as shown in Figure
     \label{fig:calibration}
 \end{figure}
 
-\subsubsection{Setting the MCMC options}\label{setting-the-mcmc-options}
+\begin{framed}
+\textbf{Topic for discussion:} After setting the calibration node prior
+a new prior for \passthrough{\lstinline!clockrate.c:clock!} magically
+appeared in the priors tab! If you go back to the \textbf{Clock model}
+tab you'll see that the \textbf{estimate} box next to \textbf{Mean clock
+rate} is now checked and greyed out (cannot be unchecked).
 
-Finally, the \textbf{MCMC} tab allows to control the length of the MCMC
-chain and the frequency of stored samples. It also allows one to change
-the output file names.
+What just happened?
+\end{framed}
+
+\hypertarget{setting-the-mcmc-options}{%
+\subsubsection{Setting the MCMC
+options}\label{setting-the-mcmc-options}}
+
+Finally, the \textbf{MCMC} tab allows us to control the length of the
+MCMC chain and the frequency of stored samples. It also allows one to
+change the output file names.
 
 \begin{framed}
 Go to the \textbf{MCMC} tab.
@@ -709,7 +748,7 @@ Expand the \textbf{tracelog} options.
 \item
   Set the \textbf{Log Every} parameter to \textbf{200}.
 \item
-  Leave the filename as is
+  Leave the filename as is (\passthrough{\lstinline!$filebase).log!}).
 \end{itemize}
 \end{framed}
 
@@ -749,7 +788,8 @@ Expand the \textbf{treelog.t:tree} options.
 \begin{itemize}
 
 \item
-  Set the \textbf{File Name} to \lstinline!primate-mtDNA.trees!.
+  Set the \textbf{File Name} to
+  \passthrough{\lstinline!primate-mtDNA.trees!}.
 \item
   Leave the \textbf{Log Every} parameter at the default value of 1'000.
 \end{itemize}
@@ -764,25 +804,28 @@ The final setup should look as in Figure \ref{fig:logs}.
     \label{fig:logs}
 \end{figure}
 
-\subsubsection{Generating the XML file}\label{generating-the-xml-file}
+\hypertarget{generating-the-xml-file}{%
+\subsubsection{Generating the XML file}\label{generating-the-xml-file}}
 
 We are now ready to create the BEAST2 XML file. This is the final
 configuration file BEAST2 can use to execute the analysis.
 
 \begin{framed}
-Save the XML file under the name \lstinline!Primates.xml! using
-\textbf{File \textgreater{} Save}.
+Save the XML file under the name
+\passthrough{\lstinline!primates-mtDNA.xml!} using \textbf{File
+\textgreater{} Save}.
 \end{framed}
 
 \clearpage
 
-\subsection{Running the analysis}\label{running-the-analysis}
+\hypertarget{running-the-analysis}{%
+\subsection{Running the analysis}\label{running-the-analysis}}
 
 Now run BEAST2 and provide your newly created XML file as input. You can
 also change the \textbf{random number seed} for the run. This number is
 the starting point of a pseudo-random number chain BEAST2 will use to
 generate the samples. As computers are unable to generate truly random
-numbers, we have to resort to generating determinate sequences of
+numbers, we have to resort to generating deterministic sequences of
 numbers that only look random, but will be identical when the starting
 seed is the same. If your MCMC run converges to the true posterior then
 you will be able to draw the same conclusions regardless of which random
@@ -795,7 +838,8 @@ Run the \textbf{BEAST2} program.
 \begin{itemize}
 
 \item
-  Select \lstinline!Primates.xml! as the \textbf{Beast XML File}.
+  Select \passthrough{\lstinline!primates-mtDNA.xml!} as the
+  \textbf{Beast XML File}.
 \item
   Set the \textbf{Random number seed} to \textbf{777} (or pick your
   favourite number).
@@ -813,10 +857,11 @@ Run the \textbf{BEAST2} program.
     \label{fig:beast}
 \end{figure}
 
-The BEAST2 window should look as shown in Figure \ref{fig:beast}.
+The BEAST2 window should look similar to Figure \ref{fig:beast}.
 
 \begin{framed}
-Run \textbf{BEAST2} by clicking the \lstinline!Run! button.
+Run \textbf{BEAST2} by clicking the \passthrough{\lstinline!Run!}
+button.
 \end{framed}
 
 BEAST2 will run until the specified number of steps in the chain is
@@ -855,21 +900,25 @@ Can you find the likelihood, priors and hyperpriors in the XML file?
 
 \clearpage
 
-\subsection{Analysing the results}\label{analysing-the-results}
+\hypertarget{analysing-the-results}{%
+\subsection{Analysing the results}\label{analysing-the-results}}
 
 Once BEAST2 has finished running, open Tracer to get an overview of
 BEAST2 output. When the main window has opened, choose
-\lstinline!File > Import Trace File...! and select the file called
-\lstinline!primate-mtDNA.log! that BEAST2 has created, or simply drag
-the file from the file manager window into Tracer.
+\passthrough{\lstinline!File > Import Trace File...!} and select the
+file called \passthrough{\lstinline!primate-mtDNA.log!} that BEAST2 has
+created, or simply drag the file from the file manager window into
+Tracer.
 
 \begin{framed}
-Open \textbf{Tracer}. Drag and drop the \lstinline!primate-mtDNA.log!
-file that BEAST2 created into the open Tracer window.
+Open \textbf{Tracer}. Drag and drop the
+\passthrough{\lstinline!primate-mtDNA.log!} file that BEAST2 created
+into the open Tracer window.
 
 Alternatively, use \textbf{File \textgreater{} Import Trace
 File\ldots{}} (or press the \textbf{+} button below the \textbf{Trace
-Files} panel) then locate and click on \lstinline!primate-mtDNA.log!.
+Files} panel) then locate and click on
+\passthrough{\lstinline!primate-mtDNA.log!}.
 \end{framed}
 
 The Tracer window should look as shown in Figure \ref{fig:tracer_bad}.
@@ -903,16 +952,15 @@ shown in the file list table (top left) in Tracer. The burn-in is
 intended to give the Markov Chain time to reach its equilibrium
 distribution, particularly if it has started from a bad starting point.
 A bad starting point may lead to over-sampling regions of the posterior
-that actually have very low probability under the equilibrium
-distribution, before the chain settles into the equilibrium
-distribution. Burn-in allows us to simply discard the first \emph{N}
-samples of a chain and not use them to compute the summary statistics.
-Determining the number of samples to discard is not a trivial problem
-and depends on the size of the dataset, the complexity of the model and
-the length of the chain. A good rule of thumb is to always throw out at
-least the first 10\% of the whole chain length as the burn-in (however,
-in some cases it may be necessary to discard as much as 50\% of the MCMC
-chain).
+that actually have very low probability, before the chain settles into
+the equilibrium distribution. Burn-in allows us to simply discard the
+first \emph{N} samples of a chain and not use them to compute the
+summary statistics. Determining the number of samples to discard is not
+a trivial problem and depends on the size of the dataset, the complexity
+of the model and the length of the chain. A good rule of thumb is to
+always throw out at least the first 10\% of the whole chain length as
+the burn-in (however, in some cases it may be necessary to discard as
+much as 50\% of the MCMC chain).
 
 Select the \textbf{TreeHeight} statistic in the left hand list to look
 at the tree height estimated jointly for all partitions in the
@@ -966,8 +1014,9 @@ rates of 1st and 2nd codon positions? (display the legend on the plot to
 help with your analysis).
 \end{framed}
 
+\hypertarget{analysing-the-posterior-estimate-quality}{%
 \subsubsection{Analysing the posterior estimate
-quality}\label{analysing-the-posterior-estimate-quality}
+quality}\label{analysing-the-posterior-estimate-quality}}
 
 Two very important summary statistics that we should pay attention to
 are the Auto-Correlation Time (ACT) and the Effective Sample Size (ESS).
@@ -980,7 +1029,7 @@ as the chain length (excluding the burn-in) divided by the ACT.
 
 The ESS is in general regarded as a quality-measure of the resulting
 sample sequence. It is unclear how to determine exactly how large should
-the ESS be for the analysis to be trustworthy. In general, an ESS of 200
+the ESS be for an analysis to be trustworthy. In general, an ESS of 200
 is considered high enough to make the analysis useful. However, this is
 an arbitrary number and you should always use your own judgment to
 decide if the analysis has converged or not. As you can see in Figure
@@ -988,7 +1037,7 @@ decide if the analysis has converged or not. As you can see in Figure
 means that we should not trust the value of the statistics, and ESS
 values between 100 and 200 are coloured in yellow.
 
-If a lot of statistics have red or yellow coloured ESS value, we have
+If a lot of statistics have red or yellow coloured ESS values, we have
 not sufficiently explored the posterior space. This is most likely a
 result of the chain not running long enough. Try running the same
 analysis as before, but with a longer chain.
@@ -996,15 +1045,15 @@ analysis as before, but with a longer chain.
 \begin{framed}
 First load the XML configuration file into BEAUti again by pressing
 \textbf{File \textgreater{} Load} and select the
-\lstinline!Primates.xml! file. Within BEAUti, change the MCMC chain
-length parameter to \textbf{10'000'000} and change the \textbf{tracelog}
-frequency to \textbf{1'000}.
+\passthrough{\lstinline!primate-mtDNA.xml!} file. Within BEAUti, change
+the MCMC chain length parameter to \textbf{10'000'000} and change the
+\textbf{tracelog} frequency to \textbf{1'000}.
 
 Change the trace and tree log file names in order to not overwrite the
 results of the previous analysis. You may add something like
-\lstinline!_long! behind the name of the file, to obtain
-\lstinline!primate-mtDNA_long.log! for the log file and
-\lstinline!primate-mtDNA_long.trees! for trees file.
+\passthrough{\lstinline!\_long!} behind the name of the file, to obtain
+\passthrough{\lstinline!primate-mtDNA\_long.log!} for the log file and
+\passthrough{\lstinline!primate-mtDNA\_long.trees!} for trees file.
 
 Run BEAST2 again with the updated configuration file and the same seed
 of \textbf{777}.
@@ -1080,7 +1129,9 @@ values for some parameters are higher than others?
 Do you think a burn-in of 10\% is sufficient for this analysis?
 \end{framed}
 
-\subsubsection{Analysing tree estimates}\label{analysing-tree-estimates}
+\hypertarget{analysing-tree-estimates}{%
+\subsubsection{Analysing tree
+estimates}\label{analysing-tree-estimates}}
 
 Besides producing a sample of parameter estimates, BEAST2 also produces
 a posterior sample of phylogenetic time-trees. These need to be
@@ -1139,9 +1190,10 @@ file.
 
 \begin{framed}
 Click \textbf{Choose File} next to \textbf{Input Tree File} and choose
-\lstinline!primate-mtDNA.trees!.
+\passthrough{\lstinline!primate-mtDNA.trees!}.
 
-Set the \textbf{Output File} to \lstinline!Primates.MCC.tree!.
+Set the \textbf{Output File} to
+\passthrough{\lstinline!Primates.MCC.tree!}.
 \end{framed}
 
 The setup should look as shown in Figure \ref{fig:treeannot}. You can
@@ -1154,15 +1206,16 @@ now run the program.
     \label{fig:treeannot}
 \end{figure}
 
+\hypertarget{visualising-the-tree-estimate}{%
 \subsubsection{Visualising the tree
-estimate}\label{visualising-the-tree-estimate}
+estimate}\label{visualising-the-tree-estimate}}
 
 Finally, we can visualize the tree with one of the available pieces of
 software, such as FigTree.
 
 \begin{framed}
 Open \textbf{FigTree}. Use \textbf{File \textgreater{} Open} then locate
-and click on \lstinline!Primates.MCC.tree!.
+and click on \passthrough{\lstinline!Primates.MCC.tree!}.
 
 \begin{itemize}
 
@@ -1174,10 +1227,12 @@ and click on \lstinline!Primates.MCC.tree!.
   Size} until it is readable.
 \item
   Check the \textbf{Node Bars} checkbox, expand the options and select
-  \lstinline!height_95%_HPD! from the \textbf{Display} drop-down menu.
+  \passthrough{\lstinline!height\_95\%\_HPD!} from the \textbf{Display}
+  drop-down menu.
 \item
   Check the \textbf{Node Labels} checkbox, expand the options and select
-  \lstinline!posterior! from the \textbf{Display} drop-down menu.
+  \passthrough{\lstinline!posterior!} from the \textbf{Display}
+  drop-down menu.
 \item
   Increase the \textbf{Font Size} until it is readable.
 \item
@@ -1227,8 +1282,9 @@ confident we are about their divergence times.
 \end{itemize}
 \end{framed}
 
+\hypertarget{visualising-tree-posteriors-optional}{%
 \subsubsection{Visualising tree posteriors
-(optional)}\label{visualising-tree-posteriors-optional}
+(optional)}\label{visualising-tree-posteriors-optional}}
 
 The MCC tree is one way of summarising the posterior distribution of
 trees as a single tree, annotated with extra information on some nodes
@@ -1245,7 +1301,7 @@ using DensiTree) to be able to visualise the estimates.
 
 \begin{framed}
 Open \textbf{DensiTree}. Use \textbf{File \textgreater{} Load} then
-locate and click on \lstinline!primate-mtDNA.trees!.
+locate and click on \passthrough{\lstinline!primate-mtDNA.trees!}.
 
 Expand the \textbf{Show} options and check the \textbf{Consensus Trees}
 checkbox.
@@ -1301,14 +1357,16 @@ taxa are sampled.
 \clearpage
 \end{framed}
 
-\section{Acknowledgment}\label{acknowledgment}
+\hypertarget{acknowledgment}{%
+\section{Acknowledgment}\label{acknowledgment}}
 
 The content of this tutorial is based on the
 \href{https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true}{Divergence
 Dating Tutorial with BEAST 2.0} tutorial by Drummond, Rambaut, and
 Bouckaert.
 
-\section{Useful Links}\label{useful-links}
+\hypertarget{useful-links}{%
+\section{Useful Links}\label{useful-links}}
 
 \begin{itemize}
 
@@ -1325,7 +1383,8 @@ Bouckaert.
   \url{http://groups.google.com/group/beast-users} \clearpage
 \end{itemize}
 
-
+\hypertarget{relevant-references}{%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Tutorial disclaimer %
@@ -1333,7 +1392,9 @@ Bouckaert.
 % Please do not change the license
 % Add the author names and relevant links
 % Add any other aknowledgments here
-\href{http://creativecommons.org/licenses/by/4.0/}{\includegraphics[scale=0.8]{figures/ccby.pdf}} This tutorial was written by Jūlija Pečerska, Veronika Bošková and Louis du Plessis for \href{https://taming-the-beast.github.io}{Taming the BEAST} and is licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License}. 
+\href{http://creativecommons.org/licenses/by/4.0/}{\includegraphics[scale=0.8]{figures/ccby.pdf}} This tutorial was written by Jūlija
+Pečerska, Veronika Bošková and Louis du
+Plessis for \href{https://taming-the-beast.github.io}{Taming the BEAST} and is licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License}. 
 
 
 %%%%%%%%%%%%%%%%%%%%
