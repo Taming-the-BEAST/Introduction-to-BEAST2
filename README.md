@@ -2,11 +2,13 @@
 author: Jūlija Pečerska,Veronika Bošková,Louis du Plessis
 level: Beginner
 title: Introduction to BEAST2
-beastversion: 2.7.0
-tracerversion: 1.7.0
-figtreeversion: 1.4.3
+beastversion: 2.7.x
+tracerversion: 1.7.x
+figtreeversion: 1.4.x
 subtitle: This is a simple introductory tutorial to help you get started with using BEAST2 and its accomplices.
 ---
+
+
 
 
 # Background
@@ -23,7 +25,7 @@ In this simple tutorial you will get acquainted with the basic workflow of BEAST
 
 ### BEAST2 - Bayesian Evolutionary Analysis Sampling Trees 2
 
-BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite Bouckaert2014 --file Introduction-to-BEAST2/master-refs %}, {% cite Bouckaert2019 --file Introduction-to-BEAST2/master-refs %}. 
+BEAST2 ([http://www.beast2.org](http://www.beast2.org)) is a free software package for Bayesian evolutionary analysis of molecular sequences using MCMC and strictly oriented toward inference using rooted, time-measured phylogenetic trees. This tutorial is written for BEAST v{{ page.beastversion }} {% cite Bouckaert2014  Bouckaert2019 --file Introduction-to-BEAST2/master-refs %}. 
 
 
 ### BEAUti2 - Bayesian Evolutionary Analysis Utility
@@ -139,9 +141,9 @@ Once you have done that, the data should appear in the BEAUti window which shoul
 
 ### Setting up shared models
 
-A common way to account for site-to-site rate heterogeneity (variation in substitution rates between different sites) is to use a Gamma site model. In this model, one assumes that rate variation follows a Gamma distribution. To make the analysis tractable the Gamma distribution is discretised to a small number of bins (4-6 usually). The mean of each bin then acts as a multiplier for the overall substitution rate. The transition probabilities are then calculated for each scaled substitution rate. To calculate the likelihood for a site, **P(data | tree, substitution model)** is calculated under each Gamma rate category and the results are summed up to average over all possible rates. This is a handy approach if one suspects that some sites are mutating faster than others but the precise position of these sites in the alignment is unknown or random.
+A common way to account for site-to-site rate heterogeneity (variation in substitution rates between different sites) is to use a Gamma site model. In this model, one assumes that rate variation follows a Gamma distribution. To make the analysis tractable the Gamma distribution is discretised to a small number of bins (4-6 usually). The mean of each bin then acts as a multiplier for the overall substitution rate. The transition probabilities are then calculated for each scaled substitution rate. To calculate the likelihood for a site, **P(data \| tree, substitution model)** is calculated under each Gamma rate category and the results are summed up to average over all possible rates. This is a handy approach if one suspects that some sites are mutating faster than others but the precise position of these sites in the alignment is unknown or random.
 
-Another way to account for site-to-site rate heterogeneity is to split the alignment into explicit partitions, and specify an independent substitution model for each partition. This is especially relevant, when one knows exactly which positions in the alignment have different substitution rates from the rest of the sites. In our example, we split the alignment into coding and non-coding regions, and further split the coding region into 1st, 2nd and 3rd codon positions. This information is encoded as metadata into the `.nex` file, which BEAUti automatically processes to produce the four partitions in the **Partitions** tab as shown in [Figure 1](#fig:data).
+Another way to account for site-to-site rate heterogeneity is to split the alignment into explicit partitions, and specify an independent substitution model for each partition. This is especially relevant when one knows exactly which positions in the alignment are expected to evolve at different rates. In our example, we split the alignment into coding and non-coding regions, and further split the coding region into 1st, 2nd and 3rd codon positions. This information is encoded as metadata into the `.nex` file, which BEAUti automatically processes to produce the four partitions in the **Partitions** tab as shown in [Figure 1](#fig:data).
 
 > **Double-click** on the different partitions (under the **File** column) to view the individual alignments.
 >
@@ -163,7 +165,7 @@ By looking at the alignments for the 2nd and 3rd codon positions ([Figure 2](#fi
 
 > **Topic for discussion:** Do you think there is a good case for using independent substitution models on the different partitions in the `.nex` file? Do you think this is sufficient for taking all site-to-site rate variation into account? 
 >
-> How would you account for rate variation between sites in each partition? 
+> How would you account for rate variation between sites _within_ each partition? 
 >
 
 
@@ -190,13 +192,13 @@ You will see that the **Clock Model** and the **Tree** columns in the table both
 
 ### Setting the substitution model
 
-In this analysis all of our sequences come from extant species and were thus all sampled in the present day (assumed to be {% eqinline t = 0 %}). Therefore we do not need to set up sampling dates and we skip the **Tip Dates** panel. Next, we need to set up the substitution model in the **Site Model** tab.
+In this analysis all of our sequences come from extant species and were thus all sampled in the present day (assumed to be {% eqinline t = 0 %}). Therefore we do not need to set sampling dates and we skip the **Tip Dates** panel. Next, we need to set the substitution model in the **Site Model** tab.
 
 > Select the **Site Model** tab.
 
-The options available in this panel depend on whether the alignment data are in nucleotides, amino-acids, binary data or general data. The settings available after loading the alignment will contain the default values which we normally want to modify.
+The options available in this panel depend on whether the alignment data are in nucleotides, amino-acids, binary data or general data. The settings available after loading the alignment will contain the default values we normally want to modify.
 
-The panel on the left shows each partition. Remember that we did not link the substitution models in the previous step for the different partitions, so each partition evolves under a different substitution model, i.e. we assume that different positions in the alignment accumulate substitutions differently. We will need to set the site substitution model separately for each part of the alignment as these models are unlinked. However, we think that all partitions evolve according to the same model (although with different parameter values).
+The panel on the left shows each partition. Remember that we did not link the substitution models in the previous step for the different partitions, so each partition evolves under a different substitution model, i.e. we assume that different positions in the alignment accumulate substitutions differently. We will need to set the site model separately for each part of the alignment as these models are unlinked. However, we think that all partitions evolve according to the same general model (albeit with different parameter values).
 
 > Make sure that `noncoding` is selected. 
 >
@@ -204,9 +206,10 @@ The panel on the left shows each partition. Remember that we did not link the su
 > - Set the **Gamma Category Count** to 4.
 > - Check the **estimate** box for the **Shape** parameter (it should already be checked).
 > - Select **HKY** in the **Subst Model** drop-down menu.
+> - Ensure that the **estimate** box for **Kappa** is checked (it should already be checked).
 > - Select **Empirical** from the **Frequencies** drop-down menu.
 >
-> Note that when you checked **estimate** for the substitution rate a yellow circle with a cross appeared to the right of **Fix mean substitution rate**. If you hover your cursor above the circle you will see a warning. **Ignore** the warning and continue with the next step.
+> Note that when you checked **estimate** for the substitution rate the greyed out **Fix mean substitution rate** box at the bottom of the window was also automatically checked. 
 >
 
 <figure>	
@@ -216,13 +219,13 @@ The panel on the left shows each partition. Remember that we did not link the su
 </figure>
 <br>
 
-The panel should look like [Figure 5](#fig:subst). 
+The panel should now look like [Figure 5](#fig:subst). 
 
 We are using an HKY substitution model with empirical frequencies. This will fix the frequencies to the proportions observed in the partition. This approach means that we can get a good fit to the data without explicitly estimating these parameters. To model site-to-site rate variation within each partition we use a discrete Gamma site model with 4 categories. Now we _could_ repeat the above steps for each of the remaining partitions or we can take a shortcut.
 
 > Select the remaining three partitions (use **shift+click**). The window will now look like [Figure 6](#fig:clone). 
 >
-> Click **OK** to to clone the site model for the other three partitions from `noncoding`.
+> Select `noncoding` and click **OK** to to clone the site model for the other three partitions from `noncoding`.
 
 <figure>	
 	<a id="fig:clone"></a>
@@ -231,11 +234,9 @@ We are using an HKY substitution model with empirical frequencies. This will fix
 </figure>
 <br>
 
-If you did everything correctly the yellow circle with a cross to the right of **Fix mean substitution rate** would have disappeared. 
 
-
-> **Topic for discussion:** Can you figure out the reason for the warning when you checked **estimate** for the substitution rate?
-> Don't worry if you can't figure it out, the reason for the warning is explained in detail in later tutorials.
+> **Topic for discussion:** Can you figure out the reason why **Fix mean substitution rate** was automatically checked when you checked **estimate** for the substitution rate?
+> Don't worry if you can't figure it out, it is explained in detail in later tutorials.
 >
 
 
@@ -246,6 +247,8 @@ If you did everything correctly the yellow circle with a cross to the right of *
 Next, select the **Clock Model** tab at the top of the main window. This is where we set up the molecular clock model. For this exercise we are going to leave the selection at the default value of a strict molecular clock, because this data is very clock-like and does not need rate variation among branches to be included in the model.
 
 > Click on the **Clock Models** tab and view the setup _(but don't do anything)_.
+
+Note that the **estimate** box next to **Mean clock rate** is not checked.
 
 
 
@@ -286,17 +289,17 @@ Please note that in general using default priors is frowned upon as priors are m
 
 ### Adding a calibration node
 
-Since all of the samples come from a single time point, there is no information on the actual height of the phylogenetic tree in time units. The tree height (tMRCA) and substitution rate parameters will not be distinguishable and BEAST2 will only be able to estimate their product. To allow BEAST2 to separate these two parameters we need to input additional information that will help calibrate the tree in time.
+Since all of the samples come from a single time point, there is no information on the actual height of the phylogenetic tree in time units. That means the tree height (tMRCA) and substitution rate parameters will not be distinguishable and BEAST2 will only be able to estimate their product. To allow BEAST2 to separate these two parameters we need to input additional information that will help calibrate the tree in time.
 
 In a Bayesian analysis, additional information from external sources should be encoded in the form of a prior distribution. Thus, we will have to add a new prior to the model. 
 
 
-> To add an extra prior to the model, press the **+ Add Prior** button below list of priors and select **MRCA Prior** from the drop-down menu.
+> To add an extra prior to the model, press the **+ Add Prior** button below the list of priors. If this doesn't automatically open a **Taxon set editor** window, select **MRCA Prior** from the drop-down menu.
 >
-> You will see a dialogue box that allows you to select a subset of taxa from the phylogenetic tree. Once you have created a taxon set you will be able to add calibration information for its most recent common ancestor (MRCA) later on.
+> You will see a dialogue box (**Taxon set editor**) that allows you to select a subset of taxa from the phylogenetic tree. Once you have created a taxon set you will be able to add calibration information for its most recent common ancestor (MRCA) later on.
 > 
 > - Set the **Taxon set label** to `human-chimp`.
-> - Locate `Homo_sapiens` in the left hand side list and click the **>>** button to add it to the `human-chimp` taxon set.
+> - Locate `Homo_sapiens` in the left hand side list and click the **>>** button to add it to the `human-chimp` taxon set. (Note that the arrows may not render in BEAST 2.7. **>>** is the top button and **<<** is at the bottom).
 > - Locate `Pan` in the left hand side list and click the **>>** button to add it to the `human-chimp` taxon set.
 
 
@@ -314,10 +317,10 @@ The taxon set should now look like [Figure 8](#fig:taxa).
 
 The new node we have added is a calibrated node on the human-chimpanzee split to be used in conjunction with the Calibrated Yule prior. In order for that to work we need to enforce monophyly. This will constrain the tree topology so that the human-chimp grouping is kept monophyletic during the course of the MCMC analysis.
 
-> Check the **monophyletic** checkbox next to **human-chimp.prior**.
+> Check the **monophyletic** checkbox next to the **human-chimp.prior**.
 
 
-We now need to specify a prior distribution on the calibration node based on our prior fossil knowledge in order to calibrate our tree. We will use a Normal distribution with mean 6 MYA and a standard deviation of 0.5 million years. This will give a central 95% range of about 5-7 million years, which roughly corresponds to the current consensus estimate of the date of the most recent common ancestor of humans and chimpanzees.
+We now need to specify a prior distribution on the calibration node based on our prior knowledge from fossils in order to calibrate our tree. We will use a Normal distribution with mean 6 MYA and a standard deviation of 0.5 million years. This will give a central 95% range of about 5-7 million years, which roughly corresponds to the current consensus estimate of the date of the most recent common ancestor of humans and chimpanzees.
 
 > Select **Normal** from the drop-down menu to the right of the newly added **human-chimp.prior**.
 >
@@ -326,7 +329,7 @@ We now need to specify a prior distribution on the calibration node based on our
 > - Set the **Sigma** of the distribution to **0.5**.
 
 
-The final setup of the calibration node should look as shown in [Figure 9](#fig:calibration).
+The final setup of the calibration node prior   should look as shown in [Figure 9](#fig:calibration).
 
 <figure>
 	<a id="fig:calibration"></a>
@@ -335,10 +338,14 @@ The final setup of the calibration node should look as shown in [Figure 9](#fig:
 </figure>
 
 
+> **Topic for discussion:** After setting the calibration node prior a new prior for `clockrate.c:clock` magically appeared in the priors tab! If you go back to the **Clock model** tab you'll see that the **estimate** box next to **Mean clock rate** is now checked and greyed out (cannot be unchecked).
+>
+> What just happened?
+
 
 ### Setting the MCMC options
 
-Finally, the **MCMC** tab allows to control the length of the MCMC chain and the frequency of stored samples. It also allows one to change the output file names.
+Finally, the **MCMC** tab allows us to control the length of the MCMC chain and the frequency of stored samples. It also allows one to change the output file names.
 
 > Go to the **MCMC** tab.
 
@@ -354,7 +361,7 @@ Start by expanding the **tracelog** options. This is the log file you will use l
 > Expand the **tracelog** options.
 > 
 > - Set the **Log Every** parameter to **200**.
-> - Leave the filename as is
+> - Leave the filename as is (`$filebase).log`).
 >
 
 Next, expand the **screenlog** options. The screen output is simply for monitoring the program's progress. Since it is not so important, especially if you run your analysis on a remote computer or a computer cluster, the **Log Every** can be set to any value. However, if it is set too small, the sheer quantity of information being displayed on the screen will actually slow the program down. For this analysis we will make BEAST2 log to screen every 1'000 samples, which is the default setting.
@@ -382,7 +389,7 @@ The final setup should look as in [Figure 10](#fig:logs).
 
 We are now ready to create the BEAST2 XML file. This is the final configuration file BEAST2 can use to execute the analysis.
 
-> Save the XML file under the name `Primates.xml` using **File > Save**.
+> Save the XML file under the name `primates-mtDNA.xml` using **File > Save**.
 
 <br>
 
@@ -391,11 +398,11 @@ We are now ready to create the BEAST2 XML file. This is the final configuration 
 
 ## Running the analysis
 
-Now run BEAST2 and provide your newly created XML file as input. You can also change the **random number seed** for the run. This number is the starting point of a pseudo-random number chain BEAST2 will use to generate the samples. As computers are unable to generate truly random numbers, we have to resort to generating determinate sequences of numbers that only look random, but will be identical when the starting seed is the same. If your MCMC run converges to the true posterior then you will be able to draw the same conclusions regardless of which random seed is provided. However, if you want to exactly reproduce the results of a run you need to start it with the same random number seed.
+Now run BEAST2 and provide your newly created XML file as input. You can also change the **random number seed** for the run. This number is the starting point of a pseudo-random number chain BEAST2 will use to generate the samples. As computers are unable to generate truly random numbers, we have to resort to generating deterministic sequences of numbers that only look random, but will be identical when the starting seed is the same. If your MCMC run converges to the true posterior then you will be able to draw the same conclusions regardless of which random seed is provided. However, if you want to exactly reproduce the results of a run you need to start it with the same random number seed.
 
 > Run the **BEAST2** program.
 >
-> - Select `Primates.xml` as the **Beast XML File**.
+> - Select `primates-mtDNA.xml` as the **Beast XML File**.
 > - Set the **Random number seed** to **777** (or pick your favourite number).
 > - Check the **Use BEAGLE library if available** checkbox. If you have previously installed BEAGLE this will make the analysis run faster.
 >
@@ -407,7 +414,7 @@ Now run BEAST2 and provide your newly created XML file as input. You can also ch
 </figure>
 <br>
 
-The BEAST2 window should look as shown in [Figure 11](#fig:beast). 
+The BEAST2 window should look similar to [Figure 11](#fig:beast). 
 
 > Run **BEAST2** by clicking the `Run` button.
 
@@ -458,7 +465,7 @@ Tracer provides a few useful summary statistics on the results of the analysis. 
 
 The log file contains traces for the posterior (this is the natural logarithm of the product of the tree likelihood and the prior density), prior, the likelihood, tree likelihoods and other continuous parameters. Selecting a trace on the left brings up the summary statistics for this trace on the right hand side. When first opened, the **posterior** trace is selected and various statistics of this trace are shown under the **Estimates** tab.
 
-For each loaded log file we can specify a **Burn-In**, which is shown in the file list table (top left) in Tracer. The burn-in is intended to give the Markov Chain time to reach its equilibrium distribution, particularly if it has started from a bad starting point. A bad starting point may lead to over-sampling regions of the posterior that actually have very low probability under the equilibrium distribution, before the chain settles into the equilibrium distribution. Burn-in allows us to simply discard the first _N_ samples of a chain and not use them to compute the summary statistics. Determining the number of samples to discard is not a trivial problem and depends on the size of the dataset, the complexity of the model and the length of the chain. A good rule of thumb is to always throw out at least the first 10% of the whole chain length as the burn-in (however, in some cases it may be necessary to discard as much as 50% of the MCMC chain).
+For each loaded log file we can specify a **Burn-In**, which is shown in the file list table (top left) in Tracer. The burn-in is intended to give the Markov Chain time to reach its equilibrium distribution, particularly if it has started from a bad starting point. A bad starting point may lead to over-sampling regions of the posterior that actually have very low probability, before the chain settles into the equilibrium distribution. Burn-in allows us to simply discard the first _N_ samples of a chain and not use them to compute the summary statistics. Determining the number of samples to discard is not a trivial problem and depends on the size of the dataset, the complexity of the model and the length of the chain. A good rule of thumb is to always throw out at least the first 10% of the whole chain length as the burn-in (however, in some cases it may be necessary to discard as much as 50% of the MCMC chain).
 
 Select the **TreeHeight** statistic in the left hand list to look at the tree height estimated jointly for all partitions in the alignment. Tracer plots the (marginal posterior) histogram for the selected statistic and also give you summary statistics such as the mean and median. The 95% HPD stands for *highest posterior density interval* and represents the most compact interval on the selected statistic that contains 95% of the posterior density. It can be loosely thought of as a Bayesian analogue to a confidence interval. The **TreeHeight** statistic gives the marginal posterior distribution of the age of the root of the entire tree (that is, the tMRCA).
 
@@ -494,11 +501,11 @@ You will be able to see all four distributions in one plot, similar to what is s
 
 Two very important summary statistics that we should pay attention to are the Auto-Correlation Time (ACT) and the Effective Sample Size (ESS). ACT is the average number of states in the MCMC chain that two samples have to be separated by for them to be uncorrelated, i.e. for them to be independent samples from the posterior. The ACT is estimated from the samples in the trace (excluding the burn-in). The ESS is the number of independent samples that the trace is equivalent to. This is calculated as the chain length (excluding the burn-in) divided by the ACT.
 
-The ESS is in general regarded as a quality-measure of the resulting sample sequence. It is unclear how to determine exactly how large should the ESS be for the analysis to be trustworthy. In general, an ESS of 200 is considered high enough to make the analysis useful. However, this is an arbitrary number and you should always use your own judgment to decide if the analysis has converged or not. As you can see in [Figure 13](#fig:tracer_bad), ESS values below 100 are coloured in red, which means that we should not trust the value of the statistics, and ESS values between 100 and 200 are coloured in yellow.
+The ESS is in general regarded as a quality-measure of the resulting sample sequence. It is unclear how to determine exactly how large should the ESS be for an analysis to be trustworthy. In general, an ESS of 200 is considered high enough to make the analysis useful. However, this is an arbitrary number and you should always use your own judgment to decide if the analysis has converged or not. As you can see in [Figure 13](#fig:tracer_bad), ESS values below 100 are coloured in red, which means that we should not trust the value of the statistics, and ESS values between 100 and 200 are coloured in yellow.
 
-If a lot of statistics have red or yellow coloured ESS value, we have not sufficiently explored the posterior space. This is most likely a result of the chain not running long enough. Try running the same analysis as before, but with a longer chain. 
+If a lot of statistics have red or yellow coloured ESS values, we have not sufficiently explored the posterior space. This is most likely a result of the chain not running long enough. Try running the same analysis as before, but with a longer chain. 
 
-> First load the XML configuration file into BEAUti again by pressing **File > Load** and select the `Primates.xml` file.  Within BEAUti, change the MCMC chain length parameter to **10'000'000** and change the **tracelog** frequency to **1'000**. 
+> First load the XML configuration file into BEAUti again by pressing **File > Load** and select the `primate-mtDNA.xml` file.  Within BEAUti, change the MCMC chain length parameter to **10'000'000** and change the **tracelog** frequency to **1'000**. 
 >
 > Change the trace and tree log file names in order to not overwrite the results of the previous analysis. You may add something like `_long` behind the name of the file, to obtain `primate-mtDNA_long.log` for the log file and `primate-mtDNA_long.trees` for trees file. 
 >
