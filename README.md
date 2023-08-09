@@ -10,6 +10,8 @@ subtitle: This is a simple introductory tutorial to help you get started with us
 
 
 
+
+
 # Background
 
 Before diving into performing complex analyses with BEAST2 one needs to understand the basic workflow and concepts. While BEAST2 tries to be as user-friendly as possible, the amount of possibilities can be overwhelming.
@@ -298,7 +300,7 @@ In a Bayesian analysis, additional information from external sources should be e
 > You will see a dialogue box (**Taxon set editor**) that allows you to select a subset of taxa from the phylogenetic tree. Once you have created a taxon set you will be able to add calibration information for its most recent common ancestor (MRCA) later on.
 > 
 > - Set the **Taxon set label** to `human-chimp`.
-> - Locate `Homo_sapiens` in the left hand side list and click the **>>** button to add it to the `human-chimp` taxon set. (Note that the arrows may not render in BEAST 2.7. **>>** is the top button and **<<** is at the bottom).
+> - Locate `Homo_sapiens` in the left hand side list and click the **>>** button to add it to the `human-chimp` taxon set. 
 > - Locate `Pan` in the left hand side list and click the **>>** button to add it to the `human-chimp` taxon set.
 
 
@@ -360,7 +362,7 @@ Start by expanding the **tracelog** options. This is the log file you will use l
 > Expand the **tracelog** options.
 > 
 > - Set the **Log Every** parameter to **200**.
-> - Leave the filename as is (`$filebase).log`).
+> - Leave the filename as is (`$(filebase).log`).
 >
 
 Next, expand the **screenlog** options. The screen output is simply for monitoring the program's progress. Since it is not so important, especially if you run your analysis on a remote computer or a computer cluster, the **Log Every** can be set to any value. However, if it is set too small, the sheer quantity of information being displayed on the screen will actually slow the program down. For this analysis we will make BEAST2 log to screen every 1'000 samples, which is the default setting.
