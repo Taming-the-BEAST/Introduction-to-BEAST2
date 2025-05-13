@@ -562,8 +562,9 @@ The panel should like [Figure 17](#fig:tracer_covariance). The ellipses represen
 
 Besides producing a sample of parameter estimates, BEAST2 also produces a posterior sample of phylogenetic time-trees. These need to be summarised too before any conclusions about the quality of the posterior estimate can be made.
 
-One way to summarise the trees is by using the program TreeAnnotator. This will take the set of trees and find the best supported tree. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges. It will also calculate the posterior clade probability for each node. Such a tree is called the _maximum clade credibility_ tree.
+One way to summarise the trees is by using the program TreeAnnotator. Until recently the _maximum clade credibility_ tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximizing the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a _conditional clade distribution_ tree (CCD) has been proposed by Berling et al., 2025. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Below we show how to use both methods to summarise the posterior tree distribution.
 
+#### Producing MCC tree
 
 > Open **TreeAnnotator**.
 > 
@@ -592,7 +593,22 @@ The setup should look as shown in [Figure 18](#fig:treeannot). You can now run t
 <figure>
 	<a id="fig:treeannot"></a>
 	<img style="width:80%;" src="figures/treeannot.png">
-	<figcaption>Figure 18: TreeAnnotator setup</figcaption>
+	<figcaption>Figure 18: TreeAnnotator MCC tree setup</figcaption>
+</figure>
+<br>
+
+#### Producing CCD tree
+
+> Repeat all the steps in TreeAnotator as above, except select **MAP(CCD0)** as input for **Target tree type**.
+>
+> Set the **Output File** to `Primates.CCD0_MAP.tree`.
+
+ The setup should look as shown in [Figure 19](#fig:treeannot_CCD). You can now run the program.
+
+<figure>
+	<a id="fig:treeannot_CCD"></a>
+	<img style="width:80%;" src="figures/treeannot_CCD0.png">
+	<figcaption>Figure 19: TreeAnnotator CCD0 tree setup</figcaption>
 </figure>
 <br>
 
