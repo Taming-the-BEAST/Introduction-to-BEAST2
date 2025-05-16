@@ -601,8 +601,11 @@ The setup should look as shown in [Figure 18](#fig:treeannot). You can now run t
 
 To produce CCD0 summary tree, you will first need to install the CCD package.
 > Open BEAUTi
+> 
 > Select **File -> Manage packages**
+> 
 > Select **CCD** package in the list and select **Install/Upgrade** [Figure 19](#fig:installCCD)
+> 
 > Close BEAUTi
 
 <figure>
@@ -615,6 +618,7 @@ To produce CCD0 summary tree, you will first need to install the CCD package.
 Now you can proceed to make CCD0 tree:
 
 > Open TreeAnotator
+> 
 > Repeat all the steps in TreeAnotator as above, except select **MAP(CCD0)** as input for **Target tree type**.
 >
 > Set the **Output File** to `Primates.CCD0_MAP.tree`.
