@@ -37,7 +37,7 @@ Both BEAST2 and BEAUti2 are Java programs, which means that the exact same code 
 
 ### TreeAnnotator
 
-TreeAnnotator is used to produce a summary tree from the the posterior sample of trees using one of the available algorithms.  It can also be used to summarise and visualise the posterior estimates of other tree parameters (e.g. node height).
+TreeAnnotator is used to produce a summary tree from the posterior sample of trees using one of the available algorithms. It can also be used to summarise and visualise the posterior estimates of other tree parameters (e.g. node height).
 
 TreeAnnotator is provided as a part of the BEAST2 package so you do not need to install it separately.
 
