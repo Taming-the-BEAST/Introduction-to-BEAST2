@@ -597,18 +597,34 @@ The setup should look as shown in [Figure 18](#fig:treeannot). You can now run t
 </figure>
 <br>
 
-#### Producing CCD tree
+#### Producing CCD0 tree
 
+To produce CCD0 summary tree, you will first need to install the CCD package.
+> Open BEAUTi
+> Select **File -> Manage packages**
+> Select **CCD** package in the list and select **Install/Upgrade** [Figure 19](#fig:installCCD)
+> Close BEAUTi
+
+<figure>
+	<a id="fig:installCCD"></a>
+	<img style="width:80%;" src="figures/installCCD0.png">
+	<figcaption>Figure 19: Install CCD package</figcaption>
+</figure>
+<br>
+
+Now you can proceed to make CCD0 tree:
+
+> Open TreeAnotator
 > Repeat all the steps in TreeAnotator as above, except select **MAP(CCD0)** as input for **Target tree type**.
 >
 > Set the **Output File** to `Primates.CCD0_MAP.tree`.
 
- The setup should look as shown in [Figure 19](#fig:treeannot_CCD). You can now run the program.
+ The setup should look as shown in [Figure 20](#fig:treeannot_CCD). You can now run the program.
 
 <figure>
 	<a id="fig:treeannot_CCD"></a>
 	<img style="width:80%;" src="figures/treeannot_CCD0.png">
-	<figcaption>Figure 19: TreeAnnotator CCD0 tree setup</figcaption>
+	<figcaption>Figure 20: TreeAnnotator CCD0 tree setup</figcaption>
 </figure>
 <br>
 
@@ -634,20 +650,20 @@ Finally, we can visualize the tree with one of the available pieces of software,
 <figure>
 	<a id="fig:figtree_MCC"></a>
 	<img src="figures/figtree.png">
-	<figcaption>Figure 20: FigTree visualisation of the estimated tree.</figcaption>
+	<figcaption>Figure 21: FigTree visualisation of the estimated MCC tree.</figcaption>
 </figure>
 <br>
 
-Your tree should now look something like [Figure 20](#fig:figtree_MCC). We first ordered the tree nodes. Because there are many ways to draw the same tree ordering nodes makes it easier for us to compare different trees to each other. The scale bars we added represent the 95% HPD interval for the age of each node in the tree, as estimated by the BEAST2 analysis. The node labels we added gives the posterior probability for a node in the posterior set of trees (that is, the trees logged in the tree log file, after discarding the burn-in). We can also use FigTree to display other statistics, such as the branch lengths, the 95% HPD interval of a node etc. The exact statistics available will depend on the model used.
+Your tree should now look something like [Figure 21](#fig:figtree_MCC). We first ordered the tree nodes. Because there are many ways to draw the same tree ordering nodes makes it easier for us to compare different trees to each other. The scale bars we added represent the 95% HPD interval for the age of each node in the tree, as estimated by the BEAST2 analysis. The node labels we added gives the posterior probability for a node in the posterior set of trees (that is, the trees logged in the tree log file, after discarding the burn-in). We can also use FigTree to display other statistics, such as the branch lengths, the 95% HPD interval of a node etc. The exact statistics available will depend on the model used.
 
 ## Visualising CCD0 tree
 
-To visualise CCD0 tree, follow the same steps as above, but open the `Primates.CCD0_MAP.tree` at the first step. [Figure 21](fig:figtree_CCD) shows the resulting tree.
+To visualise CCD0 tree, follow the same steps as above, but open the `Primates.CCD0_MAP.tree` at the first step. [Figure 22](#fig:figtree_CCD) shows the resulting tree.
 
 <figure>
 	<a id="fig:figtree_CCD"></a>
 	<img src="figures/figTree_CCD.png">
-	<figcaption>Figure 21: FigTree visualisation of the estimated tree.</figcaption>
+	<figcaption>Figure 22: FigTree visualisation of the estimated CCD0 tree.</figcaption>
 </figure>
 <br>
 
@@ -678,13 +694,13 @@ You should now see many lines corresponding to all the individual trees samples 
 >
 > Now expand the **Clades** menu, check the **Show clades** checkbox and the **text** checkbox for the **Support**. 
 
-The tree should look as shown in [Figure 20](#fig:densitree).
+The tree should look as shown in [Figure 23](#fig:densitree).
 
 
 <figure>
 	<a id="fig:densitree"></a>
 	<img src="figures/densitree.png">
-	<figcaption>Figure 20: DensiTree visualisation of the tree sample.</figcaption>
+	<figcaption>Figure 23: DensiTree visualisation of the tree sample.</figcaption>
 </figure>
 <br>
 
