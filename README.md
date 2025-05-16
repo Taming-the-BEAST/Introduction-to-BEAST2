@@ -619,7 +619,9 @@ Now you can proceed to make CCD0 tree:
 
 > Open TreeAnotator
 > 
-> Repeat all the steps in TreeAnotator as above, except select **MAP(CCD0)** as input for **Target tree type**.
+> Repeat all the steps in TreeAnotator as when making the MCC tree, except for **Target tree type** and **Output File**.
+>
+> For **Target tree type** select **MAP(CCD0)** from drop down list. 
 >
 > Set the **Output File** to `Primates.CCD0_MAP.tree`.
 
@@ -677,7 +679,7 @@ To visualise CCD0 tree, follow the same steps as above, but open the `Primates.C
 > - Are all clades well-supported? How about their ages?
 > - Look at the 95% HPD interval for the age of the apes (_Hylobates, Pongo, Gorilla, Pan_ and _Homo sapiens_). Does the estimated age agree with your prior knowledge?
 > - What about the divergence time between old-world and new-world monkeys? (_Saimiri sciureus_ is the only new-world monkey in this dataset).
-> - One of the CCD0 summary method advantages is that it can explore topologies, not sampled during the MCMC, given a representative enough chain. Does it then make sense that our dataset MCC and CCD0 summary tree topologies and clade posterior supports are practically identical?
+> - One of the CCD0 summary method advantages is that it can evaluate tree topologies that were not sampled during the MCMC. In which scenario MCC and CCD0 trees would be (almost) the same? Does it then make sense that our dataset MCC and CCD0 summary tree topologies and clade posterior supports are practically identical?
 
 
 ### Visualising tree posteriors (optional)
