@@ -639,7 +639,7 @@ Now you can proceed to make CCD0 tree:
 
 Finally, we can visualise the tree with one of the available pieces of software, such as FigTree.
 
-**Visualising the MCC tree**
+#### Visualising the MCC tree
 
 > Open **FigTree**. Use **File > Open** then locate and click on `Primates.MCC.tree`.
 >
@@ -662,7 +662,7 @@ Finally, we can visualise the tree with one of the available pieces of software,
 
 Your tree should now look something like [Figure 21](#fig:figtree_MCC). We first ordered the tree nodes. Because there are many ways to draw the same tree ordering nodes makes it easier for us to compare different trees to each other. The scale bars we added represent the 95% HPD interval for the age of each node in the tree, as estimated by the BEAST2 analysis. The node labels we added gives the posterior probability for a node in the posterior set of trees (that is, the trees logged in the tree log file, after discarding the burn-in). We can also use FigTree to display other statistics, such as the branch lengths, the 95% HPD interval of a node etc. The exact statistics available will depend on the model used.
 
-**Visualising CCD0 tree**
+#### Visualising CCD0 tree
 
 To visualise CCD0 tree, follow the same steps as above, but open the `Primates.CCD0_MAP.tree` at the first step. [Figure 22](#fig:figtree_CCD) shows the resulting tree.
 
