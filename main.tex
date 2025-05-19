@@ -1135,7 +1135,7 @@ a posterior sample of phylogenetic time-trees. These need to be
 summarised too before any conclusions about the quality of the posterior
 estimate can be made.
 
-One way to summarise the trees is by using the program TreeAnnotator. Until recently the \textit{maximum clade credibility} tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximizing the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95\% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a \textit{conditional clade distribution} tree (CCD) has been proposed \citep{berling2025}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Below we show how to use both methods to summarise the posterior tree distribution.
+One way to summarise the trees is by using the program TreeAnnotator. Until recently the \textit{maximum clade credibility} tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95\% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a \textit{conditional clade distribution} tree (CCD) has been proposed \citep{berling2025}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them methods to summarise the posterior tree distribution.\textbf{ To save time, you may run just one method and compare it to the other using the example below.}
 
 
 \textbf{Producing MCC tree}
@@ -1212,7 +1212,7 @@ To produce CCD0 summary tree, you will first need to install the CCD package.
 	
 	Select \textbf{File -> Manage packages}
 	
-	Select \textbf{CCD} package in the list and click\textbf{ Install/Upgrade} (Figure 19  \ref{fig:installCCD})
+	Select \textbf{CCD} package in the list and click\textbf{ Install/Upgrade} (Figure \ref{fig:installCCD})
 	
 	Close BEAUTi.
 \end{framed}
