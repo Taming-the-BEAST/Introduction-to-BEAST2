@@ -96,8 +96,8 @@ to install it separately.
 \hypertarget{treeannotator}{%
 \subsubsection{TreeAnnotator}\label{treeannotator}}
 
-TreeAnnotator is used to summarise the posterior sample of trees to
-produce a maximum clade credibility tree. It can also be used to
+TreeAnnotator is used to produce a summary tree from the posterior sample of trees using one of the available algorithms.
+It can also be used to
 summarise and visualise the posterior estimates of other tree parameters
 (e.g.~node height).
 
@@ -1135,12 +1135,11 @@ a posterior sample of phylogenetic time-trees. These need to be
 summarised too before any conclusions about the quality of the posterior
 estimate can be made.
 
-One way to summarise the trees is by using the program TreeAnnotator.
-This will take the set of trees and find the best supported tree. It
-will then annotate this representative summary tree with the mean ages
-of all the nodes and the corresponding 95\% HPD ranges. It will also
-calculate the posterior clade probability for each node. Such a tree is
-called the \emph{maximum clade credibility} tree.
+One way to summarise the trees is by using the program TreeAnnotator. Until recently the \textit{maximum clade credibility} tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95\% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a \textit{conditional clade distribution} tree (CCD) has been proposed \citep{berling2025}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them methods to summarise the posterior tree distribution.\textbf{ To save time, you may run just one method and compare it to the other using the example below.}
+
+
+\textbf{Producing MCC tree}
+
 
 \begin{framed}
 Open \textbf{TreeAnnotator}.
@@ -1199,9 +1198,53 @@ now run the program.
 \begin{figure}
     \centering
     \includegraphics[width=0.800000\textwidth]{figures/treeannot.png}
-    \caption{TreeAnnotator setup}
+    \caption{TreeAnnotator MCC tree setup}
     \label{fig:treeannot}
 \end{figure}
+
+
+\textbf{Producing CCD0 tree}
+
+To produce CCD0 summary tree, you will first need to install the CCD package.
+
+\begin{framed}
+	Open \textbf{BEAUTi}.
+	
+	Select \textbf{File -> Manage packages}
+	
+	Select \textbf{CCD} package in the list and click\textbf{ Install/Upgrade} (Figure \ref{fig:installCCD})
+	
+	Close BEAUTi.
+\end{framed}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.800000\textwidth]{figures/installCCD0.png}
+	\caption{Install CCD package}
+	\label{fig:installCCD}
+\end{figure}
+
+Now you can proceed to make CCD0 tree:
+
+\begin{framed}
+	Open \textbf{TreeAnotator}.
+	
+	Repeat all the steps in TreeAnotator as when making the MCC tree, except for \textbf{Target tree type} and \textbf{Output File}.
+	
+	For \textbf{Target tree type} select \textbf{MAP(CCD0)} from drop down list.
+	
+	Set the \textbf{Output File} to \passthrough{\lstinline!Primates.CCD0_MAP.tree!}.
+\end{framed}
+
+The setup should look as shown in Figure  \ref{fig:treeannot_CCD}. You can now run the program.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.800000\textwidth]{figures/treeannot_CCD0.png}
+	\caption{TreeAnnotator CCD0 tree setup}
+	\label{fig:treeannot_CCD}
+\end{figure}
+
 
 \hypertarget{visualising-the-tree-estimate}{%
 \subsubsection{Visualising the tree
@@ -1209,6 +1252,8 @@ estimate}\label{visualising-the-tree-estimate}}
 
 Finally, we can visualize the tree with one of the available pieces of
 software, such as FigTree.
+
+\textbf{Visualising the MCC tree}
 
 \begin{framed}
 Open \textbf{FigTree}. Use \textbf{File \textgreater{} Open} then locate
@@ -1243,11 +1288,11 @@ and click on \passthrough{\lstinline!Primates.MCC.tree!}.
 \begin{figure}
     \centering
     \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/figtree.png}
-    \caption{FigTree visualisation of the estimated tree.}
-    \label{fig:figtree}
+    \caption{FigTree visualisation of the estimated MCC tree.}
+    \label{fig:figtree_MCC}
 \end{figure}
 
-Your tree should now look something like Figure \ref{fig:figtree}. We
+Your tree should now look something like Figure \ref{fig:figtree_MCC}. We
 first ordered the tree nodes. Because there are many ways to draw the
 same tree ordering nodes makes it easier for us to compare different
 trees to each other. The scale bars we added represent the 95\% HPD
@@ -1258,6 +1303,17 @@ logged in the tree log file, after discarding the burn-in). We can also
 use FigTree to display other statistics, such as the branch lengths, the
 95\% HPD interval of a node etc. The exact statistics available will
 depend on the model used.
+
+\textbf{Visualising CCD0 tree}
+
+To visualise CCD0 tree, follow the same steps as above, but open the \passthrough{\lstinline!Primates.CCD0_MAP.tree!} at the first step. Figure \ref{fig:figtree_CCD} shows the resulting tree.
+
+\begin{figure}
+	\centering
+	\includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/figTree_CCD.png}
+	\caption{FigTree visualisation of the estimated CCD0 tree.}
+	\label{fig:figtree_CCD}
+\end{figure}
 
 \begin{framed}
 \textbf{Topics for discussion:} The posterior probabilities tell us
@@ -1276,6 +1332,8 @@ confident we are about their divergence times.
   What about the divergence time between old-world and new-world
   monkeys? (\emph{Saimiri sciureus} is the only new-world monkey in this
   dataset).
+\item
+	One of the CCD0 summary method advantages is that it can evaluate tree topologies that were not sampled during the MCMC. In which scenario MCC and CCD0 trees would be (almost) the same? Does it then make sense that our dataset MCC and CCD0 summary tree topologies and clade posterior supports are practically identical?  
 \end{itemize}
 \end{framed}
 

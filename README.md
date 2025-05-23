@@ -37,7 +37,7 @@ Both BEAST2 and BEAUti2 are Java programs, which means that the exact same code 
 
 ### TreeAnnotator
 
-TreeAnnotator is used to summarise the posterior sample of trees to produce a maximum clade credibility tree. It can also be used to summarise and visualise the posterior estimates of other tree parameters (e.g. node height).
+TreeAnnotator is used to produce a summary tree from the posterior sample of trees using one of the available algorithms. It can also be used to summarise and visualise the posterior estimates of other tree parameters (e.g. node height).
 
 TreeAnnotator is provided as a part of the BEAST2 package so you do not need to install it separately.
 
@@ -562,8 +562,9 @@ The panel should like [Figure 17](#fig:tracer_covariance). The ellipses represen
 
 Besides producing a sample of parameter estimates, BEAST2 also produces a posterior sample of phylogenetic time-trees. These need to be summarised too before any conclusions about the quality of the posterior estimate can be made.
 
-One way to summarise the trees is by using the program TreeAnnotator. This will take the set of trees and find the best supported tree. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges. It will also calculate the posterior clade probability for each node. Such a tree is called the _maximum clade credibility_ tree.
+One way to summarise the trees is by using the program TreeAnnotator. Until recently the _maximum clade credibility_ tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a _conditional clade distribution_ tree (CCD) has been proposed {% cite berling2025 --file Introduction-to-BEAST2/master-refs %}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them to summarise the posterior tree distribution. **To save time, you may run just one method and compare it to the other using the example below.**
 
+#### Producing MCC tree
 
 > Open **TreeAnnotator**.
 > 
@@ -592,14 +593,53 @@ The setup should look as shown in [Figure 18](#fig:treeannot). You can now run t
 <figure>
 	<a id="fig:treeannot"></a>
 	<img style="width:80%;" src="figures/treeannot.png">
-	<figcaption>Figure 18: TreeAnnotator setup</figcaption>
+	<figcaption>Figure 18: TreeAnnotator MCC tree setup</figcaption>
+</figure>
+<br>
+
+#### Producing CCD0 tree
+
+To produce CCD0 summary tree, you will first need to install the CCD package.
+> Open BEAUTi
+> 
+> Select **File -> Manage packages**
+> 
+> Select **CCD** package in the list and select **Install/Upgrade** [Figure 19](#fig:installCCD)
+> 
+> Close BEAUTi
+
+<figure>
+	<a id="fig:installCCD"></a>
+	<img style="width:80%;" src="figures/installCCD0.png">
+	<figcaption>Figure 19: Install CCD package</figcaption>
+</figure>
+<br>
+
+Now you can proceed to make CCD0 tree:
+
+> Open TreeAnotator
+> 
+> Repeat all the steps in TreeAnotator as when making the MCC tree, except for **Target tree type** and **Output File**.
+>
+> For **Target tree type** select **MAP(CCD0)** from drop down list. 
+>
+> Set the **Output File** to `Primates.CCD0_MAP.tree`.
+
+ The setup should look as shown in [Figure 20](#fig:treeannot_CCD). You can now run the program.
+
+<figure>
+	<a id="fig:treeannot_CCD"></a>
+	<img style="width:80%;" src="figures/treeannot_CCD0.png">
+	<figcaption>Figure 20: TreeAnnotator CCD0 tree setup</figcaption>
 </figure>
 <br>
 
 
 ### Visualising the tree estimate
 
-Finally, we can visualize the tree with one of the available pieces of software, such as FigTree.
+Finally, we can visualise the tree with one of the available pieces of software, such as FigTree.
+
+#### Visualising the MCC tree
 
 > Open **FigTree**. Use **File > Open** then locate and click on `Primates.MCC.tree`.
 >
@@ -614,13 +654,24 @@ Finally, we can visualize the tree with one of the available pieces of software,
 
 
 <figure>
-	<a id="fig:figtree"></a>
+	<a id="fig:figtree_MCC"></a>
 	<img src="figures/figtree.png">
-	<figcaption>Figure 19: FigTree visualisation of the estimated tree.</figcaption>
+	<figcaption>Figure 21: FigTree visualisation of the estimated MCC tree.</figcaption>
 </figure>
 <br>
 
-Your tree should now look something like [Figure 19](#fig:figtree). We first ordered the tree nodes. Because there are many ways to draw the same tree ordering nodes makes it easier for us to compare different trees to each other. The scale bars we added represent the 95% HPD interval for the age of each node in the tree, as estimated by the BEAST2 analysis. The node labels we added gives the posterior probability for a node in the posterior set of trees (that is, the trees logged in the tree log file, after discarding the burn-in). We can also use FigTree to display other statistics, such as the branch lengths, the 95% HPD interval of a node etc. The exact statistics available will depend on the model used.
+Your tree should now look something like [Figure 21](#fig:figtree_MCC). We first ordered the tree nodes. Because there are many ways to draw the same tree ordering nodes makes it easier for us to compare different trees to each other. The scale bars we added represent the 95% HPD interval for the age of each node in the tree, as estimated by the BEAST2 analysis. The node labels we added gives the posterior probability for a node in the posterior set of trees (that is, the trees logged in the tree log file, after discarding the burn-in). We can also use FigTree to display other statistics, such as the branch lengths, the 95% HPD interval of a node etc. The exact statistics available will depend on the model used.
+
+#### Visualising CCD0 tree
+
+To visualise CCD0 tree, follow the same steps as above, but open the `Primates.CCD0_MAP.tree` at the first step. [Figure 22](#fig:figtree_CCD) shows the resulting tree.
+
+<figure>
+	<a id="fig:figtree_CCD"></a>
+	<img src="figures/figTree_CCD.png">
+	<figcaption>Figure 22: FigTree visualisation of the estimated CCD0 tree.</figcaption>
+</figure>
+<br>
 
 
 > **Topics for discussion:** The posterior probabilities tell us which clades are highly supported and the scale bars tell us how confident we are about their divergence times. 
@@ -628,6 +679,7 @@ Your tree should now look something like [Figure 19](#fig:figtree). We first ord
 > - Are all clades well-supported? How about their ages?
 > - Look at the 95% HPD interval for the age of the apes (_Hylobates, Pongo, Gorilla, Pan_ and _Homo sapiens_). Does the estimated age agree with your prior knowledge?
 > - What about the divergence time between old-world and new-world monkeys? (_Saimiri sciureus_ is the only new-world monkey in this dataset).
+> - One of the CCD0 summary method advantages is that it can evaluate tree topologies that were not sampled during the MCMC. In which scenario MCC and CCD0 trees would be (almost) the same? Does it then make sense that our dataset MCC and CCD0 summary tree topologies and clade posterior supports are practically identical?
 
 
 ### Visualising tree posteriors (optional)
@@ -648,13 +700,13 @@ You should now see many lines corresponding to all the individual trees samples 
 >
 > Now expand the **Clades** menu, check the **Show clades** checkbox and the **text** checkbox for the **Support**. 
 
-The tree should look as shown in [Figure 20](#fig:densitree).
+The tree should look as shown in [Figure 23](#fig:densitree).
 
 
 <figure>
 	<a id="fig:densitree"></a>
 	<img src="figures/densitree.png">
-	<figcaption>Figure 20: DensiTree visualisation of the tree sample.</figcaption>
+	<figcaption>Figure 23: DensiTree visualisation of the tree sample.</figcaption>
 </figure>
 <br>
 
