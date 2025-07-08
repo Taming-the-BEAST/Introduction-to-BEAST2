@@ -560,9 +560,9 @@ The panel should like [Figure 17](#fig:tracer_covariance). The ellipses represen
 
 ### Analysing tree estimates
 
-Besides producing a sample of parameter estimates, BEAST2 also produces a posterior sample of phylogenetic time-trees. These need to be summarised too before any conclusions about the quality of the posterior estimate can be made.
+In addition to generating a sample of parameter estimates, BEAST2 also produces a posterior sample of phylogenetic time-trees. It's important to verify that these trees have also converged. However, this is a complex topic that requires a more detailed explanation. To keep things concise, we will skip it here. For more information, please refer to the [Tree ESS Tutorial](https://linguaphylo.github.io/tutorials/tree-ess/). 
 
-One way to summarise the trees is by using the program TreeAnnotator. Until recently the _maximum clade credibility_ tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a _conditional clade distribution_ tree (CCD) has been proposed {% cite berling2025 --file Introduction-to-BEAST2/master-refs %}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them to summarise the posterior tree distribution. **To save time, you may run just one method and compare it to the other using the example below.**
+The trees we obtained from the analysis need to be summarised too before any conclusions about the quality of the posterior estimate can be made.One way to summarise them is by using the program TreeAnnotator. Until recently the _maximum clade credibility_ tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a _conditional clade distribution_ tree (CCD) has been proposed {% cite berling2025 --file Introduction-to-BEAST2/master-refs %}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them to summarise the posterior tree distribution. **To save time, you may run just one method and compare it to the other using the example below.**
 
 #### Producing MCC tree
 
@@ -731,7 +731,8 @@ The content of this tutorial is based on the [Divergence Dating Tutorial with BE
 - [Bayesian Evolutionary Analysis with BEAST 2](http://www.beast2.org/book.html) {% cite BEAST2book2014 --file Introduction-to-BEAST2/master-refs %}
 - BEAST 2 website and documentation: [http://www.beast2.org/](http://www.beast2.org/)
 - BEAST 1 website and documentation: [http://beast.bio.ed.ac.uk](http://beast.community)
-- Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users) 
+- Join the BEAST user discussion: [http://groups.google.com/group/beast-users](http://groups.google.com/group/beast-users)
+- [Tree ESS Tutorial](https://linguaphylo.github.io/tutorials/tree-ess/)
 
 ---- 
 
