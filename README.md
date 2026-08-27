@@ -1,11 +1,22 @@
 ---
 author: Jūlija Pečerska,Veronika Bošková,Louis du Plessis
-level: Beginner
 title: Introduction to BEAST2
-beastversion: 2.7.x
 tracerversion: 1.7.x
 figtreeversion: 1.4.x
 subtitle: This is a simple introductory tutorial to help you get started with using BEAST2 and its accomplices.
+beastversion_tutorial: 2.7.x
+workflow: Getting started
+status: current
+keywords:
+- molecular clock
+- substitution models
+- site models
+- nucleotide
+- Bayesian inference
+packages:
+- CCD
+domains:
+- macroevolution
 ---
 
 
